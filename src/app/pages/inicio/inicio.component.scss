@@ -1,0 +1,10 @@
+main {
+  min-height: calc(100vh - 120px); // considerando header + footer
+}
+
+.card {
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: translateY(-5px);
+  }
+}

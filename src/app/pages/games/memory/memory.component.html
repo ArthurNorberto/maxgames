@@ -1,0 +1,10 @@
+<div class="container game-page p-3 text-center">
+  <h2 class="mb-2">🧠 Jogo da Memória</h2>
+  <p class="text-muted">Clique nas cartas para encontrar os pares!</p>
+
+  <div class="mb-3">
+    <button class="btn btn-primary me-3" (click)="newGame()">Novo Jogo</button>
+  </div>
+
+  <div #gameContainer id="phaser-game" style="width:100%; max-width:800px; height:800px; margin:auto; border-radius:8px; overflow:hidden;"></div>
+</div>

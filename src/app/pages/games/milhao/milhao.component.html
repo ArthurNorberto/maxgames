@@ -1,0 +1,22 @@
+<div class="container game-page p-3 text-center">
+  <h2 class="mb-2">🎯 Jogo do Milhão</h2>
+  <p class="text-muted">Responda corretamente e avance no prêmio!</p>
+
+  <!-- Painel de controle -->
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+    <div>
+      <span class="me-3">💰 Prêmio: R$ {{score}}</span>
+    </div>
+    <div class="d-flex flex-wrap">
+      <button class="btn btn-warning me-2 mb-2" (click)="useHelp('skip')" [disabled]="helps.skip <= 0">Pular ({{helps.skip}})</button>
+      <button class="btn btn-success me-2 mb-2" (click)="useHelp('removeTwo')" [disabled]="helps.removeTwo <= 0">Remover 2 ({{helps.removeTwo}})</button>
+      <button class="btn btn-info me-2 mb-2" (click)="useHelp('hint')" [disabled]="helps.hint <= 0">Dica ({{helps.hint}})</button>
+      <button class="btn btn-danger mb-2" (click)="newGame()">Novo Jogo</button>
+    </div>
+  </div>
+
+  <!-- Canvas Phaser -->
+  <div #gameContainer id="phaser-game" 
+       style="width:100%; max-width:800px; height:500px; margin:auto; border-radius:8px; overflow:hidden;">
+  </div>
+</div>
