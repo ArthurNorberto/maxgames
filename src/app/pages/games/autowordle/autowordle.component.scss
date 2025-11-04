@@ -1,0 +1,97 @@
+.autowordle-wrapper {
+    background: #ffffff;
+    color: #003366;
+    font-family: 'Segoe UI', sans-serif;
+
+    h2 {
+        color: #003366;
+        font-weight: 700;
+    }
+
+    .autowordle-container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .game-board {
+        .guess-row {
+            display: grid;
+            gap: 8px;
+            justify-content: center;
+            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); // ✅ dinâmico
+        }
+
+        .guess-cell {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+
+            &.correct-position {
+                background-color: #78e08f;
+                border-color: #3c8d5a;
+                color: #003366;
+            }
+
+            &.wrong-position {
+                background-color: #ffd100;
+                border-color: #d6b700;
+                color: #003366;
+            }
+
+            &.not-in-word {
+                background-color: #e0e0e0;
+                border-color: #aaa;
+                color: #777;
+            }
+        }
+    }
+
+    .guess-input {
+        width: 100%;
+        max-width: 240px;
+        margin: 0 auto;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 1.2rem;
+        letter-spacing: 4px;
+    }
+
+    .end-screen {
+        color: #1e3799;
+        font-size: 1.1rem;
+    }
+
+    .ranking-box {
+        border: 2px solid #00336620;
+        background: #fafafa;
+
+        h5 {
+            color: #003366;
+            font-weight: bold;
+        }
+
+        ol {
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+
+            li {
+                font-size: 0.95rem;
+                margin-bottom: 6px;
+            }
+        }
+    }
+
+    @media (max-width: 992px) {
+        .ranking-box {
+            margin-top: 30px;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+.autoglass-footer {
+  background-color: #003366; /* Azul Autoglass */
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  border-top: 4px solid #FFD100; /* Linha amarela Autoglass */
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+
+  .container {
+    max-width: 1200px;
+  }
+
+  .footer-left {
+    font-weight: 600;
+    color: #FFD100;
+  }
+
+  .footer-center {
+    font-size: 13.5px;
+    opacity: 0.9;
+  }
+
+  .footer-link {
+    color: #FFD100;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  @media (max-width: 768px) {
+    text-align: center;
+
+    .footer-left,
+    .footer-center,
+    .footer-right {
+      margin-bottom: 8px;
+    }
+  }
+}

@@ -1,1 +1,24 @@
 @import "bootstrap/scss/bootstrap";
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body, app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex: 1;               // cresce apenas se o conteúdo for menor que a tela
+  display: flex;
+  flex-direction: column;
+}
+
+.autoglass-footer {
+  margin-top: auto;      // empurra o footer para baixo se houver espaço extra
+}
+

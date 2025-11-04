@@ -1,0 +1,53 @@
+<div class="wordsearch-wrapper container py-5">
+    <div class="row justify-content-center">
+
+        <!-- Coluna principal -->
+        <div class="col-lg-8 col-md-12">
+            <h2 class="text-center mb-4">🔍 Caça-Palavras Autoglass</h2>
+            <p class="text-center text-muted mb-4">
+                Encontre as palavras relacionadas à Autoglass e ao mundo automotivo!
+            </p>
+
+            <!-- Timer e Pontuação -->
+            <div class="d-flex justify-content-between align-items-center mb-3 px-3">
+                <span>⏱️ Tempo: <strong>{{ timer }}s</strong></span>
+                <span>⭐ Pontos: <strong>{{ score }}</strong></span>
+            </div>
+
+            <div class="game-area position-relative mb-4">
+                <div class="grid" [ngStyle]="{'grid-template-columns': 'repeat(' + cols + ', 1fr)'}">
+                    <div *ngFor="let cell of grid; let idx = index" class="cell"
+                        [class.selected]="selectedCells.includes(idx)" [class.found]="cell.isFound"
+                        (mousedown)="cellMouseDown(idx)" (mouseenter)="cellMouseEnter(idx)" (mouseup)="cellMouseUp()">
+                        {{ cell.letter }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="word-list mb-4 text-center">
+                <h5>Palavras para encontrar:</h5>
+                <ul>
+                    <li *ngFor="let w of words" [class.found]="foundWords.includes(w)">
+                        {{ w }}
+                    </li>
+                </ul>
+            </div>
+
+
+            <div *ngIf="gameOver" class="end-screen text-center">
+                <h4>{{ endMessage }}</h4>
+                <button class="btn btn-secondary mt-3" (click)="newGame()">🔁 Nova Partida</button>
+            </div>
+        </div>
+
+        <!-- Ranking lateral -->
+        <div class="col-lg-4 col-md-8 col-sm-10 mt-4 mt-lg-0">
+            <div class="ranking-box shadow-sm p-3 rounded bg-white">
+                <h5 class="mb-3 text-center">🏆 Ranking – Quem achou</h5>
+                <ol class="mb-0 text-start">
+                    <li *ngFor="let r of ranking">{{ r.name }} — {{ r.score }} pts</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

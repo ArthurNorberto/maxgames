@@ -3,20 +3,26 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 
 export const routes: Routes = [
     { path: '', component: InicioComponent },
+
     {
-        path: 'basket',
+        path: 'memoria',
         loadComponent: () =>
-            import('./pages/games/basquete/basquete.component').then(m => m.BasqueteComponent)
+            import('./pages/games/memoria/memoria.component').then(m => m.MemoriaComponent)
     },
     {
-        path: 'memory',
+        path: 'quiz',
         loadComponent: () =>
-            import('./pages/games/memory/memory.component').then(m => m.MemoryComponent)
+            import('./pages/games/quiz/quiz.component').then(m => m.QuizComponent)
     },
-     {
-        path: 'milhao',
+    {
+        path: 'autowordle',
         loadComponent: () =>
-            import('./pages/games/milhao/milhao.component').then(m => m.MilhaoComponent)
+            import('./pages/games/autowordle/autowordle.component').then(m => m.AutowordleComponent)
+    },
+    {
+        path: 'caca-palavras',
+        loadComponent: () =>
+            import('./pages/games/caca-palavras/caca-palavras.component').then(m => m.CacaPalavrasComponent)
     }
     , { path: '**', redirectTo: '' }
 ];

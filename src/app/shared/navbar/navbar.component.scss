@@ -1,0 +1,99 @@
+.autoglass-header {
+  background-color: #003366; /* Azul Autoglass */
+  color: #fff;
+  padding: 12px 0;
+  font-family: 'Segoe UI', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .brand-link {
+    color: #FFD100; /* Amarelo Autoglass */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .nav-item {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        color: #FFD100;
+      }
+    }
+  }
+
+  /* Estilo do dropdown */
+  .dropdown {
+    position: relative;
+
+    .dropdown-toggle {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #FFD100;
+      }
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 28px;
+      left: 0;
+      background-color: #fff;
+      color: #003366;
+      border-radius: 8px;
+      min-width: 200px;
+      overflow: hidden;
+      z-index: 999;
+      animation: fadeIn 0.15s ease-in;
+
+      .dropdown-item {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #003366;
+        font-weight: 500;
+        transition: background 0.2s;
+
+        &:hover {
+          background-color: #FFD100;
+          color: #003366;
+        }
+      }
+    }
+
+    &:hover .dropdown-menu {
+      display: block;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
