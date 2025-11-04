@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AutowordleService } from '../services/autowordle.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-autowordle',
@@ -19,25 +20,36 @@ export class AutowordleComponent {
   guessRows: string[][] = [];
   gameOver = false;
   endMessage = '';
+  lastPoints: number | null = null;
+
   ranking = [
     { name: 'Ana Souza', score: 50 },
     { name: 'Carlos Lima', score: 45 },
     { name: 'Marcos Silva', score: 40 },
   ];
 
-  constructor(private autoWordleService: AutowordleService) {
+  constructor(
+    private autoWordleService: AutowordleService,
+    private toastr: ToastrService
+  ) {
     this.newGame();
   }
 
   newGame() {
     this.secretWord = this.autoWordleService.getRandomWord();
-    this.wordLength = this.secretWord.length; // ✅ ajusta dinamicamente
+    this.wordLength = this.secretWord.length;
     this.guesses = [];
     this.guessRows = Array.from({ length: this.maxAttempts }, () => Array(this.wordLength).fill(''));
     this.currentGuess = '';
     this.gameOver = false;
     this.endMessage = '';
+    this.lastPoints = null;
     console.log('Palavra secreta:', this.secretWord);
+  }
+
+  nextWord() {
+    this.toastr.info('Nova palavra gerada! Boa sorte!', 'AutoWordle');
+    this.newGame();
   }
 
   submitGuess() {
@@ -50,11 +62,15 @@ export class AutowordleComponent {
 
     if (guess === this.secretWord) {
       this.gameOver = true;
+      this.lastPoints = this.calculatePoints(this.guesses.length);
       this.endMessage = `🎉 Parabéns! Você acertou em ${this.guesses.length} tentativas.`;
       this.updateRanking(this.guesses.length);
+      this.toastr.success(`Você ganhou ${this.lastPoints} pontos!`, 'Parabéns!');
     } else if (this.guesses.length >= this.maxAttempts) {
       this.gameOver = true;
+      this.lastPoints = 0;
       this.endMessage = `❌ Suas chances acabaram! A palavra era: ${this.secretWord}`;
+      this.toastr.error('Que pena! Tente novamente.', 'Fim de jogo');
     }
   }
 
@@ -71,8 +87,12 @@ export class AutowordleComponent {
     }
   }
 
+  calculatePoints(attempts: number): number {
+    return Math.max((this.wordLength - attempts + 1) * 10, 0);
+  }
+
   updateRanking(attempts: number) {
-    const points = (this.wordLength - attempts + 1) * 10;
+    const points = this.calculatePoints(attempts);
     this.ranking.unshift({ name: 'Você', score: points });
     this.ranking.sort((a, b) => b.score - a.score);
     this.ranking = this.ranking.slice(0, 10);
