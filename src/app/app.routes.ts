@@ -23,6 +23,16 @@ export const routes: Routes = [
         path: 'caca-palavras',
         loadComponent: () =>
             import('./pages/games/caca-palavras/caca-palavras.component').then(m => m.CacaPalavrasComponent)
+    },
+    {
+        path: 'forca',
+        loadComponent: () =>
+            import('./pages/games/forca/forca.component').then(m => m.ForcaComponent)
+    },
+    {
+        path: 'palavras-cruzadas',
+        loadComponent: () =>
+            import('./pages/games/palavras-cruzadas/palavras-cruzadas.component').then(m => m.PalavrasCruzadasComponent)
     }
     , { path: '**', redirectTo: '' }
 ];

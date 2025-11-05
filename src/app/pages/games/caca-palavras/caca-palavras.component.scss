@@ -168,3 +168,23 @@
         transform: scale(1);
     }
 }
+
+.loading-overlay {
+  min-height: 300px;
+  text-align: center;
+
+  p {
+    color: #003366;
+    font-weight: 500;
+  }
+}
+
+.difficulty-select {
+  button {
+    transition: all 0.3s ease;
+    &.active {
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+    }
+  }
+}

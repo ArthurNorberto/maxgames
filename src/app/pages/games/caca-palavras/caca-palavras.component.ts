@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 import { CacaPalavrasService } from '../services/caca-palavras.service';
 
 interface Cell {
@@ -23,11 +24,11 @@ export class CacaPalavrasComponent implements OnInit, OnDestroy {
   selectedCells: number[] = [];
   gameOver = false;
   endMessage = '';
+  difficulty: 'facil' | 'medio' | 'dificil' = 'medio';
 
   score = 0;
   timer = 0;
   timerInterval: any;
-  maxPoints = 1000;
 
   ranking = [
     { name: 'Ana Souza', score: 100 },
@@ -35,17 +36,42 @@ export class CacaPalavrasComponent implements OnInit, OnDestroy {
     { name: 'Marcos Silva', score: 80 },
   ];
 
-  constructor(private cacaService: CacaPalavrasService) {}
+  loading = false;
+
+  constructor(
+    private cacaService: CacaPalavrasService,
+    private cdr: ChangeDetectorRef,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
-    this.words = this.cacaService.getPalavrasAleatorias(10); // 🔹 Pega 10 palavras aleatórias
-    this.newGame();
+    this.startByDifficulty();
   }
 
   ngOnDestroy() {
     clearInterval(this.timerInterval);
   }
 
+  /** Define o número de palavras conforme a dificuldade escolhida */
+  setDifficulty(level: 'facil' | 'medio' | 'dificil') {
+    this.difficulty = level;
+    this.toastr.info(`Nível ${level.toUpperCase()} selecionado!`, 'Dificuldade', {
+      timeOut: 2000,
+      positionClass: 'toast-top-center'
+    });
+    this.startByDifficulty();
+  }
+
+  private startByDifficulty() {
+    let numWords = 8;
+    if (this.difficulty === 'facil') numWords = 5;
+    if (this.difficulty === 'dificil') numWords = 10;
+
+    this.words = this.cacaService.getPalavrasAleatorias(numWords);
+    this.newGame();
+  }
+
+  /** Reinicia o jogo */
   newGame() {
     this.gameOver = false;
     this.endMessage = '';
@@ -53,10 +79,48 @@ export class CacaPalavrasComponent implements OnInit, OnDestroy {
     this.selectedCells = [];
     this.score = 0;
     this.timer = 0;
-    this.words = this.cacaService.getPalavrasAleatorias(10); // 🔹 Atualiza as palavras a cada nova partida
-    this.buildGrid();
     clearInterval(this.timerInterval);
-    this.startTimer();
+
+    this.toastr.info('Novo jogo iniciado!', 'Boa sorte!', {
+      timeOut: 1500,
+      positionClass: 'toast-bottom-right'
+    });
+
+    this.generateGame();
+  }
+
+  /** Gera o caça-palavras */
+  async generateGame() {
+    this.loading = true;
+    this.cdr.detectChanges();
+    await new Promise(r => setTimeout(r, 150));
+
+    let success = false;
+    let attempts = 0;
+    let currentSize = 12;
+    const maxWordLength = Math.max(...this.words.map(w => w.length));
+    currentSize = Math.max(currentSize, maxWordLength + 2);
+
+    while (!success && attempts < 10) {
+      this.rows = this.cols = currentSize;
+      attempts++;
+      success = this.buildGrid();
+      if (!success) currentSize++;
+    }
+
+    this.loading = false;
+    this.cdr.detectChanges();
+
+    if (success) {
+      this.toastr.success('Caça-palavras pronto!', 'Boa sorte!', {
+        timeOut: 1500,
+        positionClass: 'toast-top-center'
+      });
+      this.startTimer();
+    } else {
+      this.toastr.error('Erro ao gerar o jogo 😞', 'Tente novamente');
+      this.gameOver = true;
+    }
   }
 
   startTimer() {
@@ -67,112 +131,86 @@ export class CacaPalavrasComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  buildGrid() {
-    const grid: string[][] = Array.from({ length: this.rows }, () =>
-      Array(this.cols).fill('')
-    );
-
-    // 🔹 8 direções possíveis
-    const directions = [
-      { dr: 0, dc: 1 },   // →
-      { dr: 0, dc: -1 },  // ←
-      { dr: 1, dc: 0 },   // ↓
-      { dr: -1, dc: 0 },  // ↑
-      { dr: 1, dc: 1 },   // ↘
-      { dr: -1, dc: -1 }, // ↖
-      { dr: 1, dc: -1 },  // ↙
-      { dr: -1, dc: 1 },  // ↗
+  /** Monta o grid */
+  private buildGrid(): boolean {
+    const dirs = [
+      { dr: 0, dc: 1 }, { dr: 1, dc: 0 }, { dr: 1, dc: 1 },
+      { dr: 0, dc: -1 }, { dr: -1, dc: 0 }, { dr: -1, dc: -1 },
+      { dr: 1, dc: -1 }, { dr: -1, dc: 1 },
     ];
 
-    const shuffledDirections = [...directions].sort(() => Math.random() - 0.5);
+    const grid: string[][] = Array.from({ length: this.rows }, () => Array(this.cols).fill(''));
+    const placed: string[] = [];
 
-    // 🔹 insere palavras
-    for (let i = 0; i < this.words.length; i++) {
-      const word = this.words[i];
-      const dir = shuffledDirections[i % shuffledDirections.length];
-      let placed = false;
-      let attempts = 0;
+    const sortedWords = [...this.words].sort((a, b) => b.length - a.length);
 
-      while (!placed && attempts < 200) {
-        attempts++;
-        const startRow = Math.floor(Math.random() * this.rows);
-        const startCol = Math.floor(Math.random() * this.cols);
+    for (const word of sortedWords) {
+      let placedFlag = false;
+      let tries = 0;
 
-        if (this.canPlaceWord(grid, word, startRow, startCol, dir.dr, dir.dc)) {
+      while (!placedFlag && tries < 800) {
+        tries++;
+        const dir = dirs[Math.floor(Math.random() * dirs.length)];
+        const r = Math.floor(Math.random() * this.rows);
+        const c = Math.floor(Math.random() * this.cols);
+
+        if (this.canPlaceWord(grid, word, r, c, dir.dr, dir.dc)) {
           for (let j = 0; j < word.length; j++) {
-            const r = startRow + j * dir.dr;
-            const c = startCol + j * dir.dc;
-            grid[r][c] = word[j];
+            grid[r + j * dir.dr][c + j * dir.dc] = word[j];
           }
-          placed = true;
-        }
-      }
-
-      if (!placed) {
-        console.warn(`⚠️ Palavra não coube na grade: ${word}`);
-      }
-    }
-
-    // 🔹 preenche com letras aleatórias
-    for (let r = 0; r < this.rows; r++) {
-      for (let c = 0; c < this.cols; c++) {
-        if (!grid[r][c]) {
-          grid[r][c] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+          placedFlag = true;
+          placed.push(word);
         }
       }
     }
 
-    this.grid = grid.flat().map(letter => ({ letter, isFound: false }));
+    if (placed.length === sortedWords.length) {
+      for (let r = 0; r < this.rows; r++) {
+        for (let c = 0; c < this.cols; c++) {
+          if (!grid[r][c]) grid[r][c] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        }
+      }
+      this.grid = grid.flat().map(letter => ({ letter, isFound: false }));
+      return true;
+    }
+
+    return false;
   }
 
-  private canPlaceWord(
-    grid: string[][],
-    word: string,
-    row: number,
-    col: number,
-    dr: number,
-    dc: number
-  ): boolean {
-    const rows = grid.length;
-    const cols = grid[0].length;
-
+  private canPlaceWord(grid: string[][], word: string, row: number, col: number, dr: number, dc: number): boolean {
+    const rows = grid.length, cols = grid[0].length;
     for (let i = 0; i < word.length; i++) {
-      const r = row + i * dr;
-      const c = col + i * dc;
+      const r = row + i * dr, c = col + i * dc;
       if (r < 0 || c < 0 || r >= rows || c >= cols) return false;
       if (grid[r][c] && grid[r][c] !== word[i]) return false;
     }
     return true;
   }
 
-  // === Interação do jogador ===
-
-  cellMouseDown(idx: number) {
-    this.selectedCells = [idx];
-  }
-
+  // === Interações ===
+  cellMouseDown(idx: number) { this.selectedCells = [idx]; }
   cellMouseEnter(idx: number) {
-    if (this.selectedCells.length > 0 && !this.selectedCells.includes(idx)) {
+    if (this.selectedCells.length > 0 && !this.selectedCells.includes(idx))
       this.selectedCells.push(idx);
-    }
   }
 
   cellMouseUp() {
     const guess = this.selectedCells.map(i => this.grid[i].letter).join('');
-    const reversed = guess.split('').reverse().join('');
+    const rev = guess.split('').reverse().join('');
+    const found = this.words.find(w => w === guess || w === rev);
 
-    const found = this.words.find(w => w === guess || w === reversed);
     if (found && !this.foundWords.includes(found)) {
       this.foundWords.push(found);
-      this.selectedCells.forEach(i => (this.grid[i].isFound = true));
-
+      this.selectedCells.forEach(i => this.grid[i].isFound = true);
       const timePenalty = Math.min(this.timer * 2, 800);
       const gained = Math.max(100 - timePenalty / 10, 10);
       this.score += Math.floor(gained);
+      this.toastr.success(`Palavra encontrada: ${found}!`, 'Boa!', { timeOut: 1200 });
 
       if (this.foundWords.length === this.words.length) {
         this.gameOver = true;
-        this.endMessage = `🎉 Você encontrou todas as palavras! Pontuação final: ${this.score}`;
+        this.endMessage = `🎉 Parabéns! Você encontrou todas as palavras!`;
+        this.toastr.success('Você completou o jogo!', '🏁 Fim de jogo!');
         clearInterval(this.timerInterval);
       }
     }

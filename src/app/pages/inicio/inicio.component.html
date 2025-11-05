@@ -1,64 +1,82 @@
 <!-- Main Content -->
-<main class="py-5">
-  <div class="container">
-    <h2 class="mb-5 text-center">Escolha seu jogo</h2>
+<main class="py-5 bg-light min-vh-100 d-flex flex-column align-items-center justify-content-start">
+  <div class="container text-center">
+    <h2 class="mb-3 fw-bold text-primary">Escolha seu jogo</h2>
+    <p class="mb-4 text-muted lead">Divirta-se aprendendo mais sobre veículos, seguros e o mundo Autoglass!</p>
 
-    <div class="row justify-content-center g-4">
+    <div class="row justify-content-center g-3">
 
       <!-- Jogo da Memória -->
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="card shadow-lg h-100 border-0">
-          <div class="card-body d-flex flex-column justify-content-between">
-            <h5 class="card-title">Jogo da Memória</h5>
-            <p class="card-text flex-grow-1">
-              Encontre todos os pares neste jogo da memória divertido!
-            </p>
-            <a routerLink="/memoria" class="btn btn-primary mt-3">Jogar</a>
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2-4">
+        <div class="game-card shadow-sm border-0" (click)="goTo('/memoria')">
+          <div class="game-icon memory">
+            <i class="bi bi-grid-3x3-gap-fill"></i>
           </div>
+          <h5 class="fw-bold mt-2">Jogo da Memória</h5>
+          <p class="text-muted small">Encontre os pares e teste sua memória!</p>
+          <a routerLink="/memoria" class="btn btn-primary btn-sm mt-auto">Jogar</a>
         </div>
       </div>
 
       <!-- Quiz -->
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="card shadow-lg h-100 border-0">
-          <div class="card-body d-flex flex-column justify-content-between">
-            <h5 class="card-title">Quiz</h5>
-            <p class="card-text flex-grow-1">
-              Responda perguntas sobre seguros e veículos e suba no ranking!
-            </p>
-            <a routerLink="/quiz" class="btn btn-primary mt-3">Jogar</a>
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2-4">
+        <div class="game-card shadow-sm border-0" (click)="goTo('/quiz')">
+          <div class="game-icon quiz">
+            <i class="bi bi-question-circle-fill"></i>
           </div>
+          <h5 class="fw-bold mt-2">Quiz</h5>
+          <p class="text-muted small">Responda perguntas e suba no ranking!</p>
+          <a routerLink="/quiz" class="btn btn-primary btn-sm mt-auto">Jogar</a>
         </div>
       </div>
 
       <!-- AutoWordle -->
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="card shadow-lg h-100 border-0">
-          <div class="card-body d-flex flex-column justify-content-between">
-            <h5 class="card-title">AutoWordle</h5>
-            <p class="card-text flex-grow-1">
-              Adivinhe palavras relacionadas a veículos, seguros e Autoglass!
-              Teste seu vocabulário técnico e veja quem acerta mais rápido.
-            </p>
-            <a routerLink="/autowordle" class="btn btn-primary mt-3">Jogar</a>
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2-4">
+        <div class="game-card shadow-sm border-0" (click)="goTo('/autowordle')">
+          <div class="game-icon wordle">
+            <i class="bi bi-keyboard-fill"></i>
           </div>
+          <h5 class="fw-bold mt-2">AutoWordle</h5>
+          <p class="text-muted small">Adivinhe palavras automotivas!</p>
+          <a routerLink="/autowordle" class="btn btn-primary btn-sm mt-auto">Jogar</a>
         </div>
       </div>
 
       <!-- Caça-Palavras -->
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="card shadow-lg h-100 border-0">
-          <div class="card-body d-flex flex-column justify-content-between">
-            <h5 class="card-title">Caça-Palavras</h5>
-            <p class="card-text flex-grow-1">
-              Encontre palavras escondidas sobre o mundo automotivo, seguros e Autoglass!
-              Um desafio de atenção e conhecimento.
-            </p>
-            <a routerLink="/caca-palavras" class="btn btn-primary mt-3">Jogar</a>
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2-4">
+        <div class="game-card shadow-sm border-0" (click)="goTo('/caca-palavras')">
+          <div class="game-icon search">
+            <i class="bi bi-search-heart-fill"></i>
           </div>
+          <h5 class="fw-bold mt-2">Caça-Palavras</h5>
+          <p class="text-muted small">Encontre termos e descubra o universo Autoglass!</p>
+          <a routerLink="/caca-palavras" class="btn btn-primary btn-sm mt-auto">Jogar</a>
         </div>
       </div>
 
+      <!-- Forca -->
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2-4">
+        <div class="game-card shadow-sm border-0" (click)="goTo('/forca')">
+          <div class="game-icon forca">
+            <i class="bi bi-alphabet"></i>
+          </div>
+          <h5 class="fw-bold mt-2">Forca</h5>
+          <p class="text-muted small">Adivinhe antes que o tempo acabe!</p>
+          <a routerLink="/forca" class="btn btn-primary btn-sm mt-auto">Jogar</a>
+        </div>
+      </div>
+
+      <!-- Palavras Cruzadas -->
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2-4">
+        <div class="game-card shadow-sm border-0" (click)="goTo('/palavras-cruzadas')">
+          <div class="game-icon crossword">
+            <i class="bi bi-pencil-square"></i>
+          </div>
+          <h5 class="fw-bold mt-2">Palavras Cruzadas</h5>
+          <p class="text-muted small">Complete as palavras automotivas!</p>
+          <a routerLink="/palavras-cruzadas" class="btn btn-primary btn-sm mt-auto">Jogar</a>
+        </div>
+      </div>
 
     </div>
   </div>

@@ -1,0 +1,74 @@
+<div class="forca-wrapper container py-4">
+  <div class="card shadow-lg border-0">
+    <div class="card-body p-4">
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h3 class="mb-1">Forca — Autoglass Edition</h3>
+          <p class="text-muted small mb-0">
+            Adivinhe a palavra antes do boneco ser enforcado.
+          </p>
+        </div>
+        <button class="btn btn-sm btn-outline-primary" (click)="newGame()">⭮ Novo Jogo</button>
+      </div>
+
+      <div class="row">
+        <!-- Canvas -->
+        <div class="col-lg-5 mb-3">
+          <canvas #hangmanCanvas width="360" height="320" class="w-100 rounded bg-white border"></canvas>
+
+          <div class="mt-3 small text-center text-muted">
+            Erros: <strong class="text-danger">{{ wrongParts }}</strong> / {{ maxParts }}
+            &nbsp;|&nbsp; Tempo: <strong>{{ timeRemaining }}s</strong>
+            <div *ngIf="lastPoints !== null" class="mt-2">
+              <span class="badge bg-success">Pontos: {{ lastPoints }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Letras, teclado e ranking -->
+        <div class="col-lg-7">
+          <div class="word-display text-center mb-3">
+            <ng-container *ngFor="let ch of displayLetters">
+              <span class="letter-box" [class.filled]="ch !== ''">{{ ch || '_' }}</span>
+            </ng-container>
+          </div>
+
+          <div class="keyboard mb-3 d-flex flex-wrap gap-2 justify-content-center">
+            <button *ngFor="let k of alphabet"
+                    class="btn btn-sm btn-outline-secondary"
+                    [disabled]="usedLetters.has(k) || gameOver"
+                    (click)="tryLetter(k)">
+              {{ k }}
+            </button>
+          </div>
+
+          <div class="text-center mb-3">
+            <input [(ngModel)]="guessWord"
+                   (keyup.enter)="submitWord()"
+                   class="form-control d-inline w-auto me-2"
+                   placeholder="Chutar palavra inteira..." [disabled]="gameOver">
+            <button class="btn btn-primary" (click)="submitWord()" [disabled]="gameOver">Chutar</button>
+          </div>
+
+          <div class="text-center mb-3">
+            <button class="btn btn-outline-danger me-2" (click)="giveUp()" [disabled]="gameOver">Desistir</button>
+            <button class="btn btn-success" (click)="nextRound()" [disabled]="!gameOver">Próxima</button>
+          </div>
+
+          <hr>
+
+          <div class="text-center">
+            <h6 class="text-muted mb-2">🏆 Ranking</h6>
+            <ul class="list-unstyled small">
+              <li *ngFor="let p of fakeRanking; let i = index">
+                {{ i + 1 }}º — <strong>{{ p.name }}</strong>: {{ p.score }} pts
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
