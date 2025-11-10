@@ -1,31 +1,31 @@
-<!-- Header -->
 <header class="autoglass-header shadow-sm">
-    <div class="container d-flex justify-content-between align-items-center flex-wrap">
-        <!-- Logo / título -->
-        <h1 class="h4 mb-0">
-            <a routerLink="/" class="brand-link text-white text-decoration-none">
-                🎮 Max Games
-            </a>
-        </h1>
+  <div class="container d-flex justify-content-between align-items-center flex-wrap">
+    <h1 class="h4 mb-0">
+      <a routerLink="/" class="brand-link text-white text-decoration-none">
+        🎮 Max Games
+      </a>
+    </h1>
 
-        <!-- Navegação -->
-        <nav class="nav-links d-flex align-items-center">
-            <a routerLink="/" class="nav-item me-3">Início</a>
+    <nav class="nav-links d-flex align-items-center">
+      <a routerLink="/" class="nav-item me-3">Início</a>
 
-            <!-- Dropdown de jogos -->
-            <div class="dropdown me-3">
-                <button class="dropdown-toggle nav-item"> Games</button>
-                <div class="dropdown-menu shadow-sm">
-                    <a routerLink="/quiz" class="dropdown-item">Quiz</a>
-                    <a routerLink="/memoria" class="dropdown-item">Jogo da Memória</a>
-                    <a routerLink="/autowordle" class="dropdown-item">AutoWordle</a>
-                    <a routerLink="/caca-palavras" class="dropdown-item">Caca-Palavras</a>
-                    <a routerLink="/forca" class="dropdown-item">Forca</a>
-                    <a routerLink="/palavras-cruzadas" class="dropdown-item">Palavras cruzadas</a>
-                </div>
-            </div>
+      <div class="dropdown me-3">
+        <button class="dropdown-toggle nav-item"> Games</button>
+        <div class="dropdown-menu shadow-sm">
+          <a routerLink="/quiz" class="dropdown-item">Quiz</a>
+          <a routerLink="/acerte-ou-erre" class="dropdown-item">Acerte ou Erre</a>
+          <a routerLink="/memoria" class="dropdown-item">Memória</a>
+          <a routerLink="/autowordle" class="dropdown-item">AutoWordle</a>
+          <a routerLink="/caca-palavras" class="dropdown-item">Caça-Palavras</a>
+          <a routerLink="/forca" class="dropdown-item">Forca</a>
+          <a routerLink="/palavras-cruzadas" class="dropdown-item">Palavras Cruzadas</a>
+        </div>
+      </div>
 
-
-        </nav>
-    </div>
+      <div *ngIf="user" class="user-info d-flex align-items-center">
+        <span class="me-3">👋 {{ user.name }} ({{ user.sector }})</span>
+        <button class="btn btn-sm btn-outline-light" (click)="logout()">Sair</button>
+      </div>
+    </nav>
+  </div>
 </header>

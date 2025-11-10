@@ -1,7 +1,9 @@
-<app-navbar></app-navbar>
+<!-- Navbar só aparece fora da tela de login -->
+<app-navbar *ngIf="!isLoginPage"></app-navbar>
 
 <div class="content-wrapper">
   <router-outlet></router-outlet>
 </div>
 
-<app-footer></app-footer>
+<!-- Footer só aparece fora da tela de login -->
+<app-footer *ngIf="!isLoginPage"></app-footer>

@@ -1,0 +1,136 @@
+<section class="sobre-page container-fluid py-5" role="main" aria-labelledby="sobre-title">
+    <div class="inner container">
+        <header class="hero d-flex gap-4 align-items-center">
+            <div class="hero-text">
+                <h1 id="sobre-title" class="title">Max Games — Aprenda. Compita. Cresça.</h1>
+                <p class="subtitle">
+                    Plataforma de jogos educativos desenvolvida para a Autoglass | Maxpar — voltada a engajar
+                    colaboradores,
+                    consolidar conhecimento técnico e reduzir a dependência de jogos de terceiros.
+                </p>
+
+                <p class="lead">
+                    Objetivo: transformar minutos ociosos em micro-treinamentos de alto impacto, alinhados a produtos,
+                    processos e políticas de seguro. Métricas e integrações pensadas para RH e Operações.
+                </p>
+
+                <div class="hero-cta d-flex gap-2 mt-3">
+                    <button class="btn btn-primary" (click)="goTo('/acerte-ou-erre')">Jogar: Acerte ou Erre</button>
+                    <button class="btn btn-outline-primary" (click)="goTo('/quiz')">Explorar Quiz</button>
+                </div>
+            </div>
+
+            <div class="hero-anim" aria-hidden="true">
+                <!-- small animated SVG badge (CSS animated) -->
+                <svg class="badge-svg" viewBox="0 0 240 240" role="img" focusable="false">
+                    <defs>
+                        <linearGradient id="g1" x1="0" x2="1">
+                            <stop offset="0" stop-color="#2b8aef" />
+                            <stop offset="1" stop-color="#0fb97f" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="bg" cx="120" cy="120" r="96" fill="url(#g1)"></circle>
+                    <g transform="translate(60,64)" fill="#fff">
+                        <!-- stylized game + shield -->
+                        <rect x="0" y="0" width="120" height="56" rx="10" class="card" />
+                        <path class="icon" d="M14 36c0-6 4-10 10-10s10 4 10 10-4 10-10 10-10-4-10-10z" />
+                    </g>
+                </svg>
+            </div>
+        </header>
+
+        <!-- Metrics -->
+        <section class="metrics mt-5" aria-label="Métricas do projeto">
+            <div class="row g-3">
+                <div class="col-12 col-md-4" *ngFor="let k of metricKeys">
+                    <div class="metric-card p-3 shadow-sm">
+                        <div class="metric-value" aria-live="polite">{{ metrics[k].value | number }}</div>
+                        <div class="metric-label">{{ metrics[k].label }}</div>
+                        <div class="metric-bar" role="progressbar" [attr.aria-valuenow]="metrics[k].value"
+                            [attr.aria-valuemin]="0" [attr.aria-valuemax]="metrics[k].target">
+                            <div class="metric-fill" [style.width.%]="(metrics[k].value / metrics[k].target) * 100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why it matters -->
+        <section class="why mt-5">
+            <h3 class="section-title">Por que o Max Games importa?</h3>
+            <p class="text-muted">
+                Observamos que agentes acessavam jogos de terceiros (tecnologias obsoletas como Flash ou sites não
+                corporativos),
+                criando riscos de segurança, perda de foco e exposição a conteúdo não controlado. Max Games resolve isso
+                com:
+            </p>
+
+            <ul class="benefits">
+                <li><strong>Ambiente seguro e controlado:</strong> hospedagem local/intranet com políticas de
+                    privacidade e compliance.</li>
+                <li><strong>Conteúdo contextual:</strong> perguntas ligadas a processos reais de atendimento, seguros e
+                    produtos Autoglass.</li>
+                <li><strong>ROI mensurável:</strong> redução de tempo fora do fluxo produtivo, aumento de acerto em
+                    perguntas técnicas e melhoria nas avaliações de performance.</li>
+            </ul>
+        </section>
+
+        <!-- Features (cards with animation) -->
+        <section class="features mt-5" aria-label="Recursos">
+            <h3 class="section-title">Recursos e diferenciais</h3>
+            <div class="row g-3">
+                <div class="col-12 col-md-6 col-lg-4" *ngFor="let f of features; let i = index">
+                    <article class="feature-card p-3 shadow-sm" [attr.data-index]="i" role="article" tabindex="0">
+                        <div class="feature-icon" [innerHTML]="getIconSvg(f.icon)"></div>
+                        <h4 class="feature-title">{{ f.title }}</h4>
+                        <p class="feature-text">{{ f.text }}</p>
+                        <div class="feature-actions mt-2">
+                            <button class="btn btn-sm btn-outline-primary" (click)="goTo('/acerte-ou-erre')">Testar
+                                agora</button>
+                            <button class="btn btn-sm btn-link" (click)="goTo('/sobre')">Saiba mais</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="how mt-5">
+            <h3 class="section-title">Como funciona (fluxo técnico)</h3>
+
+            <ol class="flow">
+                <li>
+                    <strong>Conteúdo</strong>: perguntas e lições são gerenciadas via serviço interno (json / CMS) —
+                    fácil exportação e versionamento.
+                </li>
+                <li>
+                    <strong>Execução local</strong>: jogos rodam no browser da intranet (SPA Angular) com cache e
+                    sincronização assíncrona das pontuações.
+                </li>
+                <li>
+                    <strong>Métricas</strong>: eventos (resposta, tempo, acerto/erro) são enviados ao backend e
+                    agregados em dashboards para RH/Operações.
+                </li>
+                <li>
+                    <strong>Integração</strong>: endpoints prontos para conectar com LMS, sistemas de avaliação e
+                    programas de bonificação.
+                </li>
+            </ol>
+        </section>
+
+        <!-- Call to action -->
+        <section class="cta mt-5 text-center">
+            <h3 class="mb-3">Pronto para engajar sua equipe?</h3>
+            <p class="text-muted mb-3">Converse com o time de produto e proponha um piloto local. Resultados imediatos
+                na retenção de conhecimento.</p>
+            <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-lg btn-primary" (click)="goTo('/acerte-ou-erre')">Iniciar piloto</button>
+                <button class="btn btn-lg btn-outline-secondary" (click)="goTo('/contato')">Solicitar
+                    demonstração</button>
+            </div>
+        </section>
+
+
+    </div>
+</section>

@@ -1,0 +1,64 @@
+<div class="login-wrapper d-flex align-items-center justify-content-center">
+  <div class="login-card shadow-lg rounded-4 p-4 animate__animated animate__fadeInDown">
+    <div class="text-center mb-4">
+      <img src="assets/logo-autoglass.png" alt="Autoglass" class="logo mb-3" />
+      <h2 class="fw-bold text-primary">🎮 MaxGames</h2>
+      <p class="text-muted mb-0">Desafie-se com os jogos da Autoglass!</p>
+    </div>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <div class="form-group mb-3">
+        <label for="name" class="form-label">👤 Nome</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          class="form-control"
+          required
+          [(ngModel)]="name"
+          placeholder="Digite seu nome..."
+        />
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="sector" class="form-label">🏢 Setor</label>
+        <select
+          id="sector"
+          name="sector"
+          class="form-select"
+          required
+          [(ngModel)]="sector"
+        >
+          <option value="">Selecione...</option>
+          <option>Comercial</option>
+          <option>TI</option>
+          <option>Atendimento</option>
+          <option>Financeiro</option>
+          <option>Marketing</option>
+          <option>Outros</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100 py-2"
+        [disabled]="!loginForm.valid"
+      >
+        🚀 Entrar no MaxGames
+      </button>
+    </form>
+
+    <div class="mt-4 text-center small text-muted">
+      <p>Versão corporativa Autoglass • Feito com ❤️</p>
+    </div>
+  </div>
+
+  <!-- Animação de fundo -->
+  <div class="floating-icons">
+    <span class="icon">🚗</span>
+    <span class="icon">🛠️</span>
+    <span class="icon">⭐</span>
+    <span class="icon">🎯</span>
+    <span class="icon">🏆</span>
+  </div>
+</div>

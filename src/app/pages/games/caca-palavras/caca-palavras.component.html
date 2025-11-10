@@ -28,6 +28,7 @@
         <p class="text-muted">Gerando jogo...</p>
       </div>
 
+      <!-- 🔹 Área do jogo -->
       <div *ngIf="!loading" class="animate__animated animate__fadeIn">
         <div class="d-flex justify-content-between align-items-center mb-3 px-3">
           <span>⏱️ Tempo: <strong>{{ timer }}s</strong></span>
@@ -36,14 +37,16 @@
 
         <div class="game-area position-relative mb-4">
           <div class="grid" [ngStyle]="{'grid-template-columns': 'repeat(' + cols + ', 1fr)'}">
-            <div *ngFor="let cell of grid; let idx = index"
-                class="cell"
-                [class.selected]="selectedCells.includes(idx)"
-                [class.found]="cell.isFound"
-                (mousedown)="cellMouseDown(idx)"
-                (mouseenter)="cellMouseEnter(idx)"
-                (mouseup)="cellMouseUp()">
-              {{ cell.letter }}
+            <!-- 🔹 LETRAS AGORA SÃO data-letter (não pesquisáveis com CTRL+F) -->
+            <div
+              *ngFor="let cell of grid; let idx = index; trackBy: trackByIndex"
+              class="cell"
+              [attr.data-letter]="cell.letter"
+              [class.selected]="selectedCells.includes(idx)"
+              [class.found]="cell.isFound"
+              (mousedown)="cellMouseDown(idx)"
+              (mouseenter)="cellMouseEnter(idx)"
+              (mouseup)="cellMouseUp()">
             </div>
           </div>
         </div>
