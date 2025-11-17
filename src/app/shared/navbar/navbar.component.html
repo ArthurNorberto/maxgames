@@ -1,31 +1,39 @@
 <header class="autoglass-header shadow-sm">
-  <div class="container d-flex justify-content-between align-items-center flex-wrap">
+  <div class="container-fluid d-flex align-items-center flex-nowrap px-3">
+
+    <!-- Logo / Marca -->
     <h1 class="h4 mb-0">
-      <a routerLink="/" class="brand-link text-white text-decoration-none">
-        🎮 Max Games
+      <a routerLink="/inicio" class="brand-link text-white text-decoration-none">
+        🎮 Max Play
       </a>
     </h1>
 
-    <nav class="nav-links d-flex align-items-center">
-      <a routerLink="/" class="nav-item me-3">Início</a>
+    <!-- Usuário / Notificações / Botão Sair -->
+    <div *ngIf="user" class="user-info d-flex align-items-center ms-auto position-relative">
 
-      <div class="dropdown me-3">
-        <button class="dropdown-toggle nav-item"> Games</button>
-        <div class="dropdown-menu shadow-sm">
-          <a routerLink="/quiz" class="dropdown-item">Quiz</a>
-          <a routerLink="/acerte-ou-erre" class="dropdown-item">Acerte ou Erre</a>
-          <a routerLink="/memoria" class="dropdown-item">Memória</a>
-          <a routerLink="/autowordle" class="dropdown-item">AutoWordle</a>
-          <a routerLink="/caca-palavras" class="dropdown-item">Caça-Palavras</a>
-          <a routerLink="/forca" class="dropdown-item">Forca</a>
-          <a routerLink="/palavras-cruzadas" class="dropdown-item">Palavras Cruzadas</a>
+      <!-- Notificações -->
+      <div class="notifications me-3 position-relative" (click)="toggleNotifications()">
+        <i class="bi bi-bell-fill fs-5"></i>
+        <span *ngIf="notifications.length" class="badge bg-danger">{{ notifications.length }}</span>
+
+        <!-- Dropdown -->
+        <div class="notifications-dropdown shadow-sm" *ngIf="showNotifications">
+          <h6 class="dropdown-header">Notificações</h6>
+          <ul class="list-unstyled mb-0">
+            <li *ngFor="let note of notifications">
+              <a href="#" class="dropdown-item">
+                <i class="bi bi-person-plus me-2"></i> {{ note.text }}
+              </a>
+            </li>
+            <li *ngIf="notifications.length === 0" class="text-muted p-2">Nenhuma notificação</li>
+          </ul>
         </div>
       </div>
 
-      <div *ngIf="user" class="user-info d-flex align-items-center">
-        <span class="me-3">👋 {{ user.name }} ({{ user.sector }})</span>
-        <button class="btn btn-sm btn-outline-light" (click)="logout()">Sair</button>
-      </div>
-    </nav>
+      <!-- Usuário -->
+      <span class="me-3">{{ user.name }} ({{ user.sector }})</span>
+      <button class="btn btn-sm btn-outline-light" (click)="logout()">Sair</button>
+
+    </div>
   </div>
 </header>

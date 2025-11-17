@@ -1,0 +1,53 @@
+<aside class="left-side">
+
+  <!-- PERFIL -->
+  <div class="card profile-card">
+    <a routerLink="/inicio" class="avatar-link">
+      <img class="avatar-lg" [src]="user?.avatar || 'assets/avatars/arthur.jpg'" alt="avatar" />
+    </a>
+
+    <h4 class="name">{{ user?.name || 'Usuário' }}</h4>
+    <div class="login">{{ user?.login || 'login.autoglass' }}</div>
+    <div class="sector">{{ user?.sector || 'Setor não informado' }}</div>
+
+    <div class="score-box">
+      <span class="label">Pontos</span>
+      <span class="value">{{ user?.score ?? 0 }}</span>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <div class="card navigation-card">
+    <h5 class="section-title">Menu</h5>
+
+    <ul class="menu-list">
+
+      <li routerLink="/meu-perfil" class="menu-item">
+        <i class="bi bi-person-gear"></i>
+        Alterar Perfil
+      </li>
+
+      <li routerLink="/lista-games" class="menu-item">
+        <i class="bi bi-controller"></i>
+        Games
+      </li>
+
+      <li routerLink="/ranks" class="menu-item">
+        <i class="bi bi-star"></i>
+        Ranks
+      </li>
+
+      <li routerLink="/premios" class="menu-item">
+        <i class="bi bi-gift"></i>
+        Prêmios
+      </li>
+
+      <li routerLink="/sobre" class="menu-item">
+        <i class="bi bi-info-circle"></i>
+        Sobre
+      </li>
+
+    </ul>
+  </div>
+
+</aside>

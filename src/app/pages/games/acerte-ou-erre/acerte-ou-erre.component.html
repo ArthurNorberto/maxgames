@@ -1,6 +1,9 @@
 <div class="aco-wrapper container py-4">
-  <div class="card shadow-lg border-0">
+
+  <div class="card shadow-lg border-0 game-card">
     <div class="card-body p-4">
+
+      <!-- TÍTULO + STATUS SUPERIOR -->
       <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
           <h3 class="mb-1">🎯 Acerte ou Erre — Autoglass</h3>
@@ -12,74 +15,95 @@
             <div>Perguntas: <strong>{{ answeredCount }}</strong></div>
             <div>Pontos: <strong>{{ score }}</strong></div>
           </div>
-
           <button class="btn btn-sm btn-outline-primary" (click)="startDefault()">▶ Iniciar</button>
         </div>
       </div>
 
-      <div class="row align-items-center">
-        <div class="col-lg-8">
-          <div class="question-card p-4 mb-3">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <div class="lives">Vidas:
-                <span *ngFor="let n of [].constructor(lives); let idx = index" class="life">❤️</span>
-                <span *ngFor="let n of [].constructor(Math.max(0, 5 - lives))" class="life dead">♡</span>
-              </div>
-            </div>
+      <!-- ABAS -->
+      <ul class="nav nav-tabs custom-tabs mb-3">
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="activeTab === 'jogo'" (click)="activeTab = 'jogo'">
+            🎮 Jogo
+          </button>
+        </li>
 
-            <div class="clue mb-3">
-              <small class="text-muted">Dica:</small>
-              <div class="clue-text">{{ currentQ?.pergunta || 'Clique em Iniciar para começar' }}</div>
-            </div>
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="activeTab === 'rank'" (click)="activeTab = 'rank'">
+            🏆 Rank
+          </button>
+        </li>
+      </ul>
 
-            <div class="masked-word mb-3" [ngClass]="msgClass">
-              <div class="masked">{{ displayedMasked }}</div>
-            </div>
+      <!-- ABA: JOGO -->
+      <div *ngIf="activeTab === 'jogo'">
 
-            <div *ngIf="revealedAnswer" class="revealed-answer text-center mb-3">
-              <span class="badge bg-success px-3 py-2">💡 Resposta: {{ revealedAnswer }}</span>
+        <div class="question-card p-4 mb-3">
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <div class="lives">
+              Vidas:
+              <span *ngFor="let n of [].constructor(lives); let idx = index" class="life">❤️</span>
+              <span *ngFor="let n of [].constructor(Math.max(0, 5 - lives))" class="life dead">♡</span>
             </div>
+          </div>
 
-            <div class="timer-row mb-3">
-              <div class="time-left">
-                <strong>{{ timeLeft }}s</strong>
-              </div>
-              <div class="progress-wrapper w-100 ms-3">
-                <div class="progress-bar" [ngClass]="timeColorClass" [style.width.%]="progressPercent"></div>
-              </div>
+          <div class="clue mb-3">
+            <small class="text-muted">Dica:</small>
+            <div class="clue-text">{{ currentQ?.pergunta || 'Clique em Iniciar para começar' }}</div>
+          </div>
+
+          <div class="masked-word mb-3" [ngClass]="msgClass">
+            <div class="masked">{{ displayedMasked }}</div>
+          </div>
+
+          <div *ngIf="revealedAnswer" class="revealed-answer text-center mb-3">
+            <span class="badge bg-success px-3 py-2">💡 Resposta: {{ revealedAnswer }}</span>
+          </div>
+
+          <div class="timer-row mb-3">
+            <div class="time-left"><strong>{{ timeLeft }}s</strong></div>
+            <div class="progress-wrapper w-100 ms-3">
+              <div class="progress-bar" [ngClass]="timeColorClass" [style.width.%]="progressPercent"></div>
             </div>
+          </div>
 
-            <div class="answer-row d-flex gap-2 align-items-center">
-              <input #answerInput [(ngModel)]="answer" (keyup.enter)="submitAnswer()"
-                [disabled]="gameOver || !currentQ || inputDisabled" class="form-control answer-input"
-                placeholder="Digite sua resposta..." autocomplete="off" />
+          <div class="answer-row d-flex gap-2 align-items-center">
+            <input #answerInput [(ngModel)]="answer" (keyup.enter)="submitAnswer()"
+              [disabled]="gameOver || !currentQ || inputDisabled" class="form-control answer-input"
+              placeholder="Digite sua resposta..." autocomplete="off" />
 
-              <button class="btn btn-success" (click)="submitAnswer()"
-                [disabled]="gameOver || !currentQ || inputDisabled">Confirmar</button>
-              <button class="btn btn-outline-danger" (click)="giveUp()"
-                [disabled]="gameOver || !currentQ || inputDisabled">Desistir</button>
-            </div>
+            <button class="btn btn-success"
+              (click)="submitAnswer()" [disabled]="gameOver || !currentQ || inputDisabled">Confirmar</button>
+
+            <button class="btn btn-outline-danger"
+              (click)="giveUp()" [disabled]="gameOver || !currentQ || inputDisabled">Desistir</button>
           </div>
         </div>
 
-        <div class="col-lg-4">
-          <div class="panel-stats p-3 bg-light rounded">
-            <h6 class="mb-2">Status</h6>
-            <div class="mb-2"><strong>Acertos seguidos:</strong> {{ streak }}</div>
-            <div class="mb-2"><strong>Respondidas:</strong> {{ answeredCount }}</div>
-            <div class="mb-2"><strong>Pontuação:</strong> {{ score }}</div>
-            <div class="mt-3 text-center">
-              <button class="btn btn-outline-primary w-100" (click)="startDefault()">🔄 Reiniciar</button>
-            </div>
+        <div *ngIf="gameOver" class="mt-3 text-center">
+          <h5>Fim de jogo</h5>
+          <p>Pontuação final: <strong>{{ score }}</strong></p>
+          <button class="btn btn-primary" (click)="startDefault()">Jogar novamente</button>
+        </div>
+
+      </div>
+
+      <!-- ABA: RANK -->
+      <div *ngIf="activeTab === 'rank'" class="rank-pane">
+
+        <div class="panel-stats p-4 bg-light rounded">
+          <h5 class="mb-3">📊 Estatísticas</h5>
+
+          <div><strong>Acertos seguidos:</strong> {{ streak }}</div>
+          <div><strong>Respondidas:</strong> {{ answeredCount }}</div>
+          <div><strong>Pontuação:</strong> {{ score }}</div>
+
+          <div class="mt-4">
+            <button class="btn btn-outline-primary w-100" (click)="startDefault()">🔄 Reiniciar</button>
           </div>
         </div>
       </div>
 
-      <div *ngIf="gameOver" class="mt-3 text-center">
-        <h5>Fim de jogo</h5>
-        <p>Pontuação final: <strong>{{ score }}</strong></p>
-        <button class="btn btn-primary" (click)="startDefault()">Jogar novamente</button>
-      </div>
     </div>
   </div>
+
 </div>

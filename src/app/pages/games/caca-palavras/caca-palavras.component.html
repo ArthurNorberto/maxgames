@@ -1,80 +1,125 @@
 <div class="wordsearch-wrapper container py-5">
-  <div class="row justify-content-center">
 
-    <div class="col-lg-8 col-md-12">
-      <h2 class="text-center mb-3 animate__animated animate__fadeInDown">
-        🔍 Caça-Palavras Autoglass
-      </h2>
-      <p class="text-center text-muted mb-4">
-        Escolha o nível e encontre as palavras relacionadas ao mundo automotivo!
-      </p>
+  <div class="card shadow-lg border-0 game-card animate__animated animate__fadeIn">
+    <div class="card-body p-4">
 
-      <!-- 🔹 Seleção de dificuldade -->
-      <div class="difficulty-select text-center mb-4">
-        <button class="btn btn-success mx-2" [class.active]="difficulty==='facil'" (click)="setDifficulty('facil')">
-          😊 Fácil (5)
-        </button>
-        <button class="btn btn-warning mx-2" [class.active]="difficulty==='medio'" (click)="setDifficulty('medio')">
-          😎 Médio (8)
-        </button>
-        <button class="btn btn-danger mx-2" [class.active]="difficulty==='dificil'" (click)="setDifficulty('dificil')">
-          😈 Difícil (10)
-        </button>
+      <!-- HEADER -->
+      <div class="text-center mb-4">
+        <h2 class="mb-1">🔍 Caça-Palavras Autoglass</h2>
+        <p class="text-muted small">Escolha o nível e encontre as palavras do mundo automotivo!</p>
       </div>
 
-      <!-- 🔄 Spinner -->
-      <div *ngIf="loading" class="loading-overlay d-flex flex-column align-items-center justify-content-center py-5">
-        <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status"></div>
-        <p class="text-muted">Gerando jogo...</p>
-      </div>
+      <!-- ABAS -->
+      <ul class="nav nav-tabs custom-tabs mb-4 justify-content-center">
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            [class.active]="activeTab === 'jogo'"
+            (click)="activeTab = 'jogo'">
+            🎮 Jogo
+          </button>
+        </li>
 
-      <!-- 🔹 Área do jogo -->
-      <div *ngIf="!loading" class="animate__animated animate__fadeIn">
-        <div class="d-flex justify-content-between align-items-center mb-3 px-3">
-          <span>⏱️ Tempo: <strong>{{ timer }}s</strong></span>
-          <span>⭐ Pontos: <strong>{{ score }}</strong></span>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            [class.active]="activeTab === 'rank'"
+            (click)="activeTab = 'rank'">
+            🏆 Ranking
+          </button>
+        </li>
+      </ul>
+
+      <!-- ==================== JOGO ==================== -->
+      <div *ngIf="activeTab === 'jogo'" class="animate__animated animate__fadeIn">
+
+        <!-- Seleção de dificuldade -->
+        <div class="difficulty-select text-center mb-4">
+          <button class="btn diff-btn easy"
+                  [class.active]="difficulty === 'facil'"
+                  (click)="setDifficulty('facil')">😊 Fácil (5)</button>
+
+          <button class="btn diff-btn medium"
+                  [class.active]="difficulty === 'medio'"
+                  (click)="setDifficulty('medio')">😎 Médio (8)</button>
+
+          <button class="btn diff-btn hard"
+                  [class.active]="difficulty === 'dificil'"
+                  (click)="setDifficulty('dificil')">😈 Difícil (10)</button>
         </div>
 
-        <div class="game-area position-relative mb-4">
-          <div class="grid" [ngStyle]="{'grid-template-columns': 'repeat(' + cols + ', 1fr)'}">
-            <!-- 🔹 LETRAS AGORA SÃO data-letter (não pesquisáveis com CTRL+F) -->
-            <div
-              *ngFor="let cell of grid; let idx = index; trackBy: trackByIndex"
-              class="cell"
-              [attr.data-letter]="cell.letter"
-              [class.selected]="selectedCells.includes(idx)"
-              [class.found]="cell.isFound"
-              (mousedown)="cellMouseDown(idx)"
-              (mouseenter)="cellMouseEnter(idx)"
-              (mouseup)="cellMouseUp()">
+        <!-- LOADING -->
+        <div *ngIf="loading" class="loading-overlay text-center py-5">
+          <div class="spinner-border text-primary mb-3" role="status"></div>
+          <p class="text-muted">Gerando jogo...</p>
+        </div>
+
+        <!-- Área do jogo -->
+        <div *ngIf="!loading" class="animate__animated animate__fadeIn">
+
+          <div class="d-flex justify-content-between align-items-center mb-3 px-3">
+            <span>⏱️ Tempo: <strong>{{ timer }}s</strong></span>
+            <span>⭐ Pontos: <strong>{{ score }}</strong></span>
+          </div>
+
+          <!-- GRID -->
+          <div class="game-area position-relative mb-4">
+            <div class="grid"
+                 [ngStyle]="{'grid-template-columns': 'repeat(' + cols + ', 1fr)'}">
+
+              <div
+                *ngFor="let cell of grid; let idx = index; trackBy: trackByIndex"
+                class="cell"
+                [attr.data-letter]="cell.letter"
+                [class.selected]="selectedCells.includes(idx)"
+                [class.found]="cell.isFound"
+                (mousedown)="cellMouseDown(idx)"
+                (mouseenter)="cellMouseEnter(idx)"
+                (mouseup)="cellMouseUp()">
+              </div>
+
             </div>
           </div>
-        </div>
 
-        <div class="word-list mb-4 text-center">
-          <h5>Palavras para encontrar:</h5>
-          <ul>
-            <li *ngFor="let w of words" [class.found]="foundWords.includes(w)">
-              {{ w }}
+          <!-- LISTA DE PALAVRAS -->
+          <div class="word-list text-center mb-4">
+            <h5>Palavras para encontrar:</h5>
+            <ul>
+              <li *ngFor="let w of words" [class.found]="foundWords.includes(w)">
+                {{ w }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- FIM DE JOGO -->
+          <div *ngIf="gameOver"
+               class="end-screen text-center animate__animated animate__zoomIn">
+            <h4>{{ endMessage }}</h4>
+            <button class="btn btn-primary mt-3" (click)="newGame()">
+              🔁 Nova Partida
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== RANK ==================== -->
+      <div *ngIf="activeTab === 'rank'" class="rank-pane animate__animated animate__fadeIn">
+
+        <div class="panel-stats p-4 bg-light rounded mx-auto" style="max-width: 500px;">
+          <h5 class="mb-3 text-center">🏆 Ranking – Quem encontrou mais palavras</h5>
+
+          <ol class="rank-list">
+            <li *ngFor="let r of ranking">
+              {{ r.name }} — <strong>{{ r.score }} pts</strong>
             </li>
-          </ul>
+          </ol>
+
         </div>
 
-        <div *ngIf="gameOver" class="end-screen text-center animate__animated animate__zoomIn">
-          <h4>{{ endMessage }}</h4>
-          <button class="btn btn-secondary mt-3" (click)="newGame()">🔁 Nova Partida</button>
-        </div>
       </div>
-    </div>
 
-    <div class="col-lg-4 col-md-8 col-sm-10 mt-4 mt-lg-0">
-      <div class="ranking-box shadow-sm p-3 rounded bg-white animate__animated animate__fadeInRight">
-        <h5 class="mb-3 text-center">🏆 Ranking – Quem achou</h5>
-        <ol class="mb-0 text-start">
-          <li *ngFor="let r of ranking">{{ r.name }} — {{ r.score }} pts</li>
-        </ol>
-      </div>
     </div>
-
   </div>
+
 </div>

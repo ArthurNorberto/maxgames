@@ -1,0 +1,83 @@
+:host {
+  display: block;
+}
+
+.post-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(2, 48, 86, 0.05);
+  margin-bottom: 12px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(2, 48, 86, 0.08);
+}
+
+.post-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.meta {
+  flex: 1;
+  text-align: left;
+}
+
+.user {
+  font-weight: 700;
+  color: #06314a;
+}
+
+.sector {
+  font-weight: 500;
+  color: #4a6572;
+  font-size: .9rem;
+  margin-left: 6px;
+}
+
+.time {
+  font-size: .85rem;
+  color: #7b8a91;
+  margin-top: 2px;
+}
+
+.points {
+  font-weight: 800;
+  color: #16a34a;
+}
+
+.post-body {
+  margin-top: 10px;
+  color: #0b3a57;
+}
+
+.action {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.game-label {
+  background: #eef6fb;
+  color: #0b3a57;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.message {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #0b3a57;
+  white-space: pre-line;
+}

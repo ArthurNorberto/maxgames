@@ -18,7 +18,7 @@ export class MemoriaComponent implements OnInit, OnDestroy {
   flippedCards: any[] = [];
   matchedCards = 0;
   attempts = 0;
-
+  activeTab: 'jogo' | 'ranking' | 'stats' = 'jogo';
   readonly gridSizes = [
     { rows: 4, cols: 4, label: 'Fácil' },
     { rows: 6, cols: 6, label: 'Médio' },
@@ -38,10 +38,14 @@ export class MemoriaComponent implements OnInit, OnDestroy {
   constructor(
     private toastr: ToastrService,
     private memoriaService: MemoriaService // ✅ Injeção do service
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.startNewGame();
+  }
+
+  setActiveTab(tab: 'jogo' | 'ranking' | 'stats') {
+    this.activeTab = tab;
   }
 
   /** Reinicia o jogo completamente */

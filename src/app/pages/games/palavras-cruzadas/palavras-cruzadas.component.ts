@@ -36,6 +36,7 @@ export class PalavrasCruzadasComponent implements OnInit, OnDestroy {
   allWords: string[] = [];
   wordsCount = 8;
   wordsToPlace: string[] = [];
+  activeTab: 'jogo' | 'ranking' | 'stats' = 'jogo';
 
   totalTime = 300;
   timeRemaining = this.totalTime;
@@ -55,7 +56,7 @@ export class PalavrasCruzadasComponent implements OnInit, OnDestroy {
   constructor(
     private cdr: ChangeDetectorRef,
     private palavrasService: PalavrasCruzadasService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.allWords = this.palavrasService.getPalavras();
@@ -64,6 +65,11 @@ export class PalavrasCruzadasComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.timerHandle) clearInterval(this.timerHandle);
+  }
+
+
+  setActiveTab(tab: 'jogo' | 'ranking' | 'stats') {
+    this.activeTab = tab;
   }
 
   /** Novo jogo */

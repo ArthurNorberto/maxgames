@@ -1,101 +1,100 @@
 <div class="quiz-layout container-fluid py-4">
   <div class="row justify-content-center">
-    <!-- Conteúdo principal do Quiz -->
-    <div class="col-lg-8 col-md-12 text-center quiz-content">
-      <h2 class="mb-2">🎯 Quiz Autoglass</h2>
-      <p class="text-muted">
+    <div class="col-12 col-lg-10 text-center quiz-content">
+
+      <!-- Título e descrição -->
+      <h2 class="mb-2 animate__animated animate__fadeInDown">🎯 Quiz Autoglass</h2>
+      <p class="text-muted mb-3 animate__animated animate__fadeInDown">
         Responda corretamente, ganhe pontos e mostre que você é um especialista!
       </p>
 
-      <!-- Painel de controle -->
-      <div class="controls d-flex justify-content-between align-items-center mb-3 flex-wrap">
-        <div class="score-display fs-5">
-          🧠 Pontos: <strong>{{ score }}</strong>
+      <!-- Abas -->
+      <ul class="nav nav-tabs justify-content-center mb-4 animate__animated animate__fadeIn">
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="activeTab==='quiz'" (click)="setActiveTab('quiz')">
+            🎮 Jogo
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="activeTab==='ranking'" (click)="setActiveTab('ranking')">
+            🏆 Ranking
+          </button>
+        </li>
+      </ul>
+
+      <!-- Conteúdo do Quiz -->
+      <div *ngIf="activeTab==='quiz'" class="tab-content animate__animated animate__fadeInUp">
+
+        <!-- Painel de controle -->
+        <div class="controls d-flex justify-content-center align-items-center mb-3 flex-wrap">
+          <div class="score-display fs-5 mb-2 me-3">
+            🧠 Pontos: <strong>{{ score }}</strong>
+          </div>
+          <div class="help-buttons d-flex flex-wrap justify-content-center">
+            <button class="btn btn-warning me-2 mb-2" (click)="useHelp('skip')" [disabled]="helps.skip <= 0">
+              ⏭️ Pular ({{ helps.skip }})
+            </button>
+            <button class="btn btn-success me-2 mb-2" (click)="useHelp('removeTwo')" [disabled]="helps.removeTwo <= 0">
+              ➖ Remover 2 ({{ helps.removeTwo }})
+            </button>
+            <button class="btn btn-info me-2 mb-2" (click)="useHelp('hint')" [disabled]="helps.hint <= 0">
+              💡 Dica ({{ helps.hint }})
+            </button>
+            <button class="btn btn-danger mb-2" (click)="newGame()">
+              🔁 Novo Jogo
+            </button>
+          </div>
         </div>
 
-        <div class="help-buttons d-flex flex-wrap justify-content-center">
-          <button
-            class="btn btn-warning me-2 mb-2"
-            (click)="useHelp('skip')"
-            [disabled]="helps.skip <= 0"
-          >
-            ⏭️ Pular ({{ helps.skip }})
+        <!-- Área do quiz -->
+        <div class="quiz-box" *ngIf="!gameOver">
+          <div class="question-number text-primary fw-bold mb-2">
+            Pergunta {{ currentQuestionIndex + 1 }} / {{ questions.length }}
+            <span class="badge bg-light text-dark ms-2">{{ currentQuestion?.level }}</span>
+          </div>
+
+          <div class="question-text fs-5 mb-4">
+            {{ currentQuestion?.question }}
+          </div>
+
+          <div class="options d-flex flex-column align-items-center flex-wrap">
+            <button
+              *ngFor="let opt of currentQuestion?.options; let i = index"
+              class="option-btn btn mb-2 px-4 py-2"
+              (click)="chooseOption(opt)"
+              [disabled]="optionDisabled"
+            >
+              {{ letters[i] }}) {{ opt }}
+            </button>
+          </div>
+
+          <div *ngIf="hintText" class="hint mt-3 alert alert-info py-2 animate__animated animate__fadeIn">
+            💡 Dica: {{ hintText }}
+          </div>
+        </div>
+
+        <!-- Tela de fim -->
+        <div class="end-screen" *ngIf="gameOver">
+          <h3 class="mb-3 animate__animated animate__fadeIn">{{ endMessage }}</h3>
+          <button class="btn btn-primary mt-2" (click)="newGame()">
+            🔁 Jogar Novamente
           </button>
-          <button
-            class="btn btn-success me-2 mb-2"
-            (click)="useHelp('removeTwo')"
-            [disabled]="helps.removeTwo <= 0"
-          >
-            ➖ Remover 2 ({{ helps.removeTwo }})
-          </button>
-          <button
-            class="btn btn-info me-2 mb-2"
-            (click)="useHelp('hint')"
-            [disabled]="helps.hint <= 0"
-          >
-            💡 Dica ({{ helps.hint }})
-          </button>
-          <button class="btn btn-danger mb-2" (click)="newGame()">
-            🔁 Novo Jogo
-          </button>
+        </div>
+
+      </div>
+
+      <!-- Ranking -->
+      <div *ngIf="activeTab==='ranking'" class="tab-content animate__animated animate__fadeInUp">
+        <div class="rank-box shadow-sm p-4 rounded bg-light animate__animated animate__fadeIn">
+          <h4 class="mb-3 text-center">🏆 Ranking - Top Jogadores</h4>
+          <ol class="rank-list text-start mb-0">
+            <li *ngFor="let r of ranking; let i = index">
+              <strong>{{ r.name }}</strong> — {{ r.score }} pts
+            </li>
+          </ol>
         </div>
       </div>
 
-      <!-- Área do jogo -->
-      <div class="quiz-box" *ngIf="!gameOver">
-        <div class="question-number text-primary fw-bold mb-2">
-          Pergunta {{ currentQuestionIndex + 1 }} / {{ questions.length }}
-          <span class="badge bg-light text-dark ms-2">
-            {{ currentQuestion?.level }}
-          </span>
-        </div>
-
-        <div class="question-text fs-5 mb-4">
-          {{ currentQuestion?.question }}
-        </div>
-
-        <div class="options d-flex flex-column align-items-center">
-          <button
-            *ngFor="let opt of currentQuestion?.options; let i = index"
-            class="option-btn btn btn-outline-primary mb-2 px-4 py-2 text-start w-75"
-            (click)="chooseOption(opt)"
-            [disabled]="optionDisabled"
-          >
-            {{ letters[i] }}) {{ opt }}
-          </button>
-        </div>
-
-        <div *ngIf="hintText" class="hint mt-3 alert alert-info py-2">
-          💡 Dica: {{ hintText }}
-        </div>
-      </div>
-
-      <!-- Tela de fim -->
-      <div class="end-screen" *ngIf="gameOver">
-        <h3 class="mb-3">{{ endMessage }}</h3>
-        <button class="btn btn-primary mt-2" (click)="newGame()">
-          🔁 Jogar Novamente
-        </button>
-      </div>
-    </div>
-
-    <!-- Ranking lateral -->
-    <div class="col-lg-3 col-md-8 mt-4 mt-lg-0">
-      <div class="rank-box shadow-sm p-3 rounded bg-light">
-        <h4 class="mb-3 text-center">🏆 Ranking - Top Jogadores</h4>
-        <ol class="rank-list text-start mb-0">
-          <li><strong>Ana Souza</strong> — 480 pts</li>
-          <li><strong>Carlos Lima</strong> — 455 pts</li>
-          <li><strong>Marcos Silva</strong> — 420 pts</li>
-          <li><strong>Fernanda Dias</strong> — 390 pts</li>
-          <li><strong>João Pedro</strong> — 365 pts</li>
-          <li><strong>Beatriz Costa</strong> — 340 pts</li>
-          <li><strong>Lucas Andrade</strong> — 310 pts</li>
-          <li><strong>Patrícia Melo</strong> — 295 pts</li>
-          <li><strong>Rafael Torres</strong> — 275 pts</li>
-          <li><strong>Camila Rocha</strong> — 260 pts</li>
-        </ol>
-      </div>
     </div>
   </div>
 </div>

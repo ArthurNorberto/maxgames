@@ -1,0 +1,131 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+/* --- HEADER --- */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #003366;
+}
+
+.subtitle {
+    color: #546b75;
+    margin-top: 8px;
+}
+
+/* --- GRID DE PRÊMIOS --- */
+.premios-container {
+    padding: 40px 20px;
+    background: #f4f6f8;
+    min-height: 100vh;
+}
+
+.premios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+/* --- CARD --- */
+.premio-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid #e1e6ea;
+    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
+    transition: 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.premio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 51, 102, 0.18);
+}
+
+/* --- MAIOR PRÊMIO --- */
+.premio-top {
+    border-left: 5px solid #FFD100;
+}
+
+/* Ícones */
+.icon-wrapper {
+    width: 70px;
+    height: 70px;
+    background: #003366;
+    color: #fff;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    margin: 0 auto 12px;
+}
+
+.gold-glow {
+    background: #FFD100;
+    color: #003366;
+    box-shadow: 0 0 20px rgba(255, 209, 0, 0.6);
+}
+
+/* Textos */
+.premio-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #003366;
+    margin-bottom: 8px;
+}
+
+.premio-desc {
+    font-size: 0.9rem;
+    color: #5b7078;
+    min-height: 48px;
+}
+
+.points-required {
+    margin-top: 12px;
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #003366;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* --- ANIMAÇÕES HTML5 (fade-in e fade-up) --- */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s forwards ease-out;
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s forwards ease-out;
+}
+
+.delay-1 { animation-delay: 0.2s }
+.delay-2 { animation-delay: 0.35s }
+.delay-3 { animation-delay: 0.5s }
+.delay-4 { animation-delay: 0.65s }
+.delay-5 { animation-delay: 0.8s }
+
+@keyframes fadeIn {
+    to { opacity: 1 }
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

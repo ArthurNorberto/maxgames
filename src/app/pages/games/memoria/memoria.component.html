@@ -1,46 +1,65 @@
 <div class="memory-wrapper container py-5">
-  <div class="row justify-content-center">
 
-    <!-- Coluna principal do jogo -->
+  <div class="row justify-content-center">
     <div class="col-lg-8 col-md-12">
-      <div class="memory-container text-center">
+
+      <div class="memory-container">
+
         <h2>🧠 Jogo da Memória</h2>
         <p class="subtitle text-muted mb-4">
-          Encontre todos os pares de peças automotivas! <br>
-          <strong>Nível: {{ currentLevelLabel }}</strong>
+          Encontre todos os pares de peças automotivas!
         </p>
 
-        <!-- Barra de informações -->
-        <div class="info-bar d-flex justify-content-between align-items-center mb-4">
-          <div>Pontuação: <strong>{{ score }}</strong></div>
-          <div>Tempo: <strong>{{ timer }}s</strong></div>
-          <div>Nível: <strong>{{ currentLevelLabel }}</strong></div>
-          <button class="btn btn-primary btn-sm" (click)="startNewGame()">🔁 Novo Jogo</button>
-        </div>
- 
-        <!-- Grade de cartas -->
-        <div class="grid mx-auto"
-          [ngStyle]="{'grid-template-columns': 'repeat(' + gridSizes[currentGridIndex].cols + ', 1fr)'}">
-          <div class="card" *ngFor="let card of cards" [class.flipped]="card.flipped || card.matched"
-            (click)="flipCard(card)">
-            <div class="card-inner">
-              <div class="card-front">🚗</div>
-              <div class="card-back">{{ card.value }}</div>
+        <!-- ABAS -->
+        <ul class="nav nav-tabs justify-content-center mb-4">
+          <li class="nav-item">
+            <button class="nav-link" [class.active]="activeTab==='jogo'" (click)="setActiveTab('jogo')">
+              🎮 Jogo
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" [class.active]="activeTab==='ranking'" (click)="setActiveTab('ranking')">
+              🏆 Ranking
+            </button>
+          </li>
+        </ul>
+
+        <!-- JOGO -->
+        <div *ngIf="activeTab==='jogo'" class="tab-content animate__animated animate__fadeIn">
+          
+          <!-- Barra de informações -->
+          <div class="info-bar d-flex justify-content-center gap-3 flex-wrap mb-4">
+            <div>Pontuação: <strong>{{ score }}</strong></div>
+            <div>Tempo: <strong>{{ timer }}s</strong></div>
+            <div>Nível: <strong>{{ currentLevelLabel }}</strong></div>
+            <button class="btn btn-primary btn-sm" (click)="startNewGame()">🔁 Novo Jogo</button>
+          </div>
+
+          <!-- Grade de cartas -->
+          <div class="grid mx-auto"
+               [ngStyle]="{'grid-template-columns': 'repeat(' + gridSizes[currentGridIndex].cols + ', 1fr)'}">
+            <div class="card" *ngFor="let card of cards" [class.flipped]="card.flipped || card.matched"
+                 (click)="flipCard(card)">
+              <div class="card-inner">
+                <div class="card-front">🚗</div>
+                <div class="card-back">{{ card.value }}</div>
+              </div>
             </div>
           </div>
+
         </div>
+
+        <!-- RANKING -->
+        <div *ngIf="activeTab==='ranking'" class="tab-content animate__animated animate__fadeIn">
+          <div class="ranking-box mx-auto">
+            <h5 class="mb-3 text-center">🏆 Ranking – Melhores Jogadores</h5>
+            <ol class="mb-0 text-start">
+              <li *ngFor="let r of ranking">{{ r.name }} — {{ r.score }} pts</li>
+            </ol>
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <!-- Coluna lateral do ranking -->
-    <div class="col-lg-4 col-md-8 col-sm-10 mt-4 mt-lg-0">
-      <div class="ranking-box shadow-sm p-3 rounded bg-white">
-        <h5 class="mb-3 text-center">🏆 Ranking – Melhores Jogadores</h5>
-        <ol class="mb-0 text-start">
-          <li *ngFor="let r of ranking">{{ r.name }} — {{ r.score }} pts</li>
-        </ol>
-      </div>
-    </div>
-
   </div>
 </div>

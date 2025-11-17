@@ -23,6 +23,12 @@ export class QuizComponent {
   endMessage = '';
   letters = ['A', 'B', 'C', 'D'];
 
+  activeTab: 'jogo' | 'quiz' | 'ranking' | 'stats' = 'quiz';
+
+  ranking = [] = [
+    { name: 'Ana Silva', score: 120 },
+    { name: 'Bruno Souza', score: 110 },]
+
   // ✅ Nova tabela de pontuação por nível
   private levelPoints: Record<string, number> = {
     'Fácil': 5,
@@ -42,6 +48,10 @@ export class QuizComponent {
       .map((a): [number, T] => [Math.random(), a])
       .sort((a, b) => a[0] - b[0])
       .map(a => a[1]);
+  }
+
+  setActiveTab(tab: 'jogo' | 'quiz' | 'ranking' | 'stats') {
+    this.activeTab = tab;
   }
 
   /** 

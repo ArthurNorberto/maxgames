@@ -1,76 +1,115 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { authGuard } from './pages/guards/auth.guard';
+import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 export const routes: Routes = [
-    // 🔹 Login SEM guard
-    {
-        path: 'login',
-        loadComponent: () =>
-            import('./pages/login/login.component').then(m => m.LoginComponent)
-    },
 
-    // 🔹 Rotas protegidas
     {
         path: '',
-        component: InicioComponent,
-        canActivate: [authGuard]
-    },
-    {
-        path: 'inicio',
         loadComponent: () =>
-            import('./pages/inicio/inicio.component').then(m => m.InicioComponent),
-        canActivate: [authGuard]
-    },
-    {
-        path: 'memoria',
-        loadComponent: () =>
-            import('./pages/games/memoria/memoria.component').then(m => m.MemoriaComponent),
-        canActivate: [authGuard]
-    },
-    {
-        path: 'quiz',
-        loadComponent: () =>
-            import('./pages/games/quiz/quiz.component').then(m => m.QuizComponent),
-        canActivate: [authGuard]
-    },
-    {
-        path: 'acerte-ou-erre',
-        loadComponent: () =>
-            import('./pages/games/acerte-ou-erre/acerte-ou-erre.component').then(m => m.AcerteOuErreComponent),
-        canActivate: [authGuard]
-    },
-    {
-        path: 'autowordle',
-        loadComponent: () =>
-            import('./pages/games/autowordle/autowordle.component').then(m => m.AutowordleComponent),
-        canActivate: [authGuard]
-    },
-    {
-        path: 'caca-palavras',
-        loadComponent: () =>
-            import('./pages/games/caca-palavras/caca-palavras.component').then(m => m.CacaPalavrasComponent),
-        canActivate: [authGuard]
-    },
-    {
-        path: 'forca',
-        loadComponent: () =>
-            import('./pages/games/forca/forca.component').then(m => m.ForcaComponent),
-        canActivate: [authGuard]
-    },
-    {
-        path: 'palavras-cruzadas',
-        loadComponent: () =>
-            import('./pages/games/palavras-cruzadas/palavras-cruzadas.component').then(m => m.PalavrasCruzadasComponent),
-        canActivate: [authGuard]
-    },
-    ,
-    {
-        path: 'sobre',
-        loadComponent: () =>
-            import('./pages/sobre/sobre.component').then(m => m.SobreComponent),
-        canActivate: [authGuard]
+            import('./pages/landing/landing.component').then(m => m.LandingComponent)
     },
 
-    { path: '**', redirectTo: '' }
+    {
+        path: 'login',
+        component: PublicLayoutComponent,
+        children: [
+            {
+                path: '',
+                loadComponent: () =>
+                    import('./pages/login/login.component').then(m => m.LoginComponent)
+            },
+            {
+                path: '',
+                redirectTo: 'login',
+                pathMatch: 'full'
+            }
+        ]
+    },
+    {
+        path: '',
+        component: MainLayoutComponent,
+        canActivate: [authGuard],
+        children: [
+            {
+                path: 'inicio',
+                loadComponent: () =>
+                    import('./pages/inicio/inicio.component').then(m => m.InicioComponent)
+            },
+            {
+                path: 'lista-games',
+                loadComponent: () =>
+                    import('./pages/games/lista-games.component').then(m => m.ListaGamesComponent)
+            },
+            {
+                path: 'memoria',
+                loadComponent: () =>
+                    import('./pages/games/memoria/memoria.component').then(m => m.MemoriaComponent)
+            },
+            {
+                path: 'quiz',
+                loadComponent: () =>
+                    import('./pages/games/quiz/quiz.component').then(m => m.QuizComponent)
+            },
+            {
+                path: 'acerte-ou-erre',
+                loadComponent: () =>
+                    import('./pages/games/acerte-ou-erre/acerte-ou-erre.component').then(m => m.AcerteOuErreComponent)
+            },
+            {
+                path: 'autowordle',
+                loadComponent: () =>
+                    import('./pages/games/autowordle/autowordle.component').then(m => m.AutowordleComponent)
+            },
+            {
+                path: 'caca-palavras',
+                loadComponent: () =>
+                    import('./pages/games/caca-palavras/caca-palavras.component').then(m => m.CacaPalavrasComponent)
+            },
+            {
+                path: 'forca',
+                loadComponent: () =>
+                    import('./pages/games/forca/forca.component').then(m => m.ForcaComponent)
+            },
+            {
+                path: 'palavras-cruzadas',
+                loadComponent: () =>
+                    import('./pages/games/palavras-cruzadas/palavras-cruzadas.component').then(m => m.PalavrasCruzadasComponent)
+            },
+            {
+                path: 'sobre',
+                loadComponent: () =>
+                    import('./pages/sobre/sobre.component').then(m => m.SobreComponent)
+            },
+            {
+                path: 'premios',
+                loadComponent: () =>
+                    import('./pages/premios/premios.component').then(m => m.PremiosComponent)
+            },
+            {
+                path: 'ranks',
+                loadComponent: () =>
+                    import('./pages/ranks/ranks.component').then(m => m.RanksComponent)
+            },
+            {
+                path: 'meu-perfil',
+                loadComponent: () =>
+                    import('./pages/meu-perfil/meu-perfil.component').then(m => m.MeuPerfilComponent)
+            },
+            {
+                path: '',
+                redirectTo: 'inicio',
+                pathMatch: 'full'
+            }
+        ]
+    },
+    {
+        path: '**',
+        loadComponent: () =>
+            import('./pages/pagina-not-found/pagina-not-found.component').then(m => m.PaginaNotFoundComponent)
+    }
+
+
 ];

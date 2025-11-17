@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "max-games": {
+    "max-play": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -74,10 +74,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "max-games:build:production"
+              "buildTarget": "max-play:build:production"
             },
             "development": {
-              "buildTarget": "max-games:build:development"
+              "buildTarget": "max-play:build:development"
             }
           },
           "defaultConfiguration": "development"

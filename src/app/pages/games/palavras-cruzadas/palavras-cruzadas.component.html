@@ -1,86 +1,104 @@
-<div class="crossword-container">
-  <div class="header">
-    <div class="title-area">
-      <h2>🧩 <span>Palavras Cruzadas</span> <strong>Autoglass</strong></h2>
-      <p class="subtitle">
-        Complete todas as palavras automotivas antes que o tempo acabe!
-      </p>
-    </div>
+<div class="crossword-wrapper">
 
-    <div class="status">
-      <div class="timer">⏱️ <strong>{{ timeRemaining }}s</strong></div>
-      <div class="score">⭐ <strong>{{ score ?? '-' }}</strong></div>
-      <div class="actions">
-        <button class="btn btn-sm" (click)="newGame()" [disabled]="loading">🔁 Novo</button>
-        <button class="btn btn-sm" (click)="revealAll()" [disabled]="loading">👁️ Revelar</button>
-      </div>
-    </div>
-  </div>
+  <!-- CONTAINER DO JOGO -->
+  <div class="crossword-container">
 
-  <div *ngIf="loading" class="loading">
-    <div class="spinner-border text-primary" role="status"></div>
-    <div class="muted">Gerando grade...</div>
-  </div>
-
-  <div *ngIf="!loading" class="play-area">
-    <div class="board-section">
-      <div class="board-wrap">
-        <div class="grid" [style.gridTemplateColumns]="'repeat(' + gridSize + ', 1fr)'">
-          <ng-container *ngFor="let row of grid; let r = index">
-            <ng-container *ngFor="let cell of row; let c = index">
-              <div class="cell-wrapper" [class.block]="cell.blocked">
-                <div *ngIf="cell.blocked" class="cell-block"></div>
-
-                <div *ngIf="!cell.blocked" class="cell">
-                  <div *ngIf="cell.number" class="cell-number">{{ cell.number }}</div>
-                  <input maxlength="1" autocomplete="off"
-                         [value]="cell.value || ''"
-                         (input)="onInput(r,c,$event)"
-                         [attr.aria-label]="'célula-'+r+'-'+c" />
-                </div>
-              </div>
-            </ng-container>
-          </ng-container>
-        </div>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="title-area">
+        <h2>🧩 <span>Palavras Cruzadas</span> <strong>Autoglass</strong></h2>
+        <p class="subtitle">Complete todas as palavras automotivas antes que o tempo acabe!</p>
       </div>
 
-      <div class="clues-wrap">
-        <div class="clues">
-          <h5>→ Horizontais</h5>
-          <ol>
-            <li *ngFor="let cw of acrossClues">
-              <strong>{{ cw.number }}.</strong> {{ cw.word.length }} letras
-            </li>
-          </ol>
-        </div>
-
-        <div class="clues">
-          <h5>↓ Verticais</h5>
-          <ol>
-            <li *ngFor="let cw of downClues">
-              <strong>{{ cw.number }}.</strong> {{ cw.word.length }} letras
-            </li>
-          </ol>
+      <div class="status">
+        <div class="timer">⏱️ <strong>{{ timeRemaining }}s</strong></div>
+        <div class="score">⭐ <strong>{{ score ?? '-' }}</strong></div>
+        <div class="actions">
+          <button class="btn btn-sm" (click)="newGame()" [disabled]="loading">🔁 Novo</button>
+          <button class="btn btn-sm" (click)="revealAll()" [disabled]="loading">👁️ Revelar</button>
         </div>
       </div>
     </div>
 
-    <!-- 🏆 Ranking -->
-    <aside class="ranking">
-      <h4>🏆 Ranking Autoglass</h4>
-      <ul>
-        <li *ngFor="let r of ranking; let i = index" [class.top]="i === 0">
-          <span class="pos">#{{ i + 1 }}</span>
-          <span class="name">{{ r.name }}</span>
-          <span class="points">{{ r.score }} pts</span>
-        </li>
-      </ul>
-    </aside>
-  </div>
+    <!-- ABAS (depois do título) -->
+    <ul class="nav nav-tabs justify-content-center mb-4">
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="activeTab==='jogo'" (click)="setActiveTab('jogo')">
+          🧩 Jogo
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="activeTab==='ranking'" (click)="setActiveTab('ranking')">
+          🏆 Ranking
+        </button>
+      </li>
+    </ul>
 
-  <div *ngIf="gameOver" class="game-over">
-    <h4 *ngIf="score !== null && score! > 0">🎉 Parabéns! Sua pontuação: {{ score }}</h4>
-    <h4 *ngIf="score === 0">⏳ Tempo esgotado. Tente novamente!</h4>
-    <button class="btn btn-primary" (click)="newGame()">🔁 Jogar novamente</button>
+    <!-- CONTEÚDO DAS ABAS -->
+    <div *ngIf="activeTab==='jogo'" class="tab-content animate__animated animate__fadeIn">
+
+      <div *ngIf="loading" class="loading">
+        <div class="spinner-border text-primary" role="status"></div>
+        <div class="muted">Gerando grade...</div>
+      </div>
+
+      <div *ngIf="!loading" class="play-area animate__animated animate__fadeInUp">
+        <div class="board-section">
+          <div class="board-wrap">
+            <div class="grid" [style.gridTemplateColumns]="'repeat(' + gridSize + ', 1fr)'">
+              <ng-container *ngFor="let row of grid; let r = index">
+                <ng-container *ngFor="let cell of row; let c = index">
+                  <div class="cell-wrapper" [class.block]="cell.blocked">
+                    <div *ngIf="cell.blocked" class="cell-block"></div>
+                    <div *ngIf="!cell.blocked" class="cell">
+                      <div *ngIf="cell.number" class="cell-number">{{ cell.number }}</div>
+                      <input maxlength="1" autocomplete="off"
+                             [value]="cell.value || ''"
+                             (input)="onInput(r,c,$event)"
+                             [attr.aria-label]="'célula-'+r+'-'+c" />
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="clues-wrap">
+            <div class="clues">
+              <h5>→ Horizontais</h5>
+              <ol>
+                <li *ngFor="let cw of acrossClues">
+                  <strong>{{ cw.number }}.</strong> {{ cw.word.length }} letras
+                </li>
+              </ol>
+            </div>
+
+            <div class="clues">
+              <h5>↓ Verticais</h5>
+              <ol>
+                <li *ngFor="let cw of downClues">
+                  <strong>{{ cw.number }}.</strong> {{ cw.word.length }} letras
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="activeTab==='ranking'" class="tab-content animate__animated animate__fadeIn">
+      <div class="ranking-wrapper animate__animated animate__fadeInRight">
+        <h4>🏆 Ranking Autoglass</h4>
+        <ul>
+          <li *ngFor="let r of ranking; let i = index" [class.top]="i < 3">
+            <span class="pos">#{{ i + 1 }}</span>
+            <span class="name">{{ r.name }}</span>
+            <span class="points">{{ r.score }} pts</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </div>

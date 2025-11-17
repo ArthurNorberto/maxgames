@@ -1,5 +1,5 @@
 .autoglass-header {
-  background-color: #003366; /* Azul Autoglass */
+  background-color: #003366;
   color: #fff;
   padding: 12px 0;
   font-family: 'Segoe UI', sans-serif;
@@ -8,81 +8,100 @@
   z-index: 1000;
 
   .brand-link {
-    color: #FFD100; /* Amarelo Autoglass */
+    color: #FFD100;
     font-weight: 700;
     letter-spacing: 0.5px;
     transition: color 0.2s;
+
     &:hover {
       color: #fff;
     }
   }
 
-  .nav-links {
+  .user-info {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-
-    .nav-item {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-      cursor: pointer;
-
-      &:hover {
-        color: #FFD100;
-      }
-    }
-  }
-
-  /* Estilo do dropdown */
-  .dropdown {
+    gap: 10px;
     position: relative;
 
-    .dropdown-toggle {
-      background: transparent;
-      border: none;
-      color: #fff;
+    span {
       font-weight: 500;
-      cursor: pointer;
-      padding: 0;
-      transition: color 0.2s;
+    }
+
+    .btn {
+      font-weight: 500;
+      border-radius: 5px;
+      padding: 4px 10px;
+      transition: 0.2s;
 
       &:hover {
-        color: #FFD100;
+        background-color: #FFD100;
+        color: #003366;
       }
     }
 
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 28px;
-      left: 0;
-      background-color: #fff;
-      color: #003366;
-      border-radius: 8px;
-      min-width: 200px;
-      overflow: hidden;
-      z-index: 999;
-      animation: fadeIn 0.15s ease-in;
+    /* Notificações */
+    .notifications {
+      cursor: pointer;
+      position: relative;
 
-      .dropdown-item {
-        display: block;
-        padding: 10px 15px;
-        text-decoration: none;
+      i {
+        color: #fff;
+      }
+
+      .badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        font-size: 0.65rem;
+      }
+
+      .notifications-dropdown {
+        position: absolute;
+        top: 28px;
+        right: 0;
+        width: 250px;
+        background: #fff;
         color: #003366;
-        font-weight: 500;
-        transition: background 0.2s;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 1001;
+        animation: fadeIn 0.2s ease-in;
 
-        &:hover {
-          background-color: #FFD100;
+        .dropdown-header {
+          font-weight: 700;
+          font-size: 0.9rem;
+          padding: 8px 12px;
+          border-bottom: 1px solid #eaeaea;
+        }
+
+        .dropdown-item {
+          display: flex;
+          align-items: center;
+          padding: 8px 12px;
+          font-size: 0.875rem;
           color: #003366;
+          text-decoration: none;
+          transition: background 0.2s;
+
+          &:hover {
+            background-color: #f1f1f1;
+          }
+
+          i {
+            font-size: 1rem;
+            margin-right: 8px;
+          }
+        }
+
+        .text-muted {
+          padding: 8px 12px;
+          font-size: 0.875rem;
         }
       }
-    }
-
-    &:hover .dropdown-menu {
-      display: block;
     }
   }
 

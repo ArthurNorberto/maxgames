@@ -1,0 +1,15 @@
+<div class="post-box card">
+  <div class="top">
+    <img class="avatar" [src]="user?.avatar" />
+    <input
+      [(ngModel)]="text"
+      placeholder="Compartilhe algo com o pessoal da Max Play..."
+    />
+  </div>
+
+  <div class="bottom">
+    <button (click)="publicar()" [disabled]="text.trim().length === 0">
+      Publicar
+    </button>
+  </div>
+</div>

@@ -24,6 +24,7 @@ export class CacaPalavrasComponent implements OnInit, OnDestroy {
   selectedCells: number[] = [];
   gameOver = false;
   endMessage = '';
+  activeTab: 'jogo' | 'rank' = 'jogo';
   difficulty: 'facil' | 'medio' | 'dificil' = 'facil';
 
   score = 0;

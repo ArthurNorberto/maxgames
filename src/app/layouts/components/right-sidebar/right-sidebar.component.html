@@ -1,0 +1,37 @@
+<aside class="right-side">
+
+  <!-- BLOCO AMIGOS -->
+  <div class="card friends">
+    <h5>Amigos ({{ friends.length }})</h5>
+
+    <div class="friends-grid">
+      <div *ngFor="let f of topNine" class="friend-item">
+        <img [src]="f.avatar || 'assets/avatars/default.png'" alt="Foto" />
+        <span class="name">{{ f.name }}</span>
+      </div>
+    </div>
+
+    <button class="btn-all">
+      Ver todos
+    </button>
+  </div>
+
+  <!-- BLOCO EQUIPE -->
+  <div class="card team" *ngIf="equipes.length">
+    <h5>Equipe ({{ equipes.length }})</h5>
+
+    <div class="friends-grid">
+      <div *ngFor="let e of topEquipe" class="friend-item">
+        <img [src]="e.avatar || 'assets/avatars/default.png'" alt="Foto" />
+        <span class="name">{{ e.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCO DICA -->
+  <div class="card tip">
+    <h6>Dica</h6>
+    <p class="small">Participe diariamente para subir no ranking e ganhar prêmios internos.</p>
+  </div>
+
+</aside>

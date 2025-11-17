@@ -1,10 +1,12 @@
 <div class="forca-wrapper container py-4">
+
   <div class="card shadow-lg border-0">
     <div class="card-body p-4">
 
+      <!-- HEADER -->
       <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-          <h3 class="mb-1">Forca — Autoglass Edition</h3>
+          <h3>Forca — Autoglass Edition</h3>
           <p class="text-muted small mb-0">
             Adivinhe a palavra antes do boneco ser enforcado.
           </p>
@@ -12,61 +14,86 @@
         <button class="btn btn-sm btn-outline-primary" (click)="newGame()">⭮ Novo Jogo</button>
       </div>
 
-      <div class="row">
-        <!-- Canvas -->
-        <div class="col-lg-5 mb-3">
-          <canvas #hangmanCanvas width="360" height="320" class="w-100 rounded bg-white border"></canvas>
+      <!-- ABAS -->
+      <ul class="nav nav-tabs mb-3 justify-content-center">
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="activeTab === 'jogo'" (click)="setActiveTab('jogo')">🎮 Jogo</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="activeTab === 'rank'" (click)="setActiveTab('rank')">🏆
+            Ranking</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" [class.active]="activeTab === 'stats'" (click)="setActiveTab('stats')">📊
+            Estatísticas</button>
+        </li>
+      </ul>
 
-          <div class="mt-3 small text-center text-muted">
-            Erros: <strong class="text-danger">{{ wrongParts }}</strong> / {{ maxParts }}
-            &nbsp;|&nbsp; Tempo: <strong>{{ timeRemaining }}s</strong>
-            <div *ngIf="lastPoints !== null" class="mt-2">
+      <!-- JOGO -->
+      <div *ngIf="activeTab==='jogo'" class="animate__animated animate__fadeIn">
+
+        <div class="row justify-content-center align-items-start">
+
+          <!-- CANVAS -->
+          <div class="col-lg-5 mb-3 text-center">
+            <canvas #hangmanCanvas width="360" height="320" class="w-100 rounded bg-white border"></canvas>
+
+            <div class="mt-3 small text-muted">
+              Erros: <strong class="text-danger">{{ wrongParts }}</strong> / {{ maxParts }}
+              &nbsp;|&nbsp; Tempo: <strong>{{ timeRemaining }}s</strong>
+            </div>
+
+            <div *ngIf="lastPoints!==null" class="mt-2">
               <span class="badge bg-success">Pontos: {{ lastPoints }}</span>
             </div>
           </div>
-        </div>
 
-        <!-- Letras, teclado e ranking -->
-        <div class="col-lg-7">
-          <div class="word-display text-center mb-3">
-            <ng-container *ngFor="let ch of displayLetters">
-              <span class="letter-box" [class.filled]="ch !== ''">{{ ch || '_' }}</span>
-            </ng-container>
-          </div>
+          <!-- LETRAS E TECLADO -->
+          <div class="col-lg-7 text-center">
+            <div class="word-display mb-3">
+              <ng-container *ngFor="let ch of displayLetters">
+                <span class="letter-box" [class.filled]="ch !== ''">{{ ch || '_' }}</span>
+              </ng-container>
+            </div>
 
-          <div class="keyboard mb-3 d-flex flex-wrap gap-2 justify-content-center">
-            <button *ngFor="let k of alphabet"
-                    class="btn btn-sm btn-outline-secondary"
-                    [disabled]="usedLetters.has(k) || gameOver"
-                    (click)="tryLetter(k)">
-              {{ k }}
-            </button>
-          </div>
+            <div class="keyboard mb-3 d-flex flex-wrap gap-2 justify-content-center">
+              <button *ngFor="let k of alphabet" class="btn btn-sm btn-outline-secondary"
+                [disabled]="usedLetters.has(k) || gameOver" (click)="tryLetter(k)">
+                {{ k }}
+              </button>
+            </div>
 
-          <div class="text-center mb-3">
-            <input [(ngModel)]="guessWord"
-                   (keyup.enter)="submitWord()"
-                   class="form-control d-inline w-auto me-2"
-                   placeholder="Chutar palavra inteira..." [disabled]="gameOver">
-            <button class="btn btn-primary" (click)="submitWord()" [disabled]="gameOver">Chutar</button>
-          </div>
+            <div class="mb-3">
+              <input [(ngModel)]="guessWord" (keyup.enter)="submitWord()" class="form-control d-inline w-auto me-2"
+                placeholder="Chutar palavra inteira..." [disabled]="gameOver">
+              <button class="btn btn-primary" (click)="submitWord()" [disabled]="gameOver">Chutar</button>
+            </div>
 
-          <div class="text-center mb-3">
-            <button class="btn btn-outline-danger me-2" (click)="giveUp()" [disabled]="gameOver">Desistir</button>
-            <button class="btn btn-success" (click)="nextRound()" [disabled]="!gameOver">Próxima</button>
-          </div>
+            <div class="mb-3">
+              <button class="btn btn-outline-danger me-2" (click)="giveUp()" [disabled]="gameOver">Desistir</button>
+              <button class="btn btn-success" (click)="nextRound()" [disabled]="!gameOver">Próxima</button>
+            </div>
 
-          <hr>
-
-          <div class="text-center">
-            <h6 class="text-muted mb-2">🏆 Ranking</h6>
-            <ul class="list-unstyled small">
-              <li *ngFor="let p of fakeRanking; let i = index">
-                {{ i + 1 }}º — <strong>{{ p.name }}</strong>: {{ p.score }} pts
-              </li>
-            </ul>
           </div>
         </div>
+      </div>
+
+      <!-- RANKING -->
+      <div *ngIf="activeTab==='rank'" class="rank-pane animate__animated animate__fadeIn">
+        <h6 class="text-center text-muted mb-3">🏆 Ranking</h6>
+        <ul class="list-unstyled text-center">
+          <li *ngFor="let p of fakeRanking; let i=index">
+            {{ i+1 }}º — <strong>{{ p.name }}</strong>: {{ p.score }} pts
+          </li>
+        </ul>
+      </div>
+
+      <!-- ESTATÍSTICAS -->
+      <div *ngIf="activeTab==='stats'" class="stats-pane animate__animated animate__fadeIn">
+        <h6 class="text-center text-muted mb-3">📊 Estatísticas</h6>
+        <p class="text-center">Acertos: <strong>{{ hits }}</strong></p>
+        <p class="text-center">Erros: <strong>{{ wrongParts }}</strong></p>
+        <p class="text-center">Pontuação Total: <strong>{{ score }}</strong></p>
       </div>
 
     </div>

@@ -13,7 +13,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./app.scss']
 })
 export class App {
-  protected readonly title = signal('max-games');
+  protected readonly title = signal('max-play');
   isLoginPage = false;
 
   private router = inject(Router);

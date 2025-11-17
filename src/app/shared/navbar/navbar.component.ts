@@ -12,6 +12,13 @@ import { LoginService } from '../../pages/services/login.service';
 })
 export class NavbarComponent implements OnInit {
   user: any = null;
+  showNotifications = false;
+
+  notifications = [
+    { text: 'João te adicionou como amigo' },
+    { text: 'Nova mensagem de Ana' },
+    { text: 'Carlos comentou no seu post' }
+  ];
 
   constructor(private loginService: LoginService, private router: Router) { }
 
@@ -22,5 +29,9 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.loginService.logout();
     this.router.navigate(['/login']);
+  }
+
+  toggleNotifications() {
+    this.showNotifications = !this.showNotifications;
   }
 }

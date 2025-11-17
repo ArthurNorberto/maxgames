@@ -1,0 +1,17 @@
+<div class="not-found-container">
+    <div class="astronaut-wrapper">
+        <img src="assets/404/astronaut.png" class="astronaut" alt="Astronauta perdido">
+        <img src="assets/404/planet.png" class="planet" alt="Planeta">
+    </div>
+
+    <h1 id="code" (click)="secretClick()">404</h1>
+    <p class="subtitle">Oops! Parece que você se perdeu no espaço...</p>
+
+    <button class="btn-voltar" (click)="goHome()">
+        Voltar para o início
+    </button>
+
+    <p class="secret-msg" *ngIf="showSecret">
+        🚀 Você desbloqueou o Modo Dev — continue explorando 😄
+    </p>
+</div>

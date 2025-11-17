@@ -1,0 +1,107 @@
+.left-side {
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* --- CARD BASE --- */
+.card {
+  background: #fff;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
+  margin-bottom: 16px;
+  text-align: center;
+  border-left: 4px solid #003366;
+}
+
+/* --- PERFIL --- */
+.profile-card .avatar-lg {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #003366;
+  margin: 0 auto 12px;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #003366;
+  margin: 6px 0 2px;
+}
+
+.login, .sector {
+  font-size: 13px;
+  color: #5F7A82;
+}
+
+/* --- SCORE BOX --- */
+.score-box {
+  background: #F5F7FA;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #E1E6EA;
+}
+
+.score-box .label {
+  font-size: 12px;
+  color: #5F7A82;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.score-box .value {
+  display: block;
+  margin-top: 4px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #FFD100;
+}
+
+/* --- MENU --- */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.menu-item {
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease;
+  font-size: 15px;
+  font-weight: 500;
+  color: #003366;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-item i {
+  font-size: 17px;
+  opacity: .85;
+}
+
+/* Hover padrão, igual para todos */
+.menu-item:hover {
+  background: #003366;
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.avatar-link {
+  display: inline-block;
+  cursor: pointer;
+
+  img.avatar-lg {
+    border-radius: 50%;
+    transition: transform 0.2s;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<app-navbar></app-navbar>
+
+<div class="main-container">
+  <div class="layout-grid">
+
+    <!-- Sidebar esquerda -->
+    <aside class="col left">
+      <app-left-sidebar></app-left-sidebar>
+    </aside>
+
+    <!-- Conteúdo central -->
+    <main class="col center">
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+
+    <!-- Sidebar direita -->
+    <aside class="col right">
+      <app-right-sidebar></app-right-sidebar>
+    </aside>
+
+  </div>
+</div>

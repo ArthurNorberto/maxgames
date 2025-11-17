@@ -1,97 +1,150 @@
-.autowordle-wrapper {
-    background: #ffffff;
+/* ------------------ TABS PADRONIZADAS ------------------ */
+
+.game-tabs {
+  border-bottom: 2px solid #00336630;
+
+  .nav-link {
     color: #003366;
-    font-family: 'Segoe UI', sans-serif;
+    font-weight: 600;
+    padding: 10px 22px;
+    transition: 0.25s ease;
+    font-size: 1rem;
+  }
 
-    h2 {
-        color: #003366;
-        font-weight: 700;
+  .nav-link:hover {
+    background: #e8f0ff;
+    color: #002244;
+  }
+
+  .nav-link.active {
+    background: #003366;
+    color: #fff;
+    border-color: #003366;
+  }
+}
+
+/* ------------------ RESTANTE DO CSS (SEU PADRÃO) ------------------ */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-left {
+  from { transform: translateX(40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.8); }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade-in { animation: fade-in 0.8s ease forwards; }
+.animate-slide-up { animation: slide-up 0.7s ease forwards; }
+.animate-slide-left { animation: slide-left 0.8s ease forwards; }
+.animate-pop { animation: pop 0.25s ease; }
+
+.animate-btn {
+  transition: transform 0.15s ease;
+}
+.animate-btn:hover {
+  transform: scale(1.05);
+}
+
+/* PADRÃO CORPORATIVO */
+.autowordle-wrapper {
+  background: #ffffff;
+  color: #003366;
+  font-family: 'Segoe UI', sans-serif;
+
+  .page-title {
+    font-weight: 700;
+  }
+
+  .subtitle {
+    color: #4a6fa1;
+    margin-bottom: 25px;
+  }
+
+  /* TABULEIRO */
+  .game-board {
+    .guess-row {
+      display: grid;
+      gap: 8px;
+      justify-content: center;
     }
 
-    .autowordle-container {
-        max-width: 500px;
-        margin: 0 auto;
+    .guess-cell {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      background: white;
+      transition: all 0.25s ease;
     }
 
-    .game-board {
-        .guess-row {
-            display: grid;
-            gap: 8px;
-            justify-content: center;
-            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); // ✅ dinâmico
+    .correct-position {
+      background-color: #78e08f;
+      border-color: #3c8d5a;
+    }
+
+    .wrong-position {
+      background-color: #ffd100;
+      border-color: #d6b700;
+    }
+
+    .not-in-word {
+      background-color: #e4e4e4;
+      border-color: #bbb;
+    }
+  }
+
+  /* INPUT */
+  .guess-input {
+    max-width: 260px;
+    text-align: center;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+  }
+
+  /* RANKING */
+  .ranking-box {
+    max-width: 400px;
+
+    .ranking-list {
+      list-style: none;
+
+      .ranking-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 8px;
+        border-bottom: 1px dashed #ccc;
+        transition: 0.2s;
+
+        &:hover {
+          transform: translateX(5px);
         }
 
-        .guess-cell {
-            width: 50px;
-            height: 50px;
-            border: 2px solid #ccc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-
-            &.correct-position {
-                background-color: #78e08f;
-                border-color: #3c8d5a;
-                color: #003366;
-            }
-
-            &.wrong-position {
-                background-color: #ffd100;
-                border-color: #d6b700;
-                color: #003366;
-            }
-
-            &.not-in-word {
-                background-color: #e0e0e0;
-                border-color: #aaa;
-                color: #777;
-            }
+        .score-badge {
+          background: #003366;
+          color: white;
+          padding: 2px 6px;
+          border-radius: 6px;
         }
+      }
     }
-
-    .guess-input {
-        width: 100%;
-        max-width: 240px;
-        margin: 0 auto;
-        text-transform: uppercase;
-        text-align: center;
-        font-size: 1.2rem;
-        letter-spacing: 4px;
-    }
-
-    .end-screen {
-        color: #1e3799;
-        font-size: 1.1rem;
-    }
-
-    .ranking-box {
-        border: 2px solid #00336620;
-        background: #fafafa;
-
-        h5 {
-            color: #003366;
-            font-weight: bold;
-        }
-
-        ol {
-            padding-left: 1.2rem;
-            margin-bottom: 0;
-
-            li {
-                font-size: 0.95rem;
-                margin-bottom: 6px;
-            }
-        }
-    }
-
-    @media (max-width: 992px) {
-        .ranking-box {
-            margin-top: 30px;
-        }
-    }
+  }
 }

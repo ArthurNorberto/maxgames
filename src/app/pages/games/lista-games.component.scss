@@ -1,0 +1,138 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+/* --- Seção principal --- */
+.games-section {
+    background: #f4f6f8;
+    min-height: 100vh;
+    padding-top: 40px;
+}
+
+h2 {
+    color: #003366;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.lead {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Cards dos jogos --- */
+.game-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid #e3e6ea;
+}
+
+.game-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0, 51, 102, 0.18);
+    border-color: transparent;
+}
+
+/* --- Ícones --- */
+.game-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 10px;
+    font-size: 34px;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Cada jogo com sua cor */
+.game-icon.quiz {
+    background: #003366;
+}
+
+.game-icon.acerte {
+    background: #0074B8;
+}
+
+.game-icon.memory {
+    background: #005A8C;
+}
+
+.game-icon.wordle {
+    background: #008FD6;
+}
+
+.game-icon.search {
+    background: #006699;
+}
+
+.game-icon.forca {
+    background: #004D73;
+}
+
+.game-icon.crossword {
+    background: #002F4B;
+}
+
+/* Título do card */
+.game-card h5 {
+    color: #003366;
+    font-size: 1.1rem;
+}
+
+/* Texto */
+.game-card p {
+    min-height: 48px;
+}
+
+/* Botão */
+.btn-primary {
+    background: #003366 !important;
+    border: none;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 6px 12px;
+}
+
+.btn-primary:hover {
+    background: #00294f !important;
+}
+
+/* Grid fix para col-lg-2-4 (classe custom) */
+.col-lg-2-4 {
+    width: 20%;
+}
+
+@media (max-width: 1200px) {
+    .col-lg-2-4 {
+        width: 25%;
+    }
+}
+
+@media (max-width: 992px) {
+    .col-lg-2-4 {
+        width: 33.3%;
+    }
+}
+
+@media (max-width: 768px) {
+    .col-lg-2-4 {
+        width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .col-lg-2-4 {
+        width: 100%;
+    }
+}

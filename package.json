@@ -1,5 +1,5 @@
 {
-  "name": "max-games",
+  "name": "max-play",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:max-games": "node dist/max-games/server/server.mjs"
+    "serve:ssr:max-play": "node dist/max-play/server/server.mjs"
   },
   "prettier": {
     "printWidth": 100,

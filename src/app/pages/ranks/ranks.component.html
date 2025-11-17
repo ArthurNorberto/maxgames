@@ -1,0 +1,91 @@
+<main class="ranks-container">
+
+  <header class="header fade-in">
+    <h2 class="title">Ranks</h2>
+    <p class="subtitle">Acompanhe seu desempenho entre colegas, setores e toda a empresa.</p>
+  </header>
+
+  <!-- Abas -->
+  <nav class="tabs">
+    <button (click)="activeTab = 'equipe'" [class.active]="activeTab === 'equipe'">Equipe</button>
+    <button (click)="activeTab = 'setor'" [class.active]="activeTab === 'setor'">Setor</button>
+    <button (click)="activeTab = 'geral'" [class.active]="activeTab === 'geral'">Geral</button>
+  </nav>
+
+  <!-- Conteúdo das abas -->
+  <section class="tab-content">
+
+    <!-- ========================== RANK DA EQUIPE ============================= -->
+    <div *ngIf="activeTab === 'equipe'" class="rank-section fade-up">
+
+      <h3 class="section-title">Ranking da Equipe</h3>
+
+      <div class="rank-list">
+        <div class="rank-item" *ngFor="let u of rankEquipe; let i = index">
+          <span class="pos">{{ i + 1 }}</span>
+          <div class="info">
+            <strong class="name">{{ u.name }}</strong>
+            <span class="sector">{{ u.sector || '-' }}</span>
+          </div>
+          <span class="score">{{ u.score }} pts</span>
+        </div>
+      </div>
+
+      <!-- Curiosidades -->
+      <div class="curiosidades fade-in delay-2">
+        <p><strong>Arthur</strong> é o melhor jogador do <strong>Jogo da Memória</strong> da sua equipe!</p>
+        <p><strong>Juliana</strong> domina o ranking de <strong>Quiz Autoglass</strong> no time.</p>
+      </div>
+    </div>
+
+
+    <!-- ========================== RANK DO SETOR ============================= -->
+    <div *ngIf="activeTab === 'setor'" class="rank-section fade-up">
+
+      <h3 class="section-title">Ranking do Setor</h3>
+
+      <div class="rank-list">
+        <div class="rank-item" *ngFor="let u of rankSetor; let i = index">
+          <span class="pos">{{ i + 1 }}</span>
+          <div class="info">
+            <strong class="name">{{ u.name }}</strong>
+            <span class="sector">{{ u.sector || '-' }}</span>
+          </div>
+          <span class="score">{{ u.score }} pts</span>
+        </div>
+      </div>
+
+      <!-- Curiosidades -->
+      <div class="curiosidades fade-in delay-2">
+        <p><strong>Roberta</strong> tem o maior aproveitamento no <strong>Acerte ou Erre</strong> do setor.</p>
+        <p><strong>Carlos</strong> é destaque no <strong>AutoWordle</strong> entre todos os setores.</p>
+      </div>
+    </div>
+
+
+    <!-- ========================== RANK GERAL ============================= -->
+    <div *ngIf="activeTab === 'geral'" class="rank-section fade-up">
+
+      <h3 class="section-title">Ranking Geral</h3>
+
+      <div class="rank-list">
+        <div class="rank-item" *ngFor="let u of rankGeral; let i = index">
+          <span class="pos">{{ i + 1 }}</span>
+          <div class="info">
+            <strong class="name">{{ u.name }}</strong>
+            <span class="sector">{{ u.sector || '-' }}</span>
+          </div>
+          <span class="score">{{ u.score }} pts</span>
+        </div>
+      </div>
+
+      <!-- Curiosidades -->
+      <div class="curiosidades fade-in delay-2">
+        <p><strong>João</strong> é o melhor jogador do <strong>Acerte ou Erre</strong> da empresa inteira.</p>
+        <p><strong>Matheus</strong> está no top 3 do <strong>Forca Automotiva</strong> geral.</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>

@@ -1,0 +1,68 @@
+<div class="perfil-container">
+
+    <h1>Meu Perfil</h1>
+
+    <div class="perfil-card">
+
+        <!-- Avatar -->
+        <div class="avatar-section">
+            <img [src]="avatarPreview || 'assets/avatars/default.jpg'" class="avatar-preview">
+
+            <label class="upload-btn">
+                Alterar Avatar
+                <input type="file" accept="image/*" (change)="onAvatarChange($event)">
+            </label>
+        </div>
+
+        <!-- Formulário -->
+        <div class="form-section">
+
+            <div class="form-group">
+                <label>Nome completo</label>
+                <input type="text" [(ngModel)]="usuario.name">
+            </div>
+
+            <div class="form-group">
+                <label>Setor</label>
+                <select [(ngModel)]="usuario.sector">
+                    <option value="">Selecione...</option>
+                    <option *ngFor="let s of setores" [value]="s">
+                        {{ s }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Equipe (somente se setor == Central de Atendimento) -->
+            <div class="form-group" *ngIf="usuario.sector === 'Central de Atendimento'">
+                <label>Equipe</label>
+                <select [(ngModel)]="usuario.equipe">
+                    <option value="">Selecione...</option>
+                    <option *ngFor="let e of equipesCentral" [value]="e">
+                        {{ e }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Login</label>
+                <input type="text" [(ngModel)]="usuario.login">
+            </div>
+
+            <div class="form-group">
+                <label>Nova senha (opcional)</label>
+                <input type="password" placeholder="••••••••">
+            </div>
+
+            <div class="buttons">
+                <button class="btn-salvar" (click)="salvar()">Salvar Alterações</button>
+                <button class="btn-voltar" (click)="voltar()">Cancelar</button>
+            </div>
+
+            <p *ngIf="successMessage" class="alert success">{{ successMessage }}</p>
+            <p *ngIf="errorMessage" class="alert error">{{ errorMessage }}</p>
+
+        </div>
+
+    </div>
+
+</div>

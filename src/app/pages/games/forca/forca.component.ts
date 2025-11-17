@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnDestroy, HostListener } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnDestroy, HostListener, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -11,8 +11,8 @@ import { ForcaService } from '../services/forca.service';
     templateUrl: './forca.component.html',
     styleUrls: ['./forca.component.scss']
 })
-export class ForcaComponent implements OnDestroy {
-    @ViewChild('hangmanCanvas', { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;
+export class ForcaComponent implements AfterViewInit, OnDestroy {
+    @ViewChild('hangmanCanvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
 
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     usedLetters = new Set<string>();
@@ -20,7 +20,7 @@ export class ForcaComponent implements OnDestroy {
 
     secretWord = '';
     displayLetters: string[] = [];
-
+    activeTab: 'jogo' | 'rank' | 'stats' = 'jogo';
     wrongParts = 0;
     maxParts = 6;
     gameOver = false;
@@ -40,6 +40,9 @@ export class ForcaComponent implements OnDestroy {
         { name: 'Você', score: 0 }
     ];
 
+    hits = 0;
+    score = 0;
+
     private ctx!: CanvasRenderingContext2D;
 
     constructor(
@@ -48,13 +51,38 @@ export class ForcaComponent implements OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.setupCanvas();
-        this.newGame();
+
+    }
+
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.setupCanvas();
+            this.newGame();
+        });
     }
 
     ngOnDestroy() {
         this.clearTimer();
     }
+
+    setActiveTab(tab: 'jogo' | 'rank' | 'stats') {
+        this.activeTab = tab;
+        if (tab === 'jogo') {
+            setTimeout(() => { // garante que o DOM foi renderizado
+                this.setupCanvas();
+                this.drawBase();
+                if (this.wrongParts > 0) this.drawExistingParts();
+            });
+        }
+    }
+
+    drawExistingParts() {
+        for (let i = 1; i <= this.wrongParts; i++) {
+            this.drawPart(i);
+        }
+    }
+
+
 
     // --- Entrada por teclado físico ---
     @HostListener('window:keydown', ['$event'])

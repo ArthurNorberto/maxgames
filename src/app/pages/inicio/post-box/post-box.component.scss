@@ -1,0 +1,57 @@
+.post-box {
+  background: #fff;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
+
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #003366;
+      object-fit: cover;
+    }
+
+    input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      transition: 0.2s;
+
+      &:focus {
+        border-color: #003366;
+        box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.2);
+      }
+    }
+  }
+
+  .bottom {
+    text-align: right;
+    margin-top: 12px;
+
+    button {
+      background: #003366;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        background: #00264d;
+      }
+
+      &:disabled {
+        background: #8fa5b6;
+      }
+    }
+  }
+}

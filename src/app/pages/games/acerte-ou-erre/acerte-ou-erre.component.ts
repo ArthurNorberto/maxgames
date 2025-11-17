@@ -23,6 +23,7 @@ type Difficulty = 'facil' | 'medio' | 'dificil' | 'muito' | 'especialista';
 export class AcerteOuErreComponent implements AfterViewInit, OnDestroy {
   @ViewChild('answerInput') answerInput!: ElementRef<HTMLInputElement>;
 
+  activeTab: 'jogo' | 'rank' = 'jogo';
   difficulty: Difficulty = 'facil';
   readonly Math = Math;
   lives = 3;

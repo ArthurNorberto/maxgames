@@ -1,47 +1,87 @@
-<div class="autowordle-wrapper container py-5">
-  <div class="row justify-content-center">
+<div class="autowordle-wrapper container py-5 animate-fade-in">
 
-    <!-- Coluna principal do jogo -->
-    <div class="col-lg-8 col-md-12">
-      <div class="autowordle-container text-center">
-        <h2 class="mb-4">🧩 AutoWordle</h2>
-        <p class="text-muted mb-4">Adivinhe a palavra em até 6 tentativas</p>
+  <!-- TABS -->
+  <ul class="nav nav-tabs game-tabs mb-4" id="gameTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="jogo-tab" data-bs-toggle="tab" data-bs-target="#jogo"
+        type="button" role="tab">
+        🎮 Jogo
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="ranking-tab" data-bs-toggle="tab" data-bs-target="#ranking"
+        type="button" role="tab">
+        🏆 Ranking
+      </button>
+    </li>
+  </ul>
 
-        <!-- Campo de entrada / lógica -->
-        <div class="game-board mb-4">
-          <div *ngFor="let row of guessRows; let rowIndex = index" class="guess-row mb-2"
-            [ngStyle]="{'grid-template-columns': 'repeat(' + wordLength + ', 1fr)'}">
-            <div *ngFor="let letter of row; let colIndex = index" class="guess-cell"
-              [ngClass]="getCellClass(rowIndex, colIndex)">
-              {{ letter || '' }}
+  <!-- TAB CONTENT -->
+  <div class="tab-content">
+
+    <!-- 🟦 ABA DO JOGO -->
+    <div class="tab-pane fade show active" id="jogo" role="tabpanel">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 text-center animate-slide-up">
+
+          <h2 class="page-title">🧩 AutoWordle</h2>
+          <p class="subtitle">Adivinhe a palavra em até 6 tentativas</p>
+
+          <!-- TABULEIRO -->
+          <div class="game-board mb-4">
+            <div *ngFor="let row of guessRows; let rowIndex = index"
+              class="guess-row mb-2"
+              [ngStyle]="{'grid-template-columns': 'repeat(' + wordLength + ', 1fr)'}">
+
+              <div *ngFor="let letter of row; let colIndex = index"
+                class="guess-cell animate-pop"
+                [ngClass]="getCellClass(rowIndex, colIndex)">
+                {{ letter || '' }}
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Entrada de nova tentativa -->
-        <div class="input-area mb-4" *ngIf="!gameOver">
-          <input type="text" class="form-control guess-input mx-auto" maxlength="{{ wordLength }}"
-            [(ngModel)]="currentGuess" (keyup.enter)="submitGuess()"
-            placeholder="Digite {{ wordLength }} letras" />
-          <button class="btn btn-primary mt-2" (click)="submitGuess()">Enviar</button>
-        </div>
+          <!-- INPUT -->
+          <div class="input-area mb-4" *ngIf="!gameOver">
+            <input 
+              type="text"
+              class="form-control guess-input mx-auto"
+              maxlength="{{ wordLength }}"
+              [(ngModel)]="currentGuess"
+              (keyup.enter)="submitGuess()"
+              placeholder="Digite {{ wordLength }} letras"
+            />
+            <button class="btn btn-primary mt-3 animate-btn" (click)="submitGuess()">Enviar</button>
+          </div>
 
-        <!-- Resultado / fim de jogo -->
-        <div *ngIf="gameOver" class="end-screen mb-4">
-          <h4>{{ endMessage }}</h4>
-          <p *ngIf="lastPoints !== null">💯 Pontos ganhos: {{ lastPoints }}</p>
-          <button class="btn btn-primary mt-2 me-2" (click)="newGame()">➤ JOGAR NOVAMENTE</button>
-          <button class="btn btn-secondary mt-2" (click)="nextWord()">➡ PRÓXIMA PALAVRA</button>
+          <!-- FIM DE JOGO -->
+          <div *ngIf="gameOver" class="end-screen animate-slide-up">
+            <h4>{{ endMessage }}</h4>
+            <p *ngIf="lastPoints !== null">💯 Pontos ganhos: {{ lastPoints }}</p>
+
+            <button class="btn btn-primary mt-2 me-2 animate-btn" (click)="newGame()">
+              ➤ JOGAR NOVAMENTE
+            </button>
+            <button class="btn btn-secondary mt-2 animate-btn" (click)="nextWord()">
+              ➡ PRÓXIMA PALAVRA
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <!-- Coluna lateral do ranking -->
-    <div class="col-lg-4 col-md-8 col-sm-10 mt-4 mt-lg-0">
-      <div class="ranking-box shadow-sm p-3 rounded bg-white">
-        <h5 class="mb-3 text-center">🏆 Ranking – Quem acertou</h5>
-        <ol class="mb-0 text-start">
-          <li *ngFor="let r of ranking">{{ r.name }} — {{ r.score }} pts</li>
+    <!-- 🟨 ABA DO RANKING -->
+    <div class="tab-pane fade" id="ranking" role="tabpanel">
+      <div class="ranking-box shadow-sm p-4 rounded bg-white animate-slide-left mx-auto">
+
+        <h5 class="text-center mb-3">🏆 Ranking – Quem acertou</h5>
+
+        <ol class="ranking-list">
+          <li *ngFor="let r of ranking" class="ranking-item">
+            <span>{{ r.name }}</span>
+            <span class="badge score-badge">{{ r.score }} pts</span>
+          </li>
         </ol>
       </div>
     </div>

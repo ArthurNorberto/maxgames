@@ -1,0 +1,162 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.ranks-container {
+    padding: 40px 20px;
+    background: #f4f6f8;
+    min-height: 100vh;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #003366;
+}
+
+.subtitle {
+    color: #546b75;
+    margin-top: 8px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 25px 0 35px;
+}
+
+.tabs button {
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: 1px solid #ccd4da;
+    background: #fff;
+    font-weight: 600;
+    color: #335;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.tabs button.active {
+    background: #003366;
+    color: #fff;
+    border-color: #003366;
+}
+
+.tabs button:hover:not(.active) {
+    background: #e7eef3;
+}
+
+/* Section */
+.rank-section {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #003366;
+    margin-bottom: 18px;
+}
+
+/* Lista de Rank */
+.rank-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e2e6ea;
+    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
+    transition: 0.2s;
+}
+
+.rank-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 51, 102, 0.12);
+}
+
+.pos {
+    width: 28px;
+    height: 28px;
+    background: #003366;
+    color: #fff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-weight: 700;
+    color: #003366;
+}
+
+.sector {
+    font-size: 0.8rem;
+    color: #667a85;
+}
+
+.score {
+    font-weight: 700;
+    color: #003366;
+}
+
+/* Curiosidades */
+.curiosidades {
+    margin-top: 25px;
+    background: #003366;
+    color: #fff;
+    padding: 18px 20px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Animações HTML5 */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s forwards ease-out;
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 1s forwards ease-out;
+}
+
+.delay-2 { animation-delay: 0.3s; }
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

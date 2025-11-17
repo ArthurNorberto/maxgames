@@ -1,0 +1,17 @@
+<section class="feed">
+
+  <!-- Caixa de texto para postar -->
+  <app-post-box *ngIf="user" [user]="user" (publicarPost)="handlePublicar($event)">
+  </app-post-box>
+
+  <div *ngIf="loading" class="loading">Carregando feed...</div>
+
+  <div *ngIf="!loading && posts.length === 0" class="empty">
+    Ainda sem atividades — jogue e apareça aqui!
+  </div>
+
+  <div *ngFor="let p of posts">
+    <app-post-item [post]="p" (like)="likePost(p)"></app-post-item>
+  </div>
+
+</section>
