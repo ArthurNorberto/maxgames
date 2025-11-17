@@ -44,11 +44,11 @@
             <div class="row g-3">
                 <div class="col-12 col-md-4" *ngFor="let k of metricKeys">
                     <div class="metric-card p-3 shadow-sm">
-                        <div class="metric-value" aria-live="polite">{{ metrics[k].value | number }}</div>
-                        <div class="metric-label">{{ metrics[k].label }}</div>
-                        <div class="metric-bar" role="progressbar" [attr.aria-valuenow]="metrics[k].value"
-                            [attr.aria-valuemin]="0" [attr.aria-valuemax]="metrics[k].target">
-                            <div class="metric-fill" [style.width.%]="(metrics[k].value / metrics[k].target) * 100">
+                        <div class="metric-value" aria-live="polite">{{ getMetric(k).value | number }}</div>
+                        <div class="metric-label">{{ getMetric(k).label }}</div>
+                        <div class="metric-bar" role="progressbar" [attr.aria-valuenow]="getMetric(k).value"
+                            [attr.aria-valuemin]="0" [attr.aria-valuemax]="getMetric(k).target">
+                            <div class="metric-fill" [style.width.%]="(getMetric(k).value / getMetric(k).target) * 100">
                             </div>
                         </div>
                     </div>

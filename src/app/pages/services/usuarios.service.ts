@@ -30,6 +30,7 @@ export class UsuariosService {
             id: '1',
             name: 'Bianca Vaz',
             sector: 'Central de Atendimento',
+            login: 'bianca.vaz',
             avatar: 'assets/avatars/bianca-vaz.jpg',
             score: 820
         },
@@ -37,6 +38,7 @@ export class UsuariosService {
             id: '2',
             name: 'Nadia Barcellos',
             sector: 'CIM',
+            login: 'nadia.barcellos',
             avatar: 'assets/avatars/nadia-barcellos.jpg',
             score: 910
         },
@@ -44,6 +46,7 @@ export class UsuariosService {
             id: '3',
             name: 'Weylon Rodrigues',
             sector: 'QA',
+            login: 'weylon.rodrigues',
             avatar: 'assets/avatars/weylon-rodrigues.jpg',
             score: 760
         },
@@ -51,6 +54,7 @@ export class UsuariosService {
             id: '4',
             name: 'Arthur Norberto',
             sector: 'Desenvolvimento',
+            login: 'arthur.norberto',
             avatar: 'assets/avatars/arthur.jpg',
             score: 1240
         }

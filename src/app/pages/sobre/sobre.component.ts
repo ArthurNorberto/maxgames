@@ -28,6 +28,11 @@ export class SobreComponent implements OnInit, AfterViewInit, OnDestroy {
     horasPorMes: { label: 'Horas/gamificação por mês (estim.)', value: 0, target: 3200 }
   };
 
+  getMetric(key: MetricKeys): Metric {
+    return this.metrics[key];
+  }
+
+
   get metricKeys(): MetricKeys[] {
     return Object.keys(this.metrics) as MetricKeys[];
   }
@@ -67,7 +72,7 @@ export class SobreComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private rafs: number[] = [];
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     try {
