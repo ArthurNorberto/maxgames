@@ -1,0 +1,8 @@
+<div class="tabs-container">
+
+    <div class="tab" *ngFor="let t of tabs; let i = index" [class.active]="active === t.key" (click)="setTab(t.key)">
+        {{ t.label }}
+        <div class="underline" *ngIf="active === t.key"></div>
+    </div>
+
+</div>

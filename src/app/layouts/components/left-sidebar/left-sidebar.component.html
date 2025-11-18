@@ -8,7 +8,17 @@
       <img class="avatar-lg" [src]="user?.avatar || 'assets/avatars/arthur.jpg'" alt="avatar" />
     </a>
 
-    <h4 class="name">{{ user?.nome || 'Usuário' }}</h4>
+    <div class="profile-header">
+      <h4 class="name">
+        {{ user?.nome || 'Usuário' }}
+      </h4>
+
+      <!-- ÍCONE ENGRANAGEM (Configurações / Editar Perfil) -->
+      <a routerLink="/meu-perfil" class="settings-icon">
+        <i class="bi bi-gear-fill"></i>
+      </a>
+    </div>
+
     <div class="login">{{ user?.login || 'login.autoglass' }}</div>
     <div class="sector">{{ user?.comunidade || 'Setor não informado' }}</div>
 
@@ -22,10 +32,6 @@
 
       <div class="maxcoin-info">
         <div class="maxcoin-title">MaxCoin</div>
-        <div class="maxcoin-desc">
-          Moeda virtual corporativa<br>
-          Ganha jogando no <strong>Max Play</strong>.
-        </div>
         <div class="maxcoin-value">
           {{ user?.maxCoin ?? 0 }}
         </div>
@@ -35,9 +41,9 @@
     <!-- MENU -->
     <ul class="menu-list">
 
-      <li routerLink="/meu-perfil" class="menu-item">
-        <i class="bi bi-person-gear"></i>
-        Alterar Perfil
+      <li routerLink="/inicio" class="menu-item">
+        <i class="bi bi-newspaper"></i>
+        Feed
       </li>
 
       <li routerLink="/lista-games" class="menu-item">
