@@ -1,131 +1,201 @@
 :host {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
+}
+
+/* --- SEÇÃO MAXCOIN --- */
+.maxcoin-section {
+  background: #003366;
+  color: #fff;
+  padding: 50px 20px;
+  text-align: center;
+  border-radius: 16px;
+  margin-bottom: 40px;
+  position: relative;
+  box-shadow: 0 12px 32px rgba(0, 51, 102, 0.25);
+}
+
+.maxcoin-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 20px;
+}
+
+.maxcoin-desc {
+  font-size: 1rem;
+  max-width: 700px;
+  margin: 12px auto 0;
+  opacity: 0.9;
+}
+
+/* --- MOEDA 3D EM CSS --- */
+.maxcoin-coin {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, #ffdf4d, #d4a700);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(255, 209, 0, 0.9);
+  transform-style: preserve-3d;
+}
+
+.inner-circle {
+  width: 70px;
+  height: 70px;
+  background: #003366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.55);
+}
+
+.m-letter {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #FFD100;
+  text-shadow: 0 0 8px rgba(255, 209, 0, 0.8);
+}
+
+/* efeito flutuante */
+.floating {
+  animation: floatCoin 3s ease-in-out infinite;
+}
+
+@keyframes floatCoin {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
 }
 
 /* --- HEADER --- */
 .header {
-    text-align: center;
-    margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .title {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #003366;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #003366;
 }
 
 .subtitle {
-    color: #546b75;
-    margin-top: 8px;
+  color: #546b75;
+  margin-top: 8px;
 }
 
-/* --- GRID DE PRÊMIOS --- */
+/* --- GRID --- */
 .premios-container {
-    padding: 40px 20px;
-    background: #f4f6f8;
-    min-height: 100vh;
+  padding: 40px 20px;
+  background: #f4f6f8;
+  min-height: 100vh;
 }
 
 .premios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
 
 /* --- CARD --- */
 .premio-card {
-    background: #ffffff;
-    padding: 24px;
-    border-radius: 14px;
-    text-align: center;
-    border: 1px solid #e1e6ea;
-    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
-    transition: 0.2s ease;
-    position: relative;
-    overflow: hidden;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 14px;
+  text-align: center;
+  border: 1px solid #e1e6ea;
+  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
+  transition: 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .premio-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(0, 51, 102, 0.18);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 51, 102, 0.18);
 }
 
-/* --- MAIOR PRÊMIO --- */
+/* MAIOR PRÊMIO */
 .premio-top {
-    border-left: 5px solid #FFD100;
+  border-left: 5px solid #FFD100;
 }
 
 /* Ícones */
 .icon-wrapper {
-    width: 70px;
-    height: 70px;
-    background: #003366;
-    color: #fff;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 34px;
-    margin: 0 auto 12px;
+  width: 70px;
+  height: 70px;
+  background: #003366;
+  color: #fff;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  margin: 0 auto 12px;
 }
 
 .gold-glow {
-    background: #FFD100;
-    color: #003366;
-    box-shadow: 0 0 20px rgba(255, 209, 0, 0.6);
+  background: #FFD100;
+  color: #003366;
+  box-shadow: 0 0 20px rgba(255, 209, 0, 0.6);
 }
 
 /* Textos */
 .premio-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #003366;
-    margin-bottom: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 8px;
 }
 
 .premio-desc {
-    font-size: 0.9rem;
-    color: #5b7078;
-    min-height: 48px;
+  font-size: 0.9rem;
+  color: #5b7078;
+  min-height: 48px;
 }
 
 .points-required {
-    margin-top: 12px;
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 8px;
-    background: #003366;
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.85rem;
+  margin-top: 12px;
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: #003366;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
 }
 
-/* --- ANIMAÇÕES HTML5 (fade-in e fade-up) --- */
+/* ANIMAÇÕES */
 .fade-in {
-    opacity: 0;
-    animation: fadeIn 0.8s forwards ease-out;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards ease-out;
 }
 
 .fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 1s forwards ease-out;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s forwards ease-out;
 }
 
-.delay-1 { animation-delay: 0.2s }
-.delay-2 { animation-delay: 0.35s }
-.delay-3 { animation-delay: 0.5s }
-.delay-4 { animation-delay: 0.65s }
-.delay-5 { animation-delay: 0.8s }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.35s; }
+.delay-3 { animation-delay: 0.5s; }
+.delay-4 { animation-delay: 0.65s; }
+.delay-5 { animation-delay: 0.8s; }
 
 @keyframes fadeIn {
-    to { opacity: 1 }
+  to { opacity: 1; }
 }
 
 @keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

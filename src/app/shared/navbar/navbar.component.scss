@@ -1,28 +1,40 @@
 .autoglass-header {
   background-color: #003366;
   color: #fff;
-  padding: 12px 0;
+  padding: 8px 0; // igual à public navbar
   font-family: 'Segoe UI', sans-serif;
   position: sticky;
   top: 0;
   z-index: 1000;
 
-  .brand-link {
-    color: #FFD100;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    transition: color 0.2s;
+  /* BOX BRANCO DA LOGO — IDÊNTICO à outra navbar */
+  .brand-logo-box {
+    background: #ffffff;
+    padding: 4px 10px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    text-decoration: none;
+    transition: transform 0.15s ease;
 
     &:hover {
-      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .brand-logo {
+      height: 30px; // mesmo tamanho da public navbar
+      width: auto;
     }
   }
 
+  /* ÁREA DO USUÁRIO */
   .user-info {
     display: flex;
     align-items: center;
     gap: 10px;
-    position: relative;
 
     span {
       font-weight: 500;
@@ -31,7 +43,7 @@
     .btn {
       font-weight: 500;
       border-radius: 5px;
-      padding: 4px 10px;
+      padding: 3px 10px; // igual à outra navbar
       transition: 0.2s;
 
       &:hover {

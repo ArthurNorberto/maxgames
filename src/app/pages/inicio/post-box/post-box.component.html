@@ -1,15 +1,42 @@
 <div class="post-box card">
+
   <div class="top">
     <img class="avatar" [src]="user?.avatar" />
+
     <input
       [(ngModel)]="text"
       placeholder="Compartilhe algo com o pessoal da Max Play..."
     />
   </div>
 
-  <div class="bottom">
-    <button (click)="publicar()" [disabled]="text.trim().length === 0">
-      Publicar
-    </button>
+  <!-- PREVIEW DA IMAGEM -->
+  <div class="image-preview" *ngIf="previewImage">
+    <img [src]="previewImage" alt="preview" />
+    <button class="remove-img" (click)="removerImagem()">×</button>
   </div>
+
+  <div class="bottom">
+    <div class="actions">
+
+      <!-- BOTÃO ESTILIZADO PARA UPLOAD -->
+      <label class="upload-btn">
+        <i class="bi bi-image"></i>
+        <span>Foto</span>
+        <input 
+          type="file" 
+          accept="image/*" 
+          (change)="onFileSelected($event)" 
+          hidden
+        >
+      </label>
+
+      <button 
+        (click)="publicar()" 
+        [disabled]="text.trim().length === 0 && !previewImage">
+        Publicar
+      </button>
+
+    </div>
+  </div>
+
 </div>

@@ -32,7 +32,7 @@ export class RanksComponent {
 
         // Ranking por setor
         this.usuariosService.getRanking().subscribe(r => {
-            this.rankSetor = r.filter(u => u.sector === 'Atendimento' || u.sector === 'Comercial');
+            this.rankSetor = r.filter(u => u.comunidade === 'Central de Atendimento' || u.comunidade === 'Desenvolvimento');
         });
 
         // Ranking da Equipe (mock: apenas primeiros 5)

@@ -24,10 +24,10 @@
         <div class="rank-item" *ngFor="let u of rankEquipe; let i = index">
           <span class="pos">{{ i + 1 }}</span>
           <div class="info">
-            <strong class="name">{{ u.name }}</strong>
-            <span class="sector">{{ u.sector || '-' }}</span>
+            <strong class="name">{{ u.nome }}</strong>
+            <span class="sector">{{ u.comunidade || '-' }}</span>
           </div>
-          <span class="score">{{ u.score }} pts</span>
+          <span class="score">{{ u.maxCoin }} pts</span>
         </div>
       </div>
 
@@ -48,10 +48,10 @@
         <div class="rank-item" *ngFor="let u of rankSetor; let i = index">
           <span class="pos">{{ i + 1 }}</span>
           <div class="info">
-            <strong class="name">{{ u.name }}</strong>
-            <span class="sector">{{ u.sector || '-' }}</span>
+            <strong class="name">{{ u.nome }}</strong>
+            <span class="sector">{{ u.comunidade || '-' }}</span>
           </div>
-          <span class="score">{{ u.score }} pts</span>
+          <span class="score">{{ u.maxCoin }} pts</span>
         </div>
       </div>
 
@@ -72,10 +72,10 @@
         <div class="rank-item" *ngFor="let u of rankGeral; let i = index">
           <span class="pos">{{ i + 1 }}</span>
           <div class="info">
-            <strong class="name">{{ u.name }}</strong>
-            <span class="sector">{{ u.sector || '-' }}</span>
+            <strong class="name">{{ u.nome }}</strong>
+            <span class="sector">{{ u.comunidade || '-' }}</span>
           </div>
-          <span class="score">{{ u.score }} pts</span>
+          <span class="score">{{ u.maxCoin }} pts</span>
         </div>
       </div>
 

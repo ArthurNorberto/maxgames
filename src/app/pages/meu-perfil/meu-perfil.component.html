@@ -1,68 +1,82 @@
 <div class="perfil-container">
 
+  <header class="perfil-header">
     <h1>Meu Perfil</h1>
+    <p class="muted">Atualize seus dados, equipe e avatar — mantemos tudo corporativo e seguro.</p>
+  </header>
 
-    <div class="perfil-card">
+  <div class="perfil-card animate__animated animate__fadeInUp">
 
-        <!-- Avatar -->
-        <div class="avatar-section">
-            <img [src]="avatarPreview || 'assets/avatars/default.jpg'" class="avatar-preview">
-
-            <label class="upload-btn">
-                Alterar Avatar
-                <input type="file" accept="image/*" (change)="onAvatarChange($event)">
-            </label>
+    <!-- AVATAR -->
+    <div class="avatar-section">
+      <div class="avatar-wrap" role="button" tabindex="0" (click)="openAvatarDialog()" (keydown.enter)="openAvatarDialog()"
+           aria-label="Alterar avatar">
+        <img [src]="avatarPreview || 'assets/avatars/default.jpg'" class="avatar-preview" alt="Avatar do usuário">
+        <div class="avatar-overlay">
+          <i class="bi bi-camera-fill"></i>
+          <span>Alterar</span>
         </div>
+      </div>
 
-        <!-- Formulário -->
-        <div class="form-section">
+      <!-- hidden input -->
+      <input #avatarInput type="file" accept="image/*" (change)="onAvatarChange($event)" class="d-none" />
 
-            <div class="form-group">
-                <label>Nome completo</label>
-                <input type="text" [(ngModel)]="usuario.name">
-            </div>
-
-            <div class="form-group">
-                <label>Setor</label>
-                <select [(ngModel)]="usuario.sector">
-                    <option value="">Selecione...</option>
-                    <option *ngFor="let s of setores" [value]="s">
-                        {{ s }}
-                    </option>
-                </select>
-            </div>
-
-            <!-- Equipe (somente se setor == Central de Atendimento) -->
-            <div class="form-group" *ngIf="usuario.sector === 'Central de Atendimento'">
-                <label>Equipe</label>
-                <select [(ngModel)]="usuario.equipe">
-                    <option value="">Selecione...</option>
-                    <option *ngFor="let e of equipesCentral" [value]="e">
-                        {{ e }}
-                    </option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Login</label>
-                <input type="text" [(ngModel)]="usuario.login">
-            </div>
-
-            <div class="form-group">
-                <label>Nova senha (opcional)</label>
-                <input type="password" placeholder="••••••••">
-            </div>
-
-            <div class="buttons">
-                <button class="btn-salvar" (click)="salvar()">Salvar Alterações</button>
-                <button class="btn-voltar" (click)="voltar()">Cancelar</button>
-            </div>
-
-            <p *ngIf="successMessage" class="alert success">{{ successMessage }}</p>
-            <p *ngIf="errorMessage" class="alert error">{{ errorMessage }}</p>
-
+      <div class="score-badge">
+        <i class="bi bi-star-fill"></i>
+        <div>
+          <div class="small">MaxCOIN</div>
+          <div class="big">{{ usuario?.maxCoin ?? 0 }}</div>
         </div>
-
+      </div>
     </div>
 
+    <!-- FORM -->
+    <form class="form-section" (ngSubmit)="salvar()" novalidate>
+
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <label class="form-label">Nome completo</label>
+          <input class="form-control" type="text" [(ngModel)]="usuario.nome" name="name" required />
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="form-label">Login</label>
+          <input class="form-control" type="text" [(ngModel)]="usuario.login" name="login" />
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="form-label">Setor</label>
+          <select class="form-select" [(ngModel)]="usuario.comunidade" name="sector" aria-label="Setor">
+            <option value="">Selecione...</option>
+            <option *ngFor="let s of setores" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-6" *ngIf="usuario.comunidade === 'Central de Atendimento'">
+          <label class="form-label">Equipe</label>
+          <select class="form-select" [(ngModel)]="usuario.tribo" name="equipe" aria-label="Equipe">
+            <option value="">Selecione...</option>
+            <option *ngFor="let e of equipesCentral" [value]="e">{{ e }}</option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="form-label">Nova senha (opcional)</label>
+          <input class="form-control" type="password" placeholder="••••••••" name="password" />
+        </div>
+
+        <div class="col-12 d-flex gap-2 justify-content-end align-items-center">
+          <button type="button" class="btn btn-outline-secondary" (click)="voltar()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!usuario?.nome">Salvar alterações</button>
+        </div>
+      </div>
+
+      <!-- mensagens -->
+      <div class="mt-3">
+        <div *ngIf="successMessage" class="alert alert-success small mb-0" role="status">{{ successMessage }}</div>
+        <div *ngIf="errorMessage" class="alert alert-danger small mb-0">{{ errorMessage }}</div>
+      </div>
+
+    </form>
+  </div>
 </div>

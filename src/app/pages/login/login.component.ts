@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     const user: Usuario = { ...this.usuariosSetor };
 
     if (this.sector === 'Central de Atendimento') {
-      user.equipe = this.team;
+      user.tribo = this.team;
     }
 
     this.loginService.saveUser(user);

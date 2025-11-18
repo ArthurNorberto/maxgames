@@ -8,8 +8,20 @@ export const routes: Routes = [
 
     {
         path: '',
-        loadComponent: () =>
-            import('./pages/landing/landing.component').then(m => m.LandingComponent)
+        component: PublicLayoutComponent,
+        children: [
+            {
+                path: '',
+                loadComponent: () =>
+                    import('./pages/landing/landing.component').then(m => m.LandingComponent)
+            },
+            {
+                path: '',
+                redirectTo: '',
+                pathMatch: 'full'
+            }
+        ]
+
     },
 
     {
@@ -37,6 +49,11 @@ export const routes: Routes = [
                 path: 'inicio',
                 loadComponent: () =>
                     import('./pages/inicio/inicio.component').then(m => m.InicioComponent)
+            },
+            {
+                path: 'metas',
+                loadComponent: () =>
+                    import('./pages/metas/metas.component').then(m => m.MetasComponent)
             },
             {
                 path: 'lista-games',

@@ -6,22 +6,31 @@
 /* --- CARD BASE --- */
 .card {
   background: #fff;
-  padding: 18px;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.08);
-  margin-bottom: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.09);
   text-align: center;
   border-left: 4px solid #003366;
 }
 
+/* Card único */
+.unified-card {
+  padding-bottom: 26px;
+}
+
 /* --- PERFIL --- */
-.profile-card .avatar-lg {
+.avatar-lg {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #003366;
   margin: 0 auto 12px;
+  transition: transform 0.25s ease;
+}
+
+.avatar-lg:hover {
+  transform: scale(1.05);
 }
 
 .name {
@@ -31,46 +40,101 @@
   margin: 6px 0 2px;
 }
 
-.login, .sector {
+.login,
+.sector {
   font-size: 13px;
   color: #5F7A82;
 }
 
-/* --- SCORE BOX --- */
-.score-box {
-  background: #F5F7FA;
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #E1E6EA;
+/* ------------------------------------------------ */
+/* --- MAXCOIN --- */
+/* ------------------------------------------------ */
+.maxcoin-box {
+  margin-top: 18px;
+  padding: 16px;
+  background: linear-gradient(135deg, #ffffff, #f7f9fb);
+  border-radius: 14px;
+  border: 1px solid #e1e6ea;
+  box-shadow: 0 6px 20px rgba(0, 51, 102, 0.12);
+  animation: fadeIn 0.6s ease-in-out forwards;
 }
 
-.score-box .label {
-  font-size: 12px;
-  color: #5F7A82;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.coin-glow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
 }
 
-.score-box .value {
-  display: block;
-  margin-top: 4px;
-  font-size: 22px;
+.coin-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffe680, #ffcc00, #e6b800);
+  box-shadow:
+    0 0 10px rgba(255, 209, 0, 0.55),
+    inset 0 0 8px rgba(255, 230, 128, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: coinPulse 2.5s infinite ease-in-out;
+}
+
+.coin-symbol {
+  font-size: 26px;
+  font-weight: 900;
+  color: #003366;
+}
+
+.maxcoin-title {
+  font-size: 17px;
   font-weight: 800;
-  color: #FFD100;
+  color: #003366;
 }
 
+.maxcoin-desc {
+  font-size: 12px;
+  color: #5B7078;
+  margin-bottom: 8px;
+}
+
+.maxcoin-value {
+  font-size: 24px;
+  font-weight: 900;
+  color: #FFD100;
+  text-shadow: 0 0 6px rgba(255, 209, 0, 0.5);
+}
+
+/* ANIMAÇÃO DA MOEDA */
+@keyframes coinPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+  100% { transform: scale(1); }
+}
+
+/* ------------------------------------------------ */
 /* --- MENU --- */
+/* ------------------------------------------------ */
+
+.section-title {
+  margin-top: 22px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+  color: #003366;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e3e7ec;
+}
+
 .menu-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 14px 0 0 0;
   text-align: left;
 }
 
 .menu-item {
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: 12px 12px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background 0.15s ease, transform 0.12s ease;
   font-size: 15px;
@@ -78,30 +142,17 @@
   color: #003366;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .menu-item i {
-  font-size: 17px;
-  opacity: .85;
+  font-size: 18px;
+  opacity: 0.9;
 }
 
-/* Hover padrão, igual para todos */
+/* Hover */
 .menu-item:hover {
   background: #003366;
   color: #fff;
   transform: translateX(4px);
-}
-
-.avatar-link {
-  display: inline-block;
-  cursor: pointer;
-
-  img.avatar-lg {
-    border-radius: 50%;
-    transition: transform 0.2s;
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
 }

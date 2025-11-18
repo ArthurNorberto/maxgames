@@ -1,48 +1,65 @@
-<div class="login-wrapper d-flex align-items-center justify-content-center">
-  <div class="login-card shadow-lg rounded-4 p-4 animate__animated animate__fadeInDown">
+<div class="login-container">
 
-    <div class="text-center mb-4">
-      <img src="assets/max-play.png" alt="M" class="logo mb-3" />
-      <p class="text-muted mb-0">Desafie-se com os jogos da Autoglass!</p>
+  <!-- LADO ESQUERDO -->
+  <div class="left-panel">
+    <div class="brand-area animate__animated animate__fadeInLeft">
+
+      <img src="assets/max-play.png" class="brand-logo" />
+
+      <div class="floating-shapes">
+        <span class="shape s1"></span>
+        <span class="shape s2"></span>
+        <span class="shape s3"></span>
+        <span class="shape s4"></span>
+      </div>
+
+      <!-- TEXTO DE RODAPÉ -->
+      <p class="left-footer">uma plataforma criada pela <strong>Maxpar</strong></p>
+
+    </div>
+  </div>
+
+  <!-- LADO DIREITO - Login sem box -->
+  <div class="right-panel animate__animated animate__fadeInRight">
+
+    <div class="right-logo-area mb-4 text-center">
+      <img src="assets/max-play.png" class="right-logo" />
     </div>
 
-    <form (ngSubmit)="login()" #loginForm="ngForm">
+    <form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
 
       <!-- SETOR -->
       <div class="form-group mb-3">
-        <label class="form-label">🏢 Setor</label>
         <select class="form-select" required [(ngModel)]="sector" name="sector" (change)="onSetorChange()">
-          <option value="">Selecione...</option>
+          <option value="">Selecione sua comunidade...</option>
           <option *ngFor="let s of setores">{{ s }}</option>
         </select>
       </div>
 
-      <!-- USUÁRIO AUTO-SELECIONADO -->
+      <!-- Usuário automático -->
       <div *ngIf="usuariosSetor" class="form-group mb-3">
-        <label class="form-label">👤 Usuário</label>
         <select class="form-select" disabled>
-          <option>{{ usuariosSetor.name }}</option>
+          <option>{{ usuariosSetor.nome }}</option>
         </select>
       </div>
 
       <!-- Equipes Central -->
       <div *ngIf="sector === 'Central de Atendimento'" class="form-group mb-3">
-        <label class="form-label">👥 Equipe</label>
         <select class="form-select" [(ngModel)]="team" name="team" required>
-          <option value="">Selecione...</option>
+          <option value="">Selecione sua tribo...</option>
           <option *ngFor="let e of equipes">{{ e }}</option>
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary w-100 py-2"
+      <button class="btn btn-login w-100 mt-2"
         [disabled]="!usuariosSetor || (sector === 'Central de Atendimento' && !team)">
-        🚀 Entrar no MaxPlay
+        Entrar no MaxPlay
       </button>
+
+      <p class="version-text mt-4">Autoglass • Corporativo</p>
 
     </form>
 
-    <div class="mt-4 text-center small text-muted">
-      <p>Versão corporativa Autoglass • Feito com ❤️</p>
-    </div>
   </div>
+
 </div>

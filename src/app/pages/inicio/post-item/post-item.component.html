@@ -1,30 +1,41 @@
 <article class="post-card">
+
   <div class="post-head">
-    <img class="avatar" [src]="post.avatar || 'assets/avatars/default.png'" alt="avatar" />
+    <img class="avatar" [src]="post.avatar" />
+
     <div class="meta">
       <div class="user">
-        {{ post.userName }}
-        <span class="sector">({{ post.userSector || '—' }})</span>
+        {{ post.userNome }}
+        <span class="sector">({{ post.userComunidade || '—' }})</span>
       </div>
       <div class="time">{{ timeAgo(post.createdAt) }}</div>
     </div>
+
     <div class="points" *ngIf="post.points">+{{ post.points }}</div>
   </div>
 
   <div class="post-body">
 
-    <!-- POSTS DE TEXTO (FACEBOOK STYLE) -->
+    <!-- TEXTO -->
     <p class="message" *ngIf="post.message">
       {{ post.message }}
     </p>
 
-    <!-- POSTS DE AÇÃO (JOGOS, CONQUISTAS, ETC) -->
+    <!-- IMAGEM ANEXADA (se houver) -->
+    <div class="image-wrapper" *ngIf="post.imageUrl">
+      <img class="post-image" [src]="post.imageUrl" alt="Post Image" />
+    </div>
+
+    <!-- AÇÃO -->
     <p class="action" *ngIf="post.action">
       {{ post.action }}
     </p>
 
+    <!-- JOGO -->
     <div class="game" *ngIf="post.game">
       <small class="game-label">{{ post.game }}</small>
     </div>
+
   </div>
+
 </article>

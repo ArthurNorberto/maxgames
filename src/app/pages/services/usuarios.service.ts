@@ -4,12 +4,12 @@ import { LoginService } from './login.service';
 
 export interface Usuario {
     id: string;
-    name: string;
-    sector?: string;
-    equipe?: string;
+    nome: string;
+    comunidade?: string;
+    tribo?: string;
     login?: string;
     avatar?: string;
-    score?: number;
+    maxCoin?: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -28,69 +28,69 @@ export class UsuariosService {
     usuariosPorSetor: Record<string, Usuario> = {
         'Central de Atendimento': {
             id: '1',
-            name: 'Bianca Vaz',
-            sector: 'Central de Atendimento',
+            nome: 'Bianca Vaz',
+            comunidade: 'Central de Atendimento',
             login: 'bianca.vaz',
             avatar: 'assets/avatars/bianca-vaz.jpg',
-            score: 820
+            maxCoin: 820
         },
         'CIM': {
             id: '2',
-            name: 'Nadia Barcellos',
-            sector: 'CIM',
+            nome: 'Nadia Barcellos',
+            comunidade: 'CIM',
             login: 'nadia.barcellos',
             avatar: 'assets/avatars/nadia-barcellos.jpg',
-            score: 910
+            maxCoin: 910
         },
         'QA': {
             id: '3',
-            name: 'Weylon Rodrigues',
-            sector: 'QA',
+            nome: 'Weylon Rodrigues',
+            comunidade: 'QA',
             login: 'weylon.rodrigues',
             avatar: 'assets/avatars/weylon-rodrigues.jpg',
-            score: 760
+            maxCoin: 760
         },
         'Desenvolvimento': {
             id: '4',
-            name: 'Arthur Norberto',
-            sector: 'Desenvolvimento',
+            nome: 'Arthur Norberto',
+            comunidade: 'Desenvolvimento',
             login: 'arthur.norberto',
             avatar: 'assets/avatars/arthur.jpg',
-            score: 1240
+            maxCoin: 1240
         }
     };
 
     // 🔹 Mock — futuramente substitui por API real
     private mockFriends: Usuario[] = [
-        { id: '1', name: 'Ana Silva', sector: 'Central de Atendimento', login: '', avatar: 'assets/avatars/ana-silva.jpg', score: 1240 },
-        { id: '2', name: 'Carlos Rocha', sector: 'CIM', login: '', avatar: 'assets/avatars/carlos.jpg', score: 980 },
-        { id: '3', name: 'Mariana', sector: 'QA', login: '', avatar: 'assets/avatars/mariana.jpg', score: 760 },
-        { id: '4', name: 'João Pedro', sector: 'Desenvolvimento', login: '', avatar: 'assets/avatars/joao-pedro.jpg', score: 540 },
-        { id: '5', name: 'Roberta', login: '', avatar: 'assets/avatars/roberta.jpg', score: 860 },
-        { id: '6', name: 'Felipe', login: '', avatar: 'assets/avatars/felipe.jpg', score: 320 },
-        { id: '7', name: 'Sandra', login: '', avatar: 'assets/avatars/sandra.jpg', score: 1020 },
-        { id: '8', name: 'Julia', login: '', avatar: 'assets/avatars/julia.jpg', score: 690 },
-        { id: '9', name: 'Matheus', login: '', avatar: 'assets/avatars/matheus.jpg', score: 770 },
-        { id: '10', name: 'Lucas Martins', login: '', avatar: 'assets/avatars/default.jpg', score: 830 },
-        { id: '11', name: 'Patrícia Gomes', login: '', avatar: 'assets/avatars/default.jpg', score: 410 },
-        { id: '12', name: 'Renato Carvalho', login: '', avatar: 'assets/avatars/default.jpg', score: 990 },
-        { id: '13', name: 'Beatriz Farias', login: '', avatar: 'assets/avatars/default.jpg', score: 560 },
-        { id: '14', name: 'Thiago Almeida', login: '', avatar: 'assets/avatars/default.jpg', score: 250 },
-        { id: '15', name: 'Camila Duarte', login: '', avatar: 'assets/avatars/default.jpg', score: 720 },
-        { id: '16', name: 'Eduardo Santos', login: '', avatar: 'assets/avatars/default.jpg', score: 1180 },
-        { id: '17', name: 'Fernanda Lopes', login: '', avatar: 'assets/avatars/default.jpg', score: 640 },
-        { id: '18', name: 'André Luiz', login: '', avatar: 'assets/avatars/default.jpg', score: 530 },
-        { id: '19', name: 'Paula Morais', login: '', avatar: 'assets/avatars/default.jpg', score: 880 },
-        { id: '20', name: 'Ricardo Nogueira', login: '', avatar: 'assets/avatars/default.jpg', score: 300 },
-        { id: '21', name: 'Vanessa Ribeiro', login: '', avatar: 'assets/avatars/default.jpg', score: 760 },
-        { id: '22', name: 'Diego Fernandes', login: '', avatar: 'assets/avatars/default.jpg', score: 150 },
-        { id: '23', name: 'Larissa Barros', login: '', avatar: 'assets/avatars/default.jpg', score: 940 },
-        { id: '24', name: 'Gustavo Teixeira', login: '', avatar: 'assets/avatars/default.jpg', score: 820 },
-        { id: '25', name: 'Natália Freitas', login: '', avatar: 'assets/avatars/default.jpg', score: 675 },
-        { id: '26', name: 'Rafael Correia', login: '', avatar: 'assets/avatars/default.jpg', score: 1025 },
-        { id: '27', name: 'Isabela Torres', login: '', avatar: 'assets/avatars/default.jpg', score: 580 },
-        { id: '28', name: 'Pedro Henrique', login: '', avatar: 'assets/avatars/default.jpg', score: 460 },
-        { id: '29', name: 'Marcela Pires', login: '', avatar: 'assets/avatars/default.jpg', score: 730 }
+        { id: '1', nome: 'Ana Silva', comunidade: 'Central de Atendimento', login: '', avatar: 'assets/avatars/ana-silva.jpg', maxCoin: 1240 },
+        { id: '2', nome: 'Carlos Rocha', comunidade: 'CIM', login: '', avatar: 'assets/avatars/carlos.jpg', maxCoin: 980 },
+        { id: '3', nome: 'Mariana', comunidade: 'QA', login: '', avatar: 'assets/avatars/mariana.jpg', maxCoin: 760 },
+        { id: '4', nome: 'João Pedro', comunidade: 'Desenvolvimento', login: '', avatar: 'assets/avatars/joao-pedro.jpg', maxCoin: 540 },
+        { id: '5', nome: 'Roberta', login: '', avatar: 'assets/avatars/roberta.jpg', maxCoin: 860 },
+        { id: '6', nome: 'Felipe', login: '', avatar: 'assets/avatars/felipe.jpg', maxCoin: 320 },
+        { id: '7', nome: 'Sandra', login: '', avatar: 'assets/avatars/sandra.jpg', maxCoin: 1020 },
+        { id: '8', nome: 'Julia', login: '', avatar: 'assets/avatars/julia.jpg', maxCoin: 690 },
+        { id: '9', nome: 'Matheus', login: '', avatar: 'assets/avatars/matheus.jpg', maxCoin: 770 },
+        { id: '10', nome: 'Lucas Martins', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 830 },
+        { id: '11', nome: 'Patrícia Gomes', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 410 },
+        { id: '12', nome: 'Renato Carvalho', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 990 },
+        { id: '13', nome: 'Beatriz Farias', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 560 },
+        { id: '14', nome: 'Thiago Almeida', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 250 },
+        { id: '15', nome: 'Camila Duarte', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 720 },
+        { id: '16', nome: 'Eduardo Santos', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 1180 },
+        { id: '17', nome: 'Fernanda Lopes', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 640 },
+        { id: '18', nome: 'André Luiz', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 530 },
+        { id: '19', nome: 'Paula Morais', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 880 },
+        { id: '20', nome: 'Ricardo Nogueira', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 300 },
+        { id: '21', nome: 'Vanessa Ribeiro', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 760 },
+        { id: '22', nome: 'Diego Fernandes', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 150 },
+        { id: '23', nome: 'Larissa Barros', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 940 },
+        { id: '24', nome: 'Gustavo Teixeira', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 820 },
+        { id: '25', nome: 'Natália Freitas', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 675 },
+        { id: '26', nome: 'Rafael Correia', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 1025 },
+        { id: '27', nome: 'Isabela Torres', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 580 },
+        { id: '28', nome: 'Pedro Henrique', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 460 },
+        { id: '29', nome: 'Marcela Pires', login: '', avatar: 'assets/avatars/default.jpg', maxCoin: 730 }
 
     ];
 
@@ -108,7 +108,7 @@ export class UsuariosService {
 
     /** Ranking derivado da lista de amigos */
     getRanking(): Observable<Usuario[]> {
-        const ranking = [...this.mockFriends].sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+        const ranking = [...this.mockFriends].sort((a, b) => (b.maxCoin ?? 0) - (a.maxCoin ?? 0));
         return of(ranking);
     }
 

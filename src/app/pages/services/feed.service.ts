@@ -12,19 +12,17 @@ export interface PostInteraction {
 export interface Post {
   id: string;
   userId: string;
-  userName: string;
-  userSector?: string;
+  userNome: string;
+  userComunidade?: string;
+  userTribo?: string;
   avatar?: string;
-
   type: 'jogo' | 'texto' | 'conquista';
-
   message?: string;     // quando for texto estilo Facebook
   action?: string;      // ações automáticas (jogo, ranking)
   game?: string;
   points?: number;
-
+  imageUrl?: string; 
   createdAt: string;
-
   interactions: PostInteraction;
 }
 
@@ -36,8 +34,8 @@ export class FeedService {
     {
       id: 'p10',
       userId: '1',
-      userName: 'Ana Silva',
-      userSector: 'Atendimento',
+      userNome: 'Ana Silva',
+      userComunidade: 'Central de Atendimento',
       avatar: 'assets/avatars/ana-silva.jpg',
       type: 'texto',
       message: 'Bom dia, pessoal! Hoje é dia de bater recorde 🔥',
@@ -47,8 +45,8 @@ export class FeedService {
     {
       id: 'p1',
       userId: '1',
-      userName: 'Ana Silva',
-      userSector: 'Atendimento',
+      userNome: 'Ana Silva',
+      userComunidade: 'Central de Atendimento',
       avatar: 'assets/avatars/ana-silva.jpg',
       type: 'jogo',
       action: 'fez 420 pontos no Acerte ou Erre',
@@ -60,8 +58,8 @@ export class FeedService {
     {
       id: 'p2',
       userId: '2',
-      userName: 'Carlos Rocha',
-      userSector: 'Operações',
+      userNome: 'Carlos Rocha',
+      userComunidade: 'CIM',
       avatar: 'assets/avatars/carlos.jpg',
       type: 'conquista',
       action: 'bateu recorde no AutoWordle — 5 tentativas',
@@ -72,8 +70,8 @@ export class FeedService {
     {
       id: 'p3',
       userId: '3',
-      userName: 'Mariana',
-      userSector: 'Comercial',
+      userNome: 'Mariana',
+      userComunidade: 'CIM',
       avatar: 'assets/avatars/mariana.jpg',
       type: 'jogo',
       action: 'subiu 3 posições no ranking semanal!',
@@ -83,8 +81,8 @@ export class FeedService {
     {
       id: 'p7',
       userId: '9',
-      userName: 'Matheus',
-      userSector: 'Financeiro',
+      userNome: 'Matheus',
+      userComunidade: 'Desenvolvimento',
       avatar: 'assets/avatars/matheus.jpg',
       type: 'texto',
       message: 'Alguém me ajuda no quiz do AutoWordle? 😂',
@@ -103,9 +101,9 @@ export class FeedService {
     const newPost: Post = {
       id: 'p' + (Math.random() * 999999).toFixed(0),
       userId: user.id,
-      userName: user.name,
+      userNome: user.nome,
       avatar: user.avatar,
-      userSector: user.sector,
+      userComunidade: user.comunidade,
       type: 'texto',
       message: text,
       createdAt: new Date().toISOString(),

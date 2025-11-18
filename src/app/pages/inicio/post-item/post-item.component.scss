@@ -16,6 +16,8 @@
   box-shadow: 0 10px 26px rgba(2, 48, 86, 0.08);
 }
 
+/* CABEÇALHO */
+
 .post-head {
   display: flex;
   align-items: center;
@@ -28,6 +30,8 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+/* META INFO */
 
 .meta {
   flex: 1;
@@ -42,12 +46,12 @@
 .sector {
   font-weight: 500;
   color: #4a6572;
-  font-size: .9rem;
+  font-size: 0.9rem;
   margin-left: 6px;
 }
 
 .time {
-  font-size: .85rem;
+  font-size: 0.85rem;
   color: #7b8a91;
   margin-top: 2px;
 }
@@ -57,27 +61,57 @@
   color: #16a34a;
 }
 
+/* CORPO */
+
 .post-body {
   margin-top: 10px;
   color: #0b3a57;
 }
 
+.message {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #0b3a57;
+  white-space: pre-line;
+}
+
 .action {
-  margin: 0;
+  margin: 8px 0 0;
   font-size: 1rem;
 }
+
+/* IMAGEM DO POST — ESTILO FEED FACEBOOK */
+
+.image-wrapper {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 10px 0;
+  background: #f4f7fa;
+  max-height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.post-image:hover {
+  transform: scale(1.02);
+}
+
+/* TAG DO GAME */
 
 .game-label {
   background: #eef6fb;
   color: #0b3a57;
   padding: 4px 8px;
   border-radius: 8px;
-}
-
-.message {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.4;
-  color: #0b3a57;
-  white-space: pre-line;
 }

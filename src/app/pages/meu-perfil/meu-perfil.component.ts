@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
@@ -14,13 +14,16 @@ import { FormsModule } from '@angular/forms';
 })
 export class MeuPerfilComponent implements OnInit {
 
+    @ViewChild('avatarInput') avatarInput!: ElementRef<HTMLInputElement>;
+
     usuario: Usuario = {
         id: '',
-        name: '',
-        sector: '',
-        equipe: '',
+        nome: '',
+        comunidade: '',
+        tribo: '',
         login: '',
-        avatar: ''
+        avatar: '',
+        maxCoin: 0
     };
 
     avatarPreview: string | ArrayBuffer | null = null;
@@ -70,19 +73,29 @@ export class MeuPerfilComponent implements OnInit {
         reader.readAsDataURL(file);
     }
 
+    voltar() {
+        this.router.navigate(['/inicio']);
+    }
+
+    openAvatarDialog() {
+        // segura se não estiver disponível em SSR
+        try {
+            this.avatarInput?.nativeElement?.click();
+        } catch (e) { /* no-op */ }
+    }
+
     salvar() {
         try {
             this.loginService.saveUser(this.usuario);
-
             this.successMessage = 'Informações atualizadas com sucesso!';
             this.errorMessage = '';
+
+            // limpa mensagem depois de 3s
+            setTimeout(() => this.successMessage = '', 3000);
         } catch {
             this.successMessage = '';
             this.errorMessage = 'Ocorreu um erro ao salvar. Tente novamente.';
+            setTimeout(() => this.errorMessage = '', 5000);
         }
-    }
-
-    voltar() {
-        this.router.navigate(['/inicio']);
     }
 }

@@ -1,14 +1,12 @@
 <header class="autoglass-header shadow-sm">
   <div class="container-fluid d-flex align-items-center flex-nowrap px-3">
 
-    <!-- Logo / Marca -->
-    <h1 class="h4 mb-0">
-      <a routerLink="/inicio" class="brand-link text-white text-decoration-none">
-        🎮 Max Play
-      </a>
-    </h1>
+    <!-- LOGO dentro de caixa branca -->
+    <a routerLink="/inicio" class="brand-logo-box d-flex align-items-center justify-content-center">
+      <img src="assets/logo-menor-max-play.png" alt="MaxPlay Logo" class="brand-logo" />
+    </a>
 
-    <!-- Usuário / Notificações / Botão Sair -->
+    <!-- Usuário / Notificações / Sair -->
     <div *ngIf="user" class="user-info d-flex align-items-center ms-auto position-relative">
 
       <!-- Notificações -->
@@ -31,9 +29,10 @@
       </div>
 
       <!-- Usuário -->
-      <span class="me-3">{{ user.name }} ({{ user.sector }})</span>
+      <span class="me-3">{{ user.nome }} ({{ user.comunidade }})</span>
       <button class="btn btn-sm btn-outline-light" (click)="logout()">Sair</button>
 
     </div>
+
   </div>
 </header>

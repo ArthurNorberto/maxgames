@@ -1,13 +1,13 @@
 <aside class="right-side">
 
-  <!-- BLOCO AMIGOS -->
+  <!-- BLOCO COMUNIDADE -->
   <div class="card friends">
-    <h5>Amigos ({{ friends.length }})</h5>
+    <h5>Comunidade ({{ friends.length }})</h5>
 
     <div class="friends-grid">
       <div *ngFor="let f of topNine" class="friend-item">
         <img [src]="f.avatar || 'assets/avatars/default.png'" alt="Foto" />
-        <span class="name">{{ f.name }}</span>
+        <span class="name">{{ f.nome }}</span>
       </div>
     </div>
 
@@ -16,14 +16,14 @@
     </button>
   </div>
 
-  <!-- BLOCO EQUIPE -->
+  <!-- BLOCO Tribo -->
   <div class="card team" *ngIf="equipes.length">
-    <h5>Equipe ({{ equipes.length }})</h5>
+    <h5>Tribo ({{ equipes.length }})</h5>
 
     <div class="friends-grid">
       <div *ngFor="let e of topEquipe" class="friend-item">
         <img [src]="e.avatar || 'assets/avatars/default.png'" alt="Foto" />
-        <span class="name">{{ e.name }}</span>
+        <span class="name">{{ e.nome }}</span>
       </div>
     </div>
   </div>

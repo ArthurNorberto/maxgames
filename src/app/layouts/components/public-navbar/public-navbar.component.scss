@@ -1,0 +1,53 @@
+.public-header {
+  background-color: #003366;
+  color: #fff;
+  padding: 8px 0; // era 12px — reduzido ~33%
+  font-family: 'Segoe UI', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  /* BOX BRANCO DA LOGO */
+  .brand-logo-box {
+    background: #ffffff;
+    padding: 4px 10px; // era 6px 12px
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    text-decoration: none;
+    transition: transform 0.15s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    .brand-logo {
+      height: 30px; // era 42px — redução ~30%
+      width: auto;
+    }
+  }
+
+  .nav-link {
+    font-weight: 500;
+    transition: 0.2s;
+
+    &:hover {
+      color: #FFD100;
+    }
+  }
+
+  .btn {
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 3px 10px; // leve redução no botão
+    transition: 0.2s;
+
+    &:hover {
+      background-color: #FFD100;
+      color: #003366;
+    }
+  }
+}

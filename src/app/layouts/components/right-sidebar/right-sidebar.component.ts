@@ -28,7 +28,7 @@ export class RightSidebarComponent implements OnInit {
     // Carregar equipes — exemplo: pegar todos usuários do setor "Central de Atendimento"
     this.usuariosService.getAmigos().subscribe(users => {
       // aqui você pode filtrar por equipe real se tiver, por enquanto mock
-      this.equipes = users.filter(u => u.sector === 'Central de Atendimento');
+      this.equipes = users.filter(u => u.comunidade === 'Central de Atendimento');
       this.topEquipe = this.equipes.slice(0, 9);
     });
   }

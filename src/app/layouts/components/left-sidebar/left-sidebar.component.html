@@ -1,25 +1,38 @@
 <aside class="left-side">
 
-  <!-- PERFIL -->
-  <div class="card profile-card">
+  <!-- CARD ÚNICO (Perfil + MaxCoins + Menu) -->
+  <div class="card unified-card">
+
+    <!-- PERFIL -->
     <a routerLink="/inicio" class="avatar-link">
       <img class="avatar-lg" [src]="user?.avatar || 'assets/avatars/arthur.jpg'" alt="avatar" />
     </a>
 
-    <h4 class="name">{{ user?.name || 'Usuário' }}</h4>
+    <h4 class="name">{{ user?.nome || 'Usuário' }}</h4>
     <div class="login">{{ user?.login || 'login.autoglass' }}</div>
-    <div class="sector">{{ user?.sector || 'Setor não informado' }}</div>
+    <div class="sector">{{ user?.comunidade || 'Setor não informado' }}</div>
 
-    <div class="score-box">
-      <span class="label">Pontos</span>
-      <span class="value">{{ user?.score ?? 0 }}</span>
+    <!-- MAXCOIN -->
+    <div class="maxcoin-box">
+      <div class="coin-glow">
+        <div class="coin-circle">
+          <span class="coin-symbol">Ⓜ</span>
+        </div>
+      </div>
+
+      <div class="maxcoin-info">
+        <div class="maxcoin-title">MaxCoin</div>
+        <div class="maxcoin-desc">
+          Moeda virtual corporativa<br>
+          Ganha jogando no <strong>Max Play</strong>.
+        </div>
+        <div class="maxcoin-value">
+          {{ user?.maxCoin ?? 0 }}
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- MENU -->
-  <div class="card navigation-card">
-    <h5 class="section-title">Menu</h5>
-
+    <!-- MENU -->
     <ul class="menu-list">
 
       <li routerLink="/meu-perfil" class="menu-item">
@@ -32,8 +45,13 @@
         Games
       </li>
 
+      <li routerLink="/metas" class="menu-item">
+        <i class="bi bi-flag-fill"></i>
+        Metas
+      </li>
+
       <li routerLink="/ranks" class="menu-item">
-        <i class="bi bi-star"></i>
+        <i class="bi bi-bar-chart-line-fill"></i>
         Ranks
       </li>
 

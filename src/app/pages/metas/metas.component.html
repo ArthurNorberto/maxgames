@@ -1,0 +1,74 @@
+<main class="metas-page">
+
+    <header class="metas-hero fade-in">
+        <div class="hero-left">
+            <h1>Metas</h1>
+            <p class="lead">Acompanhe suas metas diárias e mensais — comprometa-se, evolua e ganhe MaxCoins.</p>
+        </div>
+
+        <div class="hero-right">
+            <div class="tabs">
+                <button (click)="switchTab('daily')" [class.active]="activeTab === 'daily'">Diárias</button>
+                <button (click)="switchTab('monthly')" [class.active]="activeTab === 'monthly'">Mensais</button>
+            </div>
+
+            <div class="search">
+                <input type="search" placeholder="Buscar meta, descrição ou target..." [(ngModel)]="search" />
+            </div>
+        </div>
+    </header>
+
+    <section class="metas-content">
+
+        <aside class="summary-card card">
+            <h4>Resumo</h4>
+            <p>Abas: <strong>{{ activeTab === 'daily' ? 'Diárias' : 'Mensais' }}</strong></p>
+            <p>Total metas: <strong>{{ metasAtivas.length }}</strong></p>
+            <p>Completas: <strong>{{ metasAtivasCompletas.length }}</strong></p>
+
+
+            <div class="summary-progress">
+                <label>Progresso médio</label>
+                <progress [value]="progressoMedio" max="100"></progress>
+            </div>
+
+            <small class="muted">Participe regularmente para acumular MaxCoins.</small>
+        </aside>
+
+        <section class="list-card">
+            <div class="grid">
+                <article class="meta-card" *ngFor="let meta of filteredMetas()" [attr.aria-complete]="meta.completed">
+                    <div class="meta-head">
+                        <div class="meta-title">
+                            <h3>{{ meta.title }}</h3>
+                            <span class="meta-tag">{{ meta.target }}</span>
+                        </div>
+
+                        <div class="meta-actions">
+                            <button class="btn-icon" (click)="addProgress(meta, 15)" [disabled]="meta.completed"
+                                title="Adicionar progresso">+15%</button>
+                            <button class="btn-complete" (click)="toggleComplete(meta)">{{ meta.completed ? 'Desmarcar'
+                                : 'Concluir' }}</button>
+                        </div>
+                    </div>
+
+                    <p class="meta-desc">{{ meta.description }}</p>
+
+                    <div class="progress-row">
+                        <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="meta.progress"
+                            aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-fill" [style.width.%]="meta.progress"></div>
+                        </div>
+                        <div class="progress-value">{{ meta.progress }}%</div>
+                    </div>
+
+                    <div class="meta-footer">
+                        <div class="reward">Recompensa: <strong>{{ meta.reward }}</strong></div>
+                        <div class="status" [class.done]="meta.completed">{{ meta.completed ? 'COMPLETA' : 'Em
+                            andamento' }}</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </section>
+</main>
