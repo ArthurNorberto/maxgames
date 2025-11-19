@@ -1,0 +1,68 @@
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 25px 18px 50px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ============================= */
+/* HEADER UNIFICADO – AVATAR + COINS */
+/* ============================= */
+
+.profile-header-row {
+  display: flex;
+  gap: 26px;
+  align-items: stretch;
+
+  background: #ffffff;
+  padding: 26px 28px;
+  border-radius: 20px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+
+  /* Avatar maior + info pequena */
+  .left {
+    flex: 1.5;
+    display: flex;
+    align-items: center;
+  }
+
+  .right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Mantém padrão dos outros cards */
+.profile-container > app-perfil-info,
+.profile-container > app-perfil-feed,
+.profile-container > app-perfil-elogio-form {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px 26px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.05);
+}
+
+/* Remove card duplicado dos componentes que já possuem */
+app-perfil-header,
+app-perfil-gamificacao {
+  background: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 780px) {
+  .profile-header-row {
+    flex-direction: column;
+    text-align: center;
+
+    .left,
+    .right {
+      justify-content: center;
+    }
+  }
+}

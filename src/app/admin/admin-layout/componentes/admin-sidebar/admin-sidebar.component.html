@@ -1,0 +1,28 @@
+<nav class="admin-sidebar">
+
+    <!-- Logo -->
+    <div class="sidebar-header">
+        <div class="logo">MAXPLAY ADMIN</div>
+    </div>
+
+    <!-- Navegação -->
+    <ul class="nav-links">
+        <li routerLink="/admin/inicio" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="bi bi-speedometer2"></i>
+            <span>Dashboard</span>
+        </li>
+
+        <li routerLink="/admin/usuarios" routerLinkActive="active">
+            <i class="bi bi-people"></i>
+            <span>Usuários</span>
+        </li>
+    </ul>
+
+    <!-- Rodapé -->
+    <div class="sidebar-footer">
+        <button class="logout-btn" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Sair</span>
+        </button>
+    </div>
+</nav>

@@ -1,38 +1,61 @@
 <div class="post-box card">
 
-  <div class="top">
+  <!-- HEADER DO POST (avatar + seletor pequeno) -->
+  <div class="header">
     <img class="avatar" [src]="user?.avatar" />
 
-    <input
-      [(ngModel)]="text"
-      placeholder="Compartilhe algo com o pessoal da Max Play..."
-    />
+    <div class="right-side">
+      <div class="user-name">{{ user?.nome }}</div>
+
+      <!-- SELECTOR ESTILO FACEBOOK -->
+     <div class="audience-selector" (click)="onSelectorClick($event)">
+        <i [ngClass]="audienceIcon"></i>
+        <span>{{ visibilidade | titlecase }}</span>
+        <i class="bi bi-chevron-down chevron"></i>
+
+        <!-- DROPDOWN -->
+        <div class="audience-dropdown" *ngIf="toggleSelect">
+          <div class="item" (click)="setVisibilidade('universo'); $event.stopPropagation()">
+            <i class="bi bi-globe2"></i> Universo
+          </div>
+          <div class="item" (click)="setVisibilidade('tribo'); $event.stopPropagation()">
+            <i class="bi bi-diagram-3"></i> Tribo
+          </div>
+          <div class="item" (click)="setVisibilidade('comunidade'); $event.stopPropagation()">
+            <i class="bi bi-people"></i> Comunidade
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- PREVIEW DA IMAGEM -->
+  <!-- TEXTAREA PROFISSIONAL -->
+  <textarea
+    class="post-textarea"
+    [(ngModel)]="text"
+    placeholder="Compartilhe algo com o pessoal da Max Play..."
+  ></textarea>
+
+  <!-- PREVIEW -->
   <div class="image-preview" *ngIf="previewImage">
     <img [src]="previewImage" alt="preview" />
     <button class="remove-img" (click)="removerImagem()">×</button>
   </div>
 
+  <!-- AÇÕES -->
   <div class="bottom">
     <div class="actions">
 
-      <!-- BOTÃO ESTILIZADO PARA UPLOAD -->
       <label class="upload-btn">
         <i class="bi bi-image"></i>
         <span>Foto</span>
-        <input 
-          type="file" 
-          accept="image/*" 
-          (change)="onFileSelected($event)" 
-          hidden
-        >
+        <input type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
       </label>
 
-      <button 
-        (click)="publicar()" 
-        [disabled]="text.trim().length === 0 && !previewImage">
+      <button
+        (click)="publicar()"
+        [disabled]="text.trim().length === 0 && !previewImage"
+      >
         Publicar
       </button>
 

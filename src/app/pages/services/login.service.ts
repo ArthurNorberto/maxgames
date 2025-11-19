@@ -21,4 +21,9 @@ export class LoginService {
   isLoggedIn() {
     return !!localStorage.getItem(this.USER_KEY);
   }
+
+  usuarioEhAdmin(): boolean {
+    const user = this.getUser();
+    return user?.comunidade === 'Administrador';
+  }
 }

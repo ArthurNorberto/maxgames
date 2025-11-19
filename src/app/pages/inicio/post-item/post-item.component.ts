@@ -11,6 +11,10 @@ import { Post } from '../../../pages/services/feed.service';
 })
 export class PostItemComponent {
     @Input() post!: Post;
+    @Input() compact = false;            // modo compacto (perfil, listagens)
+    @Input() showVisibility = false;     // mostra ícone de visibilidade
+    @Input() showActions = true;         // mostrar botões/likes/etc
+
 
     timeAgo(iso?: string) {
         if (!iso) return '';

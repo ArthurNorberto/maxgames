@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from './pages/inicio/inicio.component';
-import { authGuard } from './pages/guards/auth.guard';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
 
@@ -22,6 +22,10 @@ export const routes: Routes = [
             }
         ]
 
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.routes').then(m => m.ADMIN_ROUTES)
     },
 
     {
@@ -114,6 +118,11 @@ export const routes: Routes = [
                 path: 'meu-perfil',
                 loadComponent: () =>
                     import('./pages/meu-perfil/meu-perfil.component').then(m => m.MeuPerfilComponent)
+            },
+            {
+                path: 'perfil/:id',
+                loadComponent: () =>
+                    import('./pages/perfil-usuario/perfil-usuario.component').then(m => m.PerfilUsuarioComponent)
             },
             {
                 path: '',

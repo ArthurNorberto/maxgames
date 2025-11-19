@@ -115,3 +115,61 @@
   padding: 4px 8px;
   border-radius: 8px;
 }
+
+/* ============================= */
+/* AÇÕES – Curtir / Comentar     */
+/* ============================= */
+
+.actions {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e3edf3;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  background: #f7fbff;
+  border: 1px solid #d9e7f0;
+  color: #0b3a57;
+  font-weight: 600;
+  padding: 10px 0;
+  border-radius: 12px;
+  font-size: 0.95rem;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  i {
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    background: #eaf5ff;
+    transform: translateY(-2px);
+    border-color: #b6d4e8;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Like com realce sutil */
+.action-btn.like i {
+  color: #2f89c8;
+}
+
+/* Comentário com ícone mais suave */
+.action-btn.comment i {
+  color: #4a6572;
+}
+

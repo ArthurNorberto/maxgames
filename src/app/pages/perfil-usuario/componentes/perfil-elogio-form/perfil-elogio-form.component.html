@@ -1,0 +1,11 @@
+<div class="elogio-box">
+
+  <textarea
+    [(ngModel)]="elogio"
+    maxlength="300"
+    placeholder="Envie um elogio para {{ usuario.nome }}">
+  </textarea>
+
+  <button (click)="enviarElogio()">Enviar</button>
+
+</div>

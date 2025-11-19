@@ -1,25 +1,28 @@
 <aside class="right-side">
 
-  
+
 
   <!-- BLOCO Tribo -->
-  <div class="card team" *ngIf="equipes.length">
-    <h5>Tribo ({{ equipes.length }})</h5>
+  <div class="card team" *ngIf="pessoasDaTribo.length">
+    <h5>Tribo ({{ pessoasDaTribo.length }})</h5>
 
     <div class="friends-grid">
-      <div *ngFor="let e of topEquipe" class="friend-item">
+      <div *ngFor="let e of topTribo" class="friend-item" (click)="goToPerfil(e.id)" style="cursor: pointer;">
+
         <img [src]="e.avatar || 'assets/avatars/default.png'" alt="Foto" />
         <span class="name">{{ e.nome }}</span>
+
       </div>
+
     </div>
   </div>
 
   <!-- BLOCO COMUNIDADE -->
   <div class="card friends">
-    <h5>Comunidade ({{ friends.length }})</h5>
+    <h5>Comunidade ({{ pessoasDacomunidade.length }})</h5>
 
     <div class="friends-grid">
-      <div *ngFor="let f of topNine" class="friend-item">
+      <div *ngFor="let f of topComunidade" class="friend-item" (click)="goToPerfil(f.id)" style="cursor: pointer;">
         <img [src]="f.avatar || 'assets/avatars/default.png'" alt="Foto" />
         <span class="name">{{ f.nome }}</span>
       </div>

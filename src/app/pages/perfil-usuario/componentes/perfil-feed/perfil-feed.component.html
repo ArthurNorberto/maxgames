@@ -1,0 +1,17 @@
+<div class="feed-section">
+
+    <h3 class="title">Elogios recebidos</h3>
+
+    <div class="elogio-card" *ngFor="let e of elogios">
+        <div class="autor">{{ e.de }}</div>
+        <div class="texto">{{ e.texto }}</div>
+    </div>
+
+    <h3 class="title">Atividades recentes</h3>
+
+    <app-post-item *ngFor="let p of posts" [post]="p" [compact]="true" [showActions]="false" [showVisibility]="false">
+    </app-post-item>
+
+
+
+</div>

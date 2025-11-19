@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../../pages/services/usuarios.service';
@@ -11,14 +11,24 @@ import { Post } from '../../../pages/services/feed.service';
   templateUrl: './post-box.component.html',
   styleUrls: ['./post-box.component.scss']
 })
-export class PostBoxComponent {
+export class PostBoxComponent implements OnInit {
+
 
   @Input() user!: Usuario | null;
   @Output() publicarPost = new EventEmitter<Post>();
 
+  toggleSelect = false;
+  visibilidade: 'universo' | 'tribo' | 'comunidade' = 'universo';
   text: string = '';
   imageFile: File | null = null;
   previewImage: string | null = null;
+  audienceIcon = 'bi bi-globe2';
+
+  ngOnInit(): void {
+    document.addEventListener('click', () => {
+      this.toggleSelect = false;
+    });
+  }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -31,9 +41,37 @@ export class PostBoxComponent {
     reader.readAsDataURL(file);
   }
 
+  setVisibilidade(tipo: 'universo' | 'tribo' | 'comunidade') {
+    this.visibilidade = tipo;
+    this.toggleSelect = false;
+
+    const icons: any = {
+      universo: 'bi bi-globe2',
+      tribo: 'bi bi-diagram-3',
+      comunidade: 'bi bi-people'
+    };
+
+    this.audienceIcon = icons[tipo];
+  }
+
+  onSelectorClick(event: MouseEvent) {
+    event.stopPropagation();
+    this.toggleSelect = !this.toggleSelect;
+  }
+
   removerImagem() {
     this.imageFile = null;
     this.previewImage = null;
+  }
+
+  updateIcon() {
+    const icons: any = {
+      universo: 'bi bi-globe2',
+      tribo: 'bi bi-diagram-3',
+      comunidade: 'bi bi-people'
+    };
+
+    this.audienceIcon = icons[this.visibilidade];
   }
 
   publicar() {
@@ -46,10 +84,15 @@ export class PostBoxComponent {
       userNome: this.user.nome,
       avatar: this.user.avatar,
       userComunidade: this.user.comunidade,
-      type: this.previewImage ? 'texto' : 'texto',
+      userTribo: this.user.tribo,
+
+      type: 'texto',
+      visibilidade: this.visibilidade,
+
       message: this.text.trim() || undefined,
       imageUrl: this.previewImage || undefined,
       createdAt: new Date().toISOString(),
+
       interactions: {
         likes: 0,
         comments: 0,
@@ -63,7 +106,9 @@ export class PostBoxComponent {
     this.text = '';
     this.previewImage = null;
     this.imageFile = null;
+    this.visibilidade = 'universo';
   }
+
 
   private generateUUID(): string {
     const array = new Uint8Array(16);

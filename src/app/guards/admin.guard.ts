@@ -1,15 +1,15 @@
+
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../pages/services/login.service';
 
-export const authGuard: CanActivateFn = () => {
+export const adminGuard: CanActivateFn = () => {
   const loginService = inject(LoginService);
   const router = inject(Router);
 
-  if (loginService.isLoggedIn()) {
+  if (loginService.usuarioEhAdmin()) {
     return true;
   }
 
-  router.navigate(['/login']);
-  return false;
+  return router.parseUrl('/inicio');
 };

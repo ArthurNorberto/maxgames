@@ -1,0 +1,37 @@
+.feed-section {
+  margin-top: 10px;
+  padding-bottom: 30px;
+
+  .title {
+    font-size: 1.2rem;
+    margin: 18px 0 12px;
+    font-weight: 700;
+    color: #06314a;
+  }
+
+  .elogio-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    .autor {
+      font-weight: 700;
+      color: #2f89c8;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    .texto {
+      color: #4a5a61;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+  }
+}

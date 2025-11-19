@@ -17,6 +17,7 @@ export interface Post {
   userTribo?: string;
   avatar?: string;
   type: 'jogo' | 'texto' | 'conquista';
+  visibilidade : 'universo' | 'tribo' | 'comunidade';
   message?: string;     // quando for texto estilo Facebook
   action?: string;      // ações automáticas (jogo, ranking)
   game?: string;
@@ -38,6 +39,7 @@ export class FeedService {
       userComunidade: 'Central de Atendimento',
       avatar: 'assets/avatars/ana-silva.jpg',
       type: 'texto',
+      visibilidade: 'universo',
       message: 'Bom dia, pessoal! Hoje é dia de bater recorde 🔥',
       createdAt: new Date(Date.now() - 1000 * 60 * 3).toISOString(),
       interactions: { likes: 12, comments: 3, shares: 0 }
@@ -49,6 +51,7 @@ export class FeedService {
       userComunidade: 'Central de Atendimento',
       avatar: 'assets/avatars/ana-silva.jpg',
       type: 'jogo',
+      visibilidade: 'universo',
       action: 'fez 420 pontos no Acerte ou Erre',
       points: 420,
       game: 'Acerte ou Erre',
@@ -62,6 +65,7 @@ export class FeedService {
       userComunidade: 'CIM',
       avatar: 'assets/avatars/carlos.jpg',
       type: 'conquista',
+      visibilidade: 'universo',
       action: 'bateu recorde no AutoWordle — 5 tentativas',
       game: 'AutoWordle',
       createdAt: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
@@ -74,6 +78,7 @@ export class FeedService {
       userComunidade: 'CIM',
       avatar: 'assets/avatars/mariana.jpg',
       type: 'jogo',
+      visibilidade: 'universo',
       action: 'subiu 3 posições no ranking semanal!',
       createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
       interactions: { likes: 9, comments: 2, shares: 0 }
@@ -85,6 +90,7 @@ export class FeedService {
       userComunidade: 'Desenvolvimento',
       avatar: 'assets/avatars/matheus.jpg',
       type: 'texto',
+      visibilidade: 'universo',
       message: 'Alguém me ajuda no quiz do AutoWordle? 😂',
       createdAt: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(),
       interactions: { likes: 3, comments: 4, shares: 0 }
@@ -105,6 +111,7 @@ export class FeedService {
       avatar: user.avatar,
       userComunidade: user.comunidade,
       type: 'texto',
+      visibilidade: 'universo',
       message: text,
       createdAt: new Date().toISOString(),
       interactions: { likes: 0, comments: 0, shares: 0 }

@@ -1,0 +1,25 @@
+<div class="profile-container" *ngIf="usuario">
+
+  <!-- HEADER UNIFICADO -->
+  <div class="profile-header-row">
+
+    <div class="left">
+      <app-perfil-header [usuario]="usuario"></app-perfil-header>
+    </div>
+
+    <div class="right">
+      <app-perfil-gamificacao [usuario]="usuario"></app-perfil-gamificacao>
+    </div>
+
+  </div>
+
+  <!-- Informações básicas -->
+  <app-perfil-info [usuario]="usuario"></app-perfil-info>
+
+  <!-- Enviar elogio -->
+  <app-perfil-elogio-form [usuario]="usuario"></app-perfil-elogio-form>
+
+  <!-- Feed atividades (elogios + posts) -->
+  <app-perfil-feed [usuario]="usuario"></app-perfil-feed>
+
+</div>

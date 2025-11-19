@@ -1,8 +1,10 @@
-<div class="tabs-container">
+<nav class="tabs-container" role="tablist" aria-label="Filtrar feed">
+    <button *ngFor="let t of tabs" class="tab" role="tab" [attr.aria-selected]="active === t.key"
+        (click)="setTab(t.key)" [class.active]="active === t.key">
+        <i class="bi {{ t.icon }}"></i>
+        <span>{{ t.label }}</span>
+    </button>
 
-    <div class="tab" *ngFor="let t of tabs; let i = index" [class.active]="active === t.key" (click)="setTab(t.key)">
-        {{ t.label }}
-        <div class="underline" *ngIf="active === t.key"></div>
-    </div>
-
-</div>
+    <!-- barra deslizante -->
+    <div class="slider" [style.width.%]="100 / tabs.length" [style.left]="getSliderPosition()"></div>
+</nav>

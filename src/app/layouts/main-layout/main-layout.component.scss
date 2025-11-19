@@ -1,40 +1,54 @@
-/* Container principal do layout */
+/* ================================
+   CONTAINER PRINCIPAL DO LAYOUT
+   ================================ */
 .main-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
-  min-height: 0; /* <-- ESSENCIAL para o flexbox permitir que o interior cresça */
+  padding-top: 16px; /* um pouco menor para aproximar do topo */
+  min-height: 0; /* mantém o flexbox funcionando corretamente */
 }
 
 
-/* GRID PRINCIPAL — Sem container, ocupa 100% da tela */
+/* ================================
+   GRID PRINCIPAL — 100% DA TELA
+   ================================ */
 .layout-grid {
   flex: 1;
   width: 100%;
   display: grid;
 
-  /* Sidebars fixas nas laterais + centro expandido */
+  /* Sidebars fixas + centro fluído */
   grid-template-columns: 260px 1fr 260px;
 
   gap: 22px;
-  padding: 0 20px; /* mantém uma margem mínima */
+  padding: 0 20px; /* margem horizontal */
 }
 
-/* Stickiness das laterais */
+
+/* ================================
+   SIDEBARS (LEFT & RIGHT) FIXAS
+   ================================ */
 .left,
 .right {
   position: sticky;
-  top: 90px;
+  top: 60px;              /* <-- SUBIDO para ficar mais perto da NAV */
   height: fit-content;
+  align-self: start;      /* evita o elemento ocupar toda a coluna vertical */
 }
 
-/* Conteúdo central cresce */
+
+/* ================================
+   CONTEÚDO CENTRAL
+   ================================ */
 .center {
-  min-width: 0; /* evita overflow */
+  min-width: 0; /* evita overflow por textos longos ou grids internos */
 }
 
-/* RESPONSIVO */
+
+/* ================================
+   RESPONSIVIDADE
+   ================================ */
 @media (max-width: 992px) {
   .layout-grid {
     grid-template-columns: 1fr;
@@ -44,6 +58,6 @@
   .left,
   .right {
     position: relative;
-    top: 0;
+    top: 0; /* remove sticky no mobile */
   }
 }

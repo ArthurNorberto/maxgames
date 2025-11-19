@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { LoginService } from '../services/login.service';
-import { UsuariosService, Usuario } from '../services/usuarios.service';
+import { Usuario, UsuariosService } from '../../../pages/services/usuarios.service';
+import { LoginService } from '../../../pages/services/login.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-usuarios',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class UsuariosComponent implements OnInit {
 
   setores: string[] = [];
   equipes: string[] = [];
@@ -56,13 +56,6 @@ export class LoginComponent implements OnInit {
     }
 
     this.loginService.saveUser(user);
-
-    // 🔥 SE FOR ADMIN, VAI PARA O ADMIN
-    if (this.loginService.usuarioEhAdmin()) {
-      this.router.navigate(['/admin/inicio']);
-    } else {
-      this.router.navigate(['/inicio']);
-    }
+    this.router.navigate(['/inicio']);
   }
-
 }

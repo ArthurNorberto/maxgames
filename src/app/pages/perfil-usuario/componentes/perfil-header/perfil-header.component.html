@@ -1,0 +1,17 @@
+<div class="header">
+
+  <div class="avatar-wrapper">
+    <img [src]="usuario.avatar" class="avatar">
+  </div>
+
+  <h2>{{ usuario.nome }}</h2>
+
+  <p class="sub">
+    {{ usuario.comunidade }} • {{ usuario.tribo }}
+  </p>
+
+  <p class="frase" *ngIf="usuario.frase">
+    "{{ usuario.frase }}"
+  </p>
+
+</div> 
