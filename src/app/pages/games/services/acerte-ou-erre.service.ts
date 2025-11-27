@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface PerguntaAcerteOuErre {
+    id?: string;
     palavra: string;
     pergunta: string;
     level: 'Fácil' | 'Médio' | 'Difícil' | 'Muito Difícil' | 'Especialista';
@@ -158,5 +159,24 @@ export class AcerteOuErreService {
 
     getAll(): PerguntaAcerteOuErre[] {
         return [...this.palavras];
+    }
+
+    listar(): PerguntaAcerteOuErre[] {
+        return [...this.palavras];
+    }
+
+
+    adicionar(item: PerguntaAcerteOuErre) {
+        item.id = crypto.randomUUID();
+        this.palavras.push(item);
+    }
+
+    atualizar(item: PerguntaAcerteOuErre) {
+        const i = this.palavras.findIndex(x => x.id === item.id);
+        if (i >= 0) this.palavras[i] = item;
+    }
+
+    remover(item: PerguntaAcerteOuErre) {
+        this.palavras = this.palavras.filter(x => x.id !== item.id);
     }
 }

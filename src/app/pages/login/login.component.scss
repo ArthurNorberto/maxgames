@@ -1,206 +1,243 @@
-.login-container {
-  display: flex;
-  height: calc(100vh - 60px);
-  font-family: "Segoe UI", sans-serif;
-}
-
-/* LEFT PANEL ---------------------------------------------------------- */
-
-.left-panel {
-  width: 75%;
-  background: linear-gradient(135deg, #f5f6fa 0%, #e7eafe 45%, #d4d8f7 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 50px;
-  position: relative;
+/* wrapper: ocupa a viewport inteira e impede scroll */
+.login-wrapper {
+  position: fixed;
+  inset: 0;
   overflow: hidden;
-  color: #444;
+  /* evita barra de rolagem na tela */
+  height: 100vh;
+  width: 100vw;
+  font-family: "Segoe UI", sans-serif;
+  color: #fff;
+  background: #000;
+  /* fallback */
 }
 
-.brand-area {
-  text-align: center;
-  max-width: 700px;
-  position: relative;
-}
-
-/* Rodapé bonito e sutil */
-.left-footer {
+/* BACKGROUND */
+.bg-image {
+  background: url('/assets/espaco.png') center center/cover no-repeat;
   position: absolute;
-  bottom: 25px;
-  width: 100%;
-  text-align: center;
-  font-size: 16px;
-  opacity: 0.55;
-  letter-spacing: 0.6px;
-  color: #555;
-  font-weight: 300;
-
-  strong {
-    font-weight: 600;
-    color: #6b6f9c;
-  }
+  inset: 0;
+  z-index: 1;
 }
 
-:host {
-  flex: 1;
-}
-
-/* LOGO — agora maior */
-.brand-logo {
-  width: 720px; /* AUMENTADA */
-  filter: drop-shadow(0 0 14px rgba(130, 120, 255, 0.45));
-  margin-bottom: 20px;
-
-  animation:
-    float 4s ease-in-out infinite,
-    flicker5 30s infinite,
-    glitch10 30s infinite,
-    pulse15 30s infinite,
-    crt20 30s infinite;
-}
-
-/* Floating shapes ----------------------------------------------------- */
-
-.floating-shapes .shape {
+.bg-overlay {
   position: absolute;
-  background: rgba(200, 205, 255, 0.35);
-  border-radius: 22px;
-  animation: floatShape 8s infinite ease-in-out;
-  box-shadow: 0 0 22px rgba(120, 110, 255, 0.35);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 2;
 }
 
-.s1 { width: 150px; height: 50px; top: 20%; left: 12%; }
-.s2 { width: 80px; height: 80px; top: 60%; left: 70%; animation-delay: 1.2s; }
-.s3 { width: 120px; height: 40px; top: 75%; left: 25%; animation-delay: 2.1s; }
-.s4 { width: 60px; height: 60px; top: 30%; left: 80%; animation-delay: 3s; }
+/* CENTRO: logo alinhada exatamente ao centro da viewport (vertical + horizontal) */
 
-/* RIGHT PANEL ---------------------------------------------------------- */
-
-.right-panel {
-  width: 25%;
-  background: #ffffff;
+.center-main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  /* pointer-events removido aqui */
 
-  /* LOGIN SUBIU AQUI */
-  justify-content: flex-start;
-  padding: 40px 50px 20px 50px;
+  .main-logo {
+    width: 760px;
+    max-width: calc(100vw - 420px);
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.45));
+    animation: float 5s infinite ease-in-out;
+  }
 
-  box-shadow: -5px 0 25px rgba(0,0,0,0.10);
-}
+  .slogan {
+    margin-top: 14px;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    color: rgba(255, 255, 255, 0.92);
+  }
 
-.right-logo {
-  width: 180px;
-  filter: drop-shadow(0 0 6px rgba(0,0,0,0.2));
-  margin-top: 10px;
-}
+  .features {
+    margin-top: 10px;
+    display: flex;
+    gap: 16px;
 
-/* Inputs --------------------------------------------------------------- */
+    .feat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-.login-form {
-  margin-top: 10px; /* estava 20, subi mais */
-}
+      .feat-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(8, 22, 50, 0.85);
+        /* círculo azul escuro */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
 
-.form-select,
-.form-control {
-  border: 2px solid #c9c9e5;
-  border-radius: 12px;
-  padding: 12px;
-  font-size: 15px;
-  transition: 0.25s;
 
-  &:focus {
-    border-color: #8e92ff;
-    box-shadow: 0 0 7px rgba(120,120,255,0.35);
+      .feat-label {
+        margin-top: 6px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
   }
 }
 
-/* Botão */
-.btn-login {
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  background: #8e92ff;
-  font-weight: bold;
-  color: #fff;
-  font-size: 17px;
-  transition: 0.3s;
 
-  &:hover {
-    background: #7b7fff;
-    transform: translateY(-2px);
-  }
-}
 
-.version-text {
-  font-size: 12px;
-  opacity: 0.6;
-  text-align: center;
-}
-
-/* Animations ---------------------------------------------------------- */
-
+/* animação leve */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
 
-@keyframes floatShape {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-20px) scale(1.05); }
-  100% { transform: translateY(0) scale(1); }
-}
-
-@keyframes flicker5 {
-  0%, 16.6% { opacity: 1; }
-  16.7% { opacity: 0.4; filter: brightness(1.6); }
-  17%   { opacity: 1; }
-  17.6% { opacity: 0.3; }
-  17.9% { opacity: 1; filter: none; }
-  100%  { opacity: 1; }
-}
-
-@keyframes glitch10 {
-  0%, 33.2% { transform: none; filter: none; }
-  33.3%  { transform: skewX(6deg) translateX(3px); filter: hue-rotate(20deg) saturate(1.4); }
-  33.45% { transform: skewX(-6deg) translateX(-3px); filter: hue-rotate(-10deg); }
-  33.6%  { transform: skewX(2deg) translateX(2px); }
-  33.8%  { transform: none; filter: none; }
-  100%   { transform: none; }
-}
-
-@keyframes pulse15 {
-  0%, 49.9% { filter: brightness(1); transform: scale(1); }
-  50%   { filter: brightness(1.4) saturate(1.2); transform: scale(1.03); }
-  51%   { filter: brightness(0.9); transform: scale(0.98); }
-  52%   { filter: brightness(1.2); transform: scale(1.02); }
-  53%   { filter: brightness(1); transform: scale(1); }
-  100%  { filter: none; transform: none; }
-}
-
-@keyframes crt20 {
-  0%, 66.6% { transform: none; filter: none; }
-  66.7% { transform: scale(1.015) skewX(1deg); filter: contrast(1.1) brightness(1.1); }
-  67.6% { transform: scale(0.985) skewX(-1deg); filter: contrast(0.9); }
-  69%   { transform: scale(1.01); filter: brightness(1.08); }
-  100%  { transform: none; filter: none; }
-}
-
-@keyframes pixel25 {
-  0%, 83.2% { filter: none; transform: none; }
-  83.3% {
-    filter: contrast(1.5) saturate(1.3) brightness(1.1);
-    image-rendering: pixelated;
-    transform: scale(1.02);
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
   }
-  83.7% {
-    filter: contrast(0.8) brightness(0.9);
-    transform: scale(0.98);
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-6px);
   }
-  84.2% {
-    image-rendering: auto;
-    filter: none;
-    transform: none;
+
+  /* apenas um leve flutuar sem empurrar pra cima */
+}
+
+/* ÁREA DO FORM À DIREITA (mantém o form no lado direito, sem empurrar a logo) */
+.content {
+  position: relative;
+  z-index: 5;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 70px;
+  pointer-events: auto;
+}
+
+/* Caixa do login — transparente clara (não forte) */
+.login-box {
+  width: 380px;
+  padding: 28px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.06);
+  /* menos visível, quase transparente */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  box-shadow: 0 8px 30px rgba(2, 6, 20, 0.55);
+
+  .title {
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  .subtitle {
+    margin-top: 6px;
+    font-size: 13px;
+    opacity: 0.85;
+    color: rgba(255, 255, 255, 0.92);
+    margin-bottom: 14px;
+  }
+}
+
+/* SELECT / INPUT: aparência legível — o dropdown (options) fica escuro ao exibir, e as opções em si ficam legíveis
+   Nota: navegadores nativos podem ter estilos próprios nas options; aqui garantimos contraste mínimo */
+.form-control {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: box-shadow .18s, border-color .18s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: rgba(123, 166, 255, 0.95);
+  box-shadow: 0 0 12px rgba(123, 166, 255, 0.18);
+}
+
+/* Força cor legível das opções em alguns browsers */
+.form-control option {
+  color: #111;
+  background: #fff;
+}
+
+/* BOTÃO */
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 10px;
+  border: none;
+  background: linear-gradient(90deg, #1f61ff, #4d88ff);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.btn-login[disabled] {
+  background: rgba(80, 80, 80, 0.6);
+  cursor: not-allowed;
+}
+
+/* RODAPÉ */
+.footer-text {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 12px;
+  opacity: 0.75;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* RESPONSIVO:
+   - em telas pequenas removemos o bloco central para dar foco ao formulário
+   - limitamos largura da logo para não ultrapassar o espaço do form */
+@media (max-width: 1150px) {
+  .center-main .main-logo {
+    width: 540px;
+  }
+
+  .center-main .slogan {
+    font-size: 18px;
+  }
+
+  .content {
+    padding-right: 32px;
+  }
+
+  .login-box {
+    width: 360px;
+    padding: 22px;
+  }
+}
+
+@media (max-width: 900px) {
+  .center-main {
+    display: none;
+  }
+
+  /* simplifica para mobile */
+  .content {
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  .login-box {
+    width: calc(100% - 40px);
+    margin: 0 20px;
   }
 }

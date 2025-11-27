@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface Question {
+    id?: string;
     question: string;
     options: string[];
     answer: string;
@@ -163,5 +164,17 @@ export class QuizService {
 
     getQuestions(): Question[] {
         return this.questions;
+    }
+
+    addQuestion(q: Question) {
+        this.questions.push(q);
+    }
+
+    updateQuestion(index: number, q: Question) {
+        this.questions[index] = q;
+    }
+
+    deleteQuestion(index: number) {
+        this.questions.splice(index, 1);
     }
 }

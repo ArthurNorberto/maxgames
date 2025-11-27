@@ -1,0 +1,134 @@
+<div class="users-admin">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h2 class="title">Gestão de Usuários</h2>
+      <p class="subtitle">Gerencie setores, equipes e edite perfis rapidamente.</p>
+    </div>
+
+    <!-- FILTROS SUPERIORES -->
+    <div class="header-right">
+      
+      <!-- SETOR -->
+      <div class="select-wrap">
+        <label>Setor</label>
+        <select class="form-control" [(ngModel)]="sector" (change)="onSetorChange()">
+          <option value="">Selecione...</option>
+          <option *ngFor="let s of setores" [value]="s">{{ s }}</option>
+        </select>
+      </div>
+
+      <!-- EQUIPE -->
+      <div class="select-wrap" *ngIf="equipes.length > 0">
+        <label>Equipe</label>
+        <select class="form-control" [(ngModel)]="team" (change)="onEquipeChange()">
+          <option value="">Todas</option>
+          <option *ngFor="let e of equipes" [value]="e">{{ e }}</option>
+        </select>
+      </div>
+
+      <!-- PESQUISA -->
+      <div class="search-wrap" *ngIf="usuariosOriginais.length > 0">
+        <label>Pesquisar</label>
+        <input class="form-control"
+               type="text"
+               placeholder="Nome ou equipe..."
+               [(ngModel)]="search"
+               (input)="filtrarPesquisa()">
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- TABELA DE USUÁRIOS -->
+    <table class="users-table" *ngIf="usuariosFiltrados.length > 0; else vazio">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Nome</th>
+          <th>Setor</th>
+          <th>Equipe</th>
+          <th>MaxCoins</th>
+          <th style="width: 240px;">Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let u of usuariosFiltrados">
+          <td>
+            <img [src]="u.avatar" class="avatar-sm">
+          </td>
+          <td>
+            <strong class="u-name">{{ u.nome }}</strong>
+          </td>
+          <td>{{ u.comunidade }}</td>
+          <td>{{ u.tribo || '-' }}</td>
+          <td class="coins">{{ u.maxCoin }}</td>
+          <td class="actions">
+            <button class="btn btn-edit" (click)="abrirModal(u)">Editar</button>
+            <button class="btn btn-login" (click)="loginComo(u)">Login</button>
+            <button class="btn btn-perfil" (click)="abrirPerfil(u)">Perfil</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- NENHUM USUÁRIO -->
+    <ng-template #vazio>
+      <div class="empty-state">
+        <div class="emoji">🔍</div>
+        Nenhum usuário encontrado.
+      </div>
+    </ng-template>
+
+  </div>
+</div>
+
+
+<!-- MODAL -->
+<div class="users-modal-backdrop" *ngIf="modalAberto">
+  <div class="users-modal">
+
+    <div class="modal-header">
+      <h5>Editar Usuário</h5>
+      <button class="btn-close" (click)="fecharModal()">✕</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-row">
+        <label class="form-label">Nome</label>
+        <input class="form-control" [(ngModel)]="usuarioEdicao!.nome">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Frase</label>
+        <input class="form-control" [(ngModel)]="usuarioEdicao!.frase">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Hobbies</label>
+        <input class="form-control" [(ngModel)]="usuarioEdicao!.hobbies">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Interesses</label>
+        <input class="form-control" [(ngModel)]="usuarioEdicao!.interesses">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">MaxCoins</label>
+        <input class="form-control" type="number" [(ngModel)]="usuarioEdicao!.maxCoin">
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-cancel" (click)="fecharModal()">Cancelar</button>
+      <button class="btn btn-save" (click)="salvarEdicao()">Salvar</button>
+    </div>
+
+  </div>
+</div>

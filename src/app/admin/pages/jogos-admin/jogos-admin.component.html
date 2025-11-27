@@ -1,0 +1,19 @@
+<div class="games-admin-container">
+  
+  <h2 class="page-title">Configurar Jogos</h2>
+  <p class="page-subtitle">Selecione um jogo para editar suas configurações.</p>
+
+  <div class="games-grid">
+    <div class="game-card" *ngFor="let game of games" (click)="goTo(game.route)">
+      
+      <div class="icon-wrapper">
+        <i [class]="game.icon"></i>
+      </div>
+
+      <h4>{{ game.title }}</h4>
+      <p>{{ game.desc }}</p>
+
+      <button class="btn-config">Configurar</button>
+    </div>
+  </div>
+</div>

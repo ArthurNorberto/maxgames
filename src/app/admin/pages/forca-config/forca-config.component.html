@@ -1,0 +1,165 @@
+<div class="forca-admin container py-4">
+
+  <div class="d-flex justify-content-between align-items-start mb-3">
+    <div>
+      <h2 class="mb-0">Forca — Configuração</h2>
+      <small class="text-muted">Gerencie palavras, dificuldades e timer do jogo da Forca</small>
+    </div>
+
+    <div class="d-flex gap-2 align-items-center">
+      <button class="btn btn-primary" (click)="novaPalavra()"> <i class="bi bi-plus-lg"></i> Nova palavra</button>
+      <button class="btn btn-outline-secondary" (click)="abrirSettings()"><i class="bi bi-gear"></i> Settings</button>
+
+      <div class="btn-group">
+        <button class="btn btn-outline-success" (click)="exportJson()">Exportar</button>
+        <label class="btn btn-outline-info mb-0">
+          Importar <input type="file" accept=".json" (change)="importJson($event)" hidden>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <input class="form-control" placeholder="Pesquisar palavra..." [(ngModel)]="filtro" (ngModelChange)="aplicarFiltro()">
+    </div>
+    <div class="col-md-6 text-md-end mt-2 mt-md-0">
+      <button class="btn btn-sm btn-outline-primary" (click)="adicionarExemplo()">Adicionar exemplos</button>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="table-responsive">
+      <table class="table mb-0 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th style="width: 60%">Palavra</th>
+            <th style="width: 20%">Tamanho</th>
+            <th style="width: 20%" class="text-end">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let w of filteredWords; let i = index">
+            <td>{{ w }}</td>
+            <td>{{ w.length }}</td>
+            <td class="text-end">
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="editarPalavra(allWords.indexOf(w))">Editar</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="removerPalavra(allWords.indexOf(w))">Excluir</button>
+            </td>
+          </tr>
+
+          <tr *ngIf="!filteredWords.length">
+            <td colspan="3" class="text-center py-4 text-muted">Nenhuma palavra encontrada.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- modal: adicionar/editar palavra -->
+<div class="modal fade" id="wordModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form class="modal-content" [formGroup]="wordForm" (ngSubmit)="salvarPalavra()">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ editingIndex === null ? 'Nova palavra' : 'Editar palavra' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="wordModalInstance?.hide()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Palavra</label>
+          <input formControlName="palavra" class="form-control" placeholder="Ex: PNEU" />
+          <div *ngIf="wordForm.get('palavra')?.touched && wordForm.get('palavra')?.invalid" class="text-danger small mt-1">
+            Palavra inválida (mínimo 2 caracteres).
+          </div>
+        </div>
+
+        <div class="mb-2 text-muted small">
+          Observação: as palavras são armazenadas em MAIÚSCULAS. A validação impede inserções vazias.
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="wordModalInstance?.hide()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- modal: settings -->
+<div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <form class="modal-content" [formGroup]="settingsForm" (ngSubmit)="salvarSettings()">
+      <div class="modal-header">
+        <h5 class="modal-title">Configurações - Forca</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="settingsModalInstance?.hide()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Tempo por rodada (segundos)</label>
+            <input type="number" class="form-control" formControlName="timePerRound" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Resetar tempo ao acertar letra</label>
+            <select class="form-select" formControlName="resetOnCorrect">
+              <option [ngValue]="true">Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Penalidade por erro (segundos)</label>
+            <input type="number" class="form-control" formControlName="penaltySeconds" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Máximo de partes do boneco (erros)</label>
+            <input type="number" class="form-control" formControlName="maxParts" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Permitir acentos (normalizar)</label>
+            <select class="form-select" formControlName="allowAccents">
+              <option [ngValue]="true">Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Permitir Ç</label>
+            <select class="form-select" formControlName="allowCedilla">
+              <option [ngValue]="true">Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Mostrar dica (ex.: primeira letra)</label>
+            <select class="form-select" formControlName="showHint">
+              <option [ngValue]="true">Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Mostrar número de letras antes de iniciar</label>
+            <select class="form-select" formControlName="showLengthBeforeStart">
+              <option [ngValue]="true">Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" (click)="settingsModalInstance?.hide()">Cancelar</button>
+        <button class="btn btn-primary" type="submit">Salvar configurações</button>
+      </div>
+    </form>
+  </div>
+</div>

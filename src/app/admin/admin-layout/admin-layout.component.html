@@ -1,7 +1,13 @@
 <div class="admin-wrapper">
-    <app-admin-sidebar></app-admin-sidebar>
 
-    <main>
-        <router-outlet></router-outlet>
-    </main>
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <div class="content-area">
+      <app-admin-navbar></app-admin-navbar>
+
+      <main>
+          <router-outlet></router-outlet>
+      </main>
+  </div>
+
 </div>

@@ -1,21 +1,28 @@
- .admin-wrapper {
+.admin-wrapper {
   display: flex;
   height: 100vh;
   width: 100%;
   background: #f7f9fc;
+}
 
-  main {
-    flex: 1;
-    padding: 26px 30px;
-    overflow-y: auto;
-  }
+/* Área total à direita do sidebar: sem container centralizado */
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* MAIN - remover padding lateral (esticar conteúdo) */
+main {
+  flex: 1;
+  padding: 26px 0; /* sem padding lateral */
+  overflow-y: auto;
 }
 
 /* Responsivo */
 @media (max-width: 900px) {
-  .admin-wrapper {
-    main {
-      padding: 20px 16px;
-    }
+  main {
+    padding: 20px 10px;
   }
 }

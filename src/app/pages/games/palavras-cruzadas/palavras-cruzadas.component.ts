@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PalavrasCruzadasService } from '../services/palavras-cruzadas.service';
+import { PalavraCruzadaItem, PalavrasCruzadasService } from '../services/palavras-cruzadas.service';
 
 type Dir = 'across' | 'down';
 
@@ -33,7 +33,7 @@ export class PalavrasCruzadasComponent implements OnInit, OnDestroy {
   gridSize = 12;
   grid: Cell[][] = [];
   placedWords: PlacedWord[] = [];
-  allWords: string[] = [];
+  allWords: PalavraCruzadaItem[] = [];
   wordsCount = 8;
   wordsToPlace: string[] = [];
   activeTab: 'jogo' | 'ranking' | 'stats' = 'jogo';
@@ -83,7 +83,7 @@ export class PalavrasCruzadasComponent implements OnInit, OnDestroy {
 
     this.wordsToPlace = this.shuffle(this.allWords)
       .slice(0, this.wordsCount)
-      .map((w) => w.toUpperCase());
+      .map((w) => w.palavra.toUpperCase());
 
     // grid dinâmico com base na palavra mais longa
     const maxLen = Math.max(...this.wordsToPlace.map((w) => w.length));
@@ -263,7 +263,7 @@ export class PalavrasCruzadasComponent implements OnInit, OnDestroy {
     // tenta substituir por novas palavras compatíveis
     const usadas = new Set(this.placedWords.map((p) => p.word));
     const novas = this.allWords
-      .map((w) => w.toUpperCase())
+      .map((w) => w.palavra.toUpperCase())
       .filter((w) => !usadas.has(w));
 
     let trocou = false;

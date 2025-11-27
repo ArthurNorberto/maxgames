@@ -1,23 +1,18 @@
 <aside class="right-side">
 
-
-
   <!-- BLOCO Tribo -->
   <div class="card team" *ngIf="pessoasDaTribo.length">
     <h5>Tribo ({{ pessoasDaTribo.length }})</h5>
 
     <div class="friends-grid">
       <div *ngFor="let e of topTribo" class="friend-item" (click)="goToPerfil(e.id)" style="cursor: pointer;">
-
         <img [src]="e.avatar || 'assets/avatars/default.png'" alt="Foto" />
         <span class="name">{{ e.nome }}</span>
-
       </div>
-
     </div>
   </div>
 
-  <!-- BLOCO COMUNIDADE -->
+  <!-- BLOCO Comunidade -->
   <div class="card friends">
     <h5>Comunidade ({{ pessoasDacomunidade.length }})</h5>
 
@@ -33,10 +28,55 @@
     </button>
   </div>
 
-  <!-- BLOCO DICA -->
-  <div class="card tip">
-    <h6>Dica</h6>
-    <p class="small">Participe diariamente para subir no ranking e ganhar prêmios internos.</p>
-  </div>
+  <!-- NOVO: CARROSSEL PREMIUM -->
+  <div class="card carousel-card">
 
+    <div id="sidebarCarousel" class="custom-carousel">
+
+      <!-- SLIDE 1 — DESTAQUES -->
+      <div class="carousel-slide active">
+        <h6 class="carousel-title">Destaques do Mês</h6>
+
+        <div class="profile-list">
+          <div *ngFor="let d of destaques" class="profile-card" (click)="goToPerfil(d.id)">
+            <img [src]="d.avatar || 'assets/avatars/default.png'" class="profile-img" />
+            <div class="profile-info">
+              <span class="profile-name">{{ d.nome }}</span>
+              <small class="profile-sub">Top MaxCoins</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2 — ANIVERSARIANTES -->
+      <div class="carousel-slide">
+        <h6 class="carousel-title">Aniversariantes</h6>
+
+        <div class="profile-list">
+          <div *ngFor="let a of aniversariantes" class="profile-card" (click)="goToPerfil(a.id)">
+            <img [src]="a.avatar || 'assets/avatars/default.png'" class="profile-img" />
+            <div class="profile-info">
+              <span class="profile-name">{{ a.nome }}</span>
+              <small class="profile-sub">{{ a.dataNascimento | date:'dd/MM' }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3 — AVISO -->
+      <div class="carousel-slide">
+        <h6 class="carousel-title">Aviso do Dia</h6>
+
+        <p class="carousel-text">
+          Lembre-se de registrar suas atividades e acompanhar os desafios semanais.
+        </p>
+      </div>
+
+      <!-- CONTROLES -->
+      <div class="carousel-controls">
+        <button (click)="prevSlide()" class="ctrl-btn">‹</button>
+        <button (click)="nextSlide()" class="ctrl-btn">›</button>
+      </div>
+    </div>
+  </div>
 </aside>

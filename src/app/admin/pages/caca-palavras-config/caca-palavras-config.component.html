@@ -1,0 +1,170 @@
+<div class="admin-container container py-3">
+
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div>
+      <h2 class="page-title mb-0">Caça-Palavras — Administração</h2>
+      <small class="text-muted">Gerencie palavras, níveis e configurações do jogo</small>
+    </div>
+
+    <div class="d-flex gap-2 align-items-center">
+      <button class="btn btn-primary" (click)="novaPalavra()">
+        <i class="bi bi-plus-lg"></i> Nova palavra
+      </button>
+
+      <button class="btn btn-outline-secondary" (click)="abrirSettings()">
+        <i class="bi bi-gear"></i> Configurações
+      </button>
+
+      <div class="btn-group">
+        <button class="btn btn-outline-success" (click)="exportJson()">Exportar</button>
+        <label class="btn btn-outline-info mb-0">
+          Importar <input type="file" accept=".json" (change)="importJson($event)" hidden>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- filtro -->
+  <div class="mb-3 d-flex gap-2">
+    <input class="form-control" placeholder="Pesquisar palavra..." [(ngModel)]="filtro" (ngModelChange)="aplicarFiltro()">
+
+    <button class="btn btn-danger" (click)="removerSelecionadas()" [disabled]="!filteredWords.length">
+      Remover filtradas
+    </button>
+  </div>
+
+  <!-- tabela -->
+  <div class="table-responsive card p-0 shadow-sm">
+    <table class="table mb-0">
+      <thead class="table-light">
+        <tr>
+          <th style="width:160px">Palavra</th>
+          <th style="width:140px">Nível</th>
+          <th style="width:160px">Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let w of filteredWords; let i = index">
+          <td class="align-middle">{{ w.palavra }}</td>
+
+          <td class="align-middle">
+            <span class="badge bg-secondary">{{ w.level }}</span>
+          </td>
+
+          <td class="align-middle text-end">
+            <button class="btn btn-sm btn-outline-primary me-2" (click)="editarPalavra(allWords.indexOf(w))">Editar</button>
+            <button class="btn btn-sm btn-outline-danger" (click)="removerPalavra(allWords.indexOf(w))">Excluir</button>
+          </td>
+        </tr>
+
+        <tr *ngIf="!filteredWords.length">
+          <td colspan="3" class="text-center py-4 text-muted">
+            Nenhuma palavra encontrada.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MODAL: palavra -->
+<div class="modal fade" id="wordModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form [formGroup]="wordForm" (ngSubmit)="salvarPalavra()" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ editingIndex === null ? 'Nova palavra' : 'Editar palavra' }}</h5>
+        <button type="button" class="btn-close" (click)="wordModalInstance?.hide()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Palavra</label>
+          <input formControlName="palavra" class="form-control" placeholder="Ex: PNEU" />
+          <div class="text-danger small mt-1"
+            *ngIf="wordForm.get('palavra')?.touched && wordForm.get('palavra')?.invalid">
+            Palavra inválida (mín. 2 caracteres).
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Nível</label>
+          <select formControlName="level" class="form-select">
+            <option *ngFor="let n of niveis" [ngValue]="n">{{ n }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="wordModalInstance?.hide()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: settings -->
+<div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <form [formGroup]="settingsForm" (ngSubmit)="salvarSettings()" class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Configurações do Caça-Palavras</h5>
+        <button type="button" class="btn-close" (click)="settingsModalInstance?.hide()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="form-label">Grid mínimo</label>
+            <input type="number" formControlName="minGrid" class="form-control" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Grid máximo</label>
+            <input type="number" formControlName="maxGrid" class="form-control" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Permitir diagonais</label>
+            <select formControlName="allowDiagonals" class="form-select">
+              <option [ngValue]="true">Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Permitir palavras ao contrário</label>
+            <select formControlName="allowReverse" class="form-select">
+              <option [ngValue]="true">Sim</option>
+              <option [ngValue]="false">Não</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Tentativas máx. para posicionar</label>
+            <input type="number" formControlName="maxPlacementAttempts" class="form-control" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Tempo limite (seg.) — vazio = sem limite</label>
+            <input type="number" formControlName="timeLimitSec" class="form-control" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Pontuação base por palavra</label>
+            <input type="number" formControlName="baseScorePerWord" class="form-control" />
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="settingsModalInstance?.hide()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar configurações</button>
+      </div>
+
+    </form>
+  </div>
+</div>

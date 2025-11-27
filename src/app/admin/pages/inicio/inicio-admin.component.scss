@@ -1,44 +1,97 @@
 .admin-dashboard {
+  padding: 40px;
+
+  .header-area {
+    margin-bottom: 40px;
+
     h1 {
-        font-size: 1.9rem;
-        margin-bottom: 10px;
-        color: #0b1f32;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #0b1f32;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      i {
+        font-size: 2.2rem;
+        color: #1e40af;
+      }
     }
 
     p {
-        color: #4b5563;
-        margin-bottom: 26px;
+      margin-top: 8px;
+      font-size: 1.05rem;
+      color: #4b5563;
     }
+  }
 
-    .cards {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
+  /* GRID PROFISSIONAL */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 30px;
+  }
 
-    .card {
-        width: 240px;
-        background: #fff;
-        padding: 22px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        cursor: pointer;
-        transition: all .2s ease;
-        text-align: center;
+  .card {
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    transition: all .25s ease;
+    text-align: center;
+    border: 1px solid transparent;
+
+    .icon-wrapper {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 16px;
+      border-radius: 14px;
+      background: #e0e7ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        font-size: 2.2rem;
+        color: #1d4ed8;
+      }
+
+      &.yellow {
+        background: #fef9c3;
 
         i {
-            font-size: 2rem;
-            color: #1d4ed8;
+          color: #ca8a04;
         }
+      }
 
-        h3 {
-            margin-top: 12px;
-            font-size: 1.1rem;
+      &.green {
+        background: #dcfce7;
+
+        i {
+          color: #15803d;
         }
+      }
     }
 
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    h3 {
+      margin-top: 10px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
     }
+
+    p {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #6b7280;
+      min-height: 40px;
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.10);
+      border-color: #dbeafe;
+    }
+  }
 }

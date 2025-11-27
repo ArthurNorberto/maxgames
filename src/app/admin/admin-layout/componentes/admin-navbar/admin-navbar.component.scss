@@ -1,0 +1,64 @@
+.admin-navbar {
+  height: 64px;
+  width: 100%;
+  background: #0d1b2a;
+  color: #e5e9f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Título */
+.page-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Área direita */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Botão logout */
+.logout-btn {
+  background: #e63946;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.25s ease;
+
+  i {
+    font-size: 1.1rem;
+  }
+}
+
+.logout-btn:hover {
+  background: #d62839;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .page-title {
+    font-size: 1rem;
+  }
+
+  .right {
+    gap: 12px;
+  }
+}

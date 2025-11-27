@@ -1,0 +1,30 @@
+.admin-container {
+  width: 100%;
+  padding: 18px 8px;
+}
+
+.page-title {
+  font-weight: 600;
+}
+
+.table-responsive {
+  margin-top: 12px;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+
+.btn-group label.btn {
+  cursor: pointer;
+}
+
+/* destaque linha hover */
+.table tbody tr:hover {
+  background: rgba(2, 30, 90, 0.03);
+}
+
+/* modal tweaks */
+.modal .modal-body .form-label {
+  font-weight: 600;
+}

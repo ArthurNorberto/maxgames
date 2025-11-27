@@ -36,7 +36,7 @@
       height: 64px;
       border-radius: 12px;
       object-fit: cover;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     }
 
     .name {
@@ -66,8 +66,116 @@
     }
   }
 
-  .tip .small {
-    color: #4c5e66;
-    font-size: 0.95rem;
+  /* CARROSSEL */
+  .carousel-card {
+    padding: 0 !important;
+
+    .custom-carousel {
+      position: relative;
+      overflow: hidden;
+      padding: 18px;
+    }
+
+    .carousel-slide {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      position: absolute;
+      width: 100%;
+      top: 0;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      position: relative;
+    }
+
+    .carousel-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #06314a;
+      margin-bottom: 12px;
+    }
+
+    .carousel-text {
+      font-size: 0.95rem;
+      color: #40535e;
+      line-height: 1.35;
+    }
+
+    /* LISTA DE PERFIS */
+    .profile-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    /* CARD DE PERFIL */
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border-radius: 12px;
+      background: #f8fafc;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+      transition: 0.3s ease;
+
+      &:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      }
+    }
+
+    .profile-img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #06314a;
+    }
+
+    .profile-sub {
+      color: #667;
+      font-size: 0.8rem;
+    }
+
+    /* CONTROLES */
+    .carousel-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+    }
+
+    .ctrl-btn {
+      width: 34px;
+      height: 34px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      background: #e8eef5;
+      font-size: 18px;
+      font-weight: bold;
+      color: #06314a;
+      transition: 0.3s;
+
+      &:hover {
+        background: #d5e1ec;
+        transform: scale(1.1);
+      }
+    }
   }
 }

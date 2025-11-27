@@ -1,12 +1,40 @@
 <div class="admin-dashboard">
-  <h1>Bem-vindo ao Painel Administrativo</h1>
 
-  <p>Escolha uma opção no menu à esquerda.</p>
+  <div class="header-area">
+    <h1>
+      <i class="bi bi-speedometer2"></i>
+      Painel Administrativo
+    </h1>
+  </div>
 
-  <div class="cards">
+  <div class="cards-grid">
+
+    <!-- Usuários -->
     <div class="card" routerLink="/admin/usuarios">
-      <i class="bi bi-people"></i>
+      <div class="icon-wrapper">
+        <i class="bi bi-people-fill"></i>
+      </div>
       <h3>Gerenciar Usuários</h3>
+      <p>Controle colaboradores, permissões e acessos.</p>
     </div>
+
+    <!-- Jogos -->
+    <div class="card" routerLink="/admin/jogos">
+      <div class="icon-wrapper yellow">
+        <i class="bi bi-controller"></i>
+      </div>
+      <h3>Configurar Jogos</h3>
+      <p>Ative, pause, edite e acompanhe a performance dos jogos.</p>
+    </div>
+
+    <!-- Prêmios -->
+    <div class="card" routerLink="/admin/premios">
+      <div class="icon-wrapper green">
+        <i class="bi bi-trophy-fill"></i>
+      </div>
+      <h3>Prêmios</h3>
+      <p>Gerencie recompensas, pontos e políticas de reconhecimento.</p>
+    </div>
+
   </div>
 </div>

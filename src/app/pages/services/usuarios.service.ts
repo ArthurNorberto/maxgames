@@ -14,6 +14,7 @@ export interface Usuario {
     frase?: string;
     hobbies?: string;
     interesses?: string;
+    dataNascimento?: string;
 }
 
 
@@ -99,7 +100,7 @@ export class UsuariosService {
 
     // 🔹 Mock — futuramente substitui por API real
     private mockUsuarios: Usuario[] = [
-        { id: '1', nome: 'Ana Silva', comunidade: 'Central de Atendimento', tribo: 'Porto', login: '', avatar: 'assets/avatars/ana-silva.jpg', maxCoin: 1240 },
+        { id: '1', nome: 'Ana Silva', comunidade: 'Central de Atendimento', tribo: 'Porto', login: '', avatar: 'assets/avatars/ana-silva.jpg', maxCoin: 1240, dataNascimento:"10-11-2025" },
         { id: '2', nome: 'Carlos Rocha', comunidade: 'CIM', tribo: 'CIM', login: '', avatar: 'assets/avatars/carlos.jpg', maxCoin: 980 },
         { id: '3', nome: 'Mariana', comunidade: 'QA', tribo: 'QA', login: '', avatar: 'assets/avatars/mariana.jpg', maxCoin: 760 },
         { id: '4', nome: 'João Pedro', comunidade: 'Desenvolvimento', tribo: 'Desenvolvimento', login: '', avatar: 'assets/avatars/joao-pedro.jpg', maxCoin: 540 },

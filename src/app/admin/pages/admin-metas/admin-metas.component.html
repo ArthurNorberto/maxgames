@@ -1,0 +1,110 @@
+<div class="admin-container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h2>Gerenciamento de Metas</h2>
+    <button class="btn primary" (click)="newMeta()">+ Nova Meta</button>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="filters">
+    <input
+      type="text"
+      placeholder="Buscar por nome, descrição ou objetivo..."
+      (input)="filter$.next($any($event.target).value)"
+    />
+
+    <select (change)="type$.next($any($event.target).value)">
+      <option value="daily">Metas Diárias</option>
+      <option value="monthly">Metas Mensais</option>
+    </select>
+  </div>
+
+  <!-- TABELA -->
+  <div class="table-wrapper">
+
+    <table class="meta-table">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Objetivo</th>
+          <th>Progresso</th>
+          <th>Recompensa</th>
+          <th>Status</th>
+          <th width="140px"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let meta of metas$ | async; trackBy: trackById">
+          <td>{{ meta.title }}</td>
+          <td>{{ meta.target }}</td>
+
+          <td>
+            <div class="progress">
+              <div class="bar" [style.width.%]="meta.progress"></div>
+            </div>
+            <span class="progress-text">{{ meta.progress }}%</span>
+          </td>
+
+          <td>{{ meta.reward }}</td>
+
+          <td>
+            <span class="status" [class.completed]="meta.completed">
+              {{ meta.completed ? 'Concluída' : 'Em andamento' }}
+            </span>
+          </td>
+
+          <td class="actions">
+            <button class="btn small" (click)="edit(meta)">Editar</button>
+            <button class="btn small danger" (click)="delete(meta)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- FORMULARIO LATERAL (SLIDE PANEL) -->
+  <div class="side-form" [class.open]="showForm">
+
+    <div class="side-header">
+      <h3>{{ editingMeta ? 'Editar Meta' : 'Nova Meta' }}</h3>
+      <button class="close-btn" (click)="showForm = false">×</button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+
+      <label>Título</label>
+      <input formControlName="title" />
+
+      <label>Descrição</label>
+      <textarea rows="3" formControlName="description"></textarea>
+
+      <label>Objetivo</label>
+      <input formControlName="target" />
+
+      <label>Recompensa</label>
+      <input formControlName="reward" />
+
+      <label>Tipo</label>
+      <select formControlName="type">
+        <option value="daily">Diária</option>
+        <option value="monthly">Mensal</option>
+      </select>
+
+      <label>Progresso (%)</label>
+      <input type="number" formControlName="progress" min="0" max="100" />
+
+      <label class="checkbox">
+        <input type="checkbox" formControlName="completed" />
+        Concluída
+      </label>
+
+      <button class="btn primary full" type="submit">
+        Salvar
+      </button>
+
+    </form>
+  </div>
+</div>

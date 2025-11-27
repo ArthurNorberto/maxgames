@@ -16,13 +16,22 @@
             <i class="bi bi-people"></i>
             <span>Usuários</span>
         </li>
+
+        <li routerLink="/admin/jogos" routerLinkActive="active">
+            <i class="bi bi-controller"></i>
+            <span>Configurar Jogos</span>
+        </li>
+
+        <li routerLink="/admin/premios" routerLinkActive="active">
+            <i class="bi bi-trophy-fill"></i>
+            <span>Configurar Prêmios</span>
+        </li>
+
+           <li routerLink="/admin/metas" routerLinkActive="active">
+            <i class="bi bi-flag-fill"></i>
+            <span>Configurar Metas</span>
+        </li>
     </ul>
 
-    <!-- Rodapé -->
-    <div class="sidebar-footer">
-        <button class="logout-btn" (click)="logout()">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Sair</span>
-        </button>
-    </div>
+
 </nav>

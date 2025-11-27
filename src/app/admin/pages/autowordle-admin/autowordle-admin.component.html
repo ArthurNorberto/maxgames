@@ -1,0 +1,77 @@
+<div class="admin-container">
+
+  <h2 class="page-title">Configurar – AutoWordle</h2>
+  <p class="page-subtitle">Gerencie as palavras usadas para gerar partidas aleatórias.</p>
+
+  <div class="admin-actions">
+    <button class="btn btn-primary" (click)="novaPalavra()">
+      + Adicionar Palavra
+    </button>
+
+    <input
+      type="text"
+      class="form-control search-box"
+      placeholder="Pesquisar palavra..."
+      [(ngModel)]="filtro"
+      (input)="atualizarLista()"
+    />
+  </div>
+
+  <!-- LISTA -->
+  <div class="table-wrapper">
+    <table class="table admin-table">
+      <thead>
+        <tr>
+          <th>Palavra</th>
+          <th class="col-actions">Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of filtrados">
+          <td>{{ item }}</td>
+          <td class="col-actions">
+            <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(item)">Editar</button>
+            <button class="btn btn-sm btn-outline-danger" (click)="remover(item)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal fade" id="modalPalavra" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">{{ editando ? 'Editar Palavra' : 'Nova Palavra' }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <form (ngSubmit)="salvar()">
+          <div class="modal-body">
+
+            <label class="form-label fw-bold">Palavra:</label>
+            <input
+              type="text"
+              [(ngModel)]="model"
+              name="palavra"
+              class="form-control"
+              required
+              maxlength="12"
+            />
+
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,347 +1,238 @@
-.login-container {
+.users-admin {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+
+  color: #213243;
+
+  /* HEADER */
+  .header {
     display: flex;
-    height: calc(100vh - 60px);
-    font-family: "Segoe UI", sans-serif;
-}
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
 
-/* LEFT PANEL ---------------------------------------------------------- */
+    .title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #112233;
+    }
 
-.left-panel {
-    width: 75%;
-    background: linear-gradient(135deg, #f5f6fa 0%, #e7eafe 45%, #d4d8f7 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 50px;
-    position: relative;
-    overflow: hidden;
-    color: #444;
-}
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7a8a;
+      margin-top: -6px;
+    }
 
-.brand-area {
-    text-align: center;
-    max-width: 700px;
-    position: relative;
-}
+    .header-right {
+      display: flex;
+      gap: 18px;
 
-/* Rodapé bonito e sutil */
-.left-footer {
-    position: absolute;
-    bottom: 25px;
+      .select-wrap, .search-wrap {
+        label {
+          display: block;
+          font-size: 0.75rem;
+          color: #6b7a8a;
+          margin-bottom: 4px;
+        }
+        .form-control {
+          min-width: 180px;
+          padding: .45rem .6rem;
+          border-radius: 6px;
+          border: 1px solid #dce3eb;
+          background: white;
+        }
+      }
+    }
+  }
+
+  /* TABLE */
+  .users-table {
     width: 100%;
-    text-align: center;
-    font-size: 16px;
-    opacity: 0.55;
-    letter-spacing: 0.6px;
-    color: #555;
-    font-weight: 300;
+    margin-top: 24px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(12, 32, 64, 0.07);
 
-    strong {
-        font-weight: 600;
-        color: #6b6f9c;
+    thead {
+      background: #f1f5fb;
+
+      th {
+        padding: 14px;
+        text-align: left;
+        font-size: 0.82rem;
+        color: #6b7a8a;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
     }
+
+    tbody tr {
+      transition: background 0.12s ease;
+
+      &:hover {
+        background: #f8fbff;
+      }
+
+      td {
+        padding: 14px;
+        font-size: 0.9rem;
+        color: #1d2e44;
+        border-top: 1px solid #eef2f7;
+      }
+
+      td.coins {
+        font-weight: 700;
+        color: #0d6efd;
+      }
+
+      td .avatar-sm {
+        width: 42px;
+        height: 42px;
+        border-radius: 6px;
+        object-fit: cover;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 6px rgba(12, 34, 60, 0.06);
+      }
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+
+      .btn {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.82rem;
+        cursor: pointer;
+        border: none;
+        transition: 0.15s ease;
+      }
+
+      .btn-edit {
+        background: #0d6efd;
+        color: white;
+      }
+
+      .btn-login {
+        background: #198754;
+        color: white;
+      }
+
+      .btn-perfil {
+        background: #6c757d;
+        color: white;
+      }
+
+      .btn:hover {
+        opacity: .85;
+      }
+    }
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    margin-top: 40px;
+    text-align: center;
+    padding: 40px;
+    background: #f8fbff;
+    border-radius: 12px;
+    border: 1px dashed #cbd9e8;
+    color: #5c6a7d;
+
+    .emoji {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+  }
 }
 
-:host {
-    flex: 1;
+/* MODAL */
+.users-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 24, 40, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
 }
 
-/* LOGO — agora maior */
-.brand-logo {
-    width: 720px;
-    /* AUMENTADA */
-    filter: drop-shadow(0 0 14px rgba(130, 120, 255, 0.45));
-    margin-bottom: 20px;
+.users-modal {
+  width: 650px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  animation: fadeIn .14s ease;
 
-    animation:
-        float 4s ease-in-out infinite,
-        flicker5 30s infinite,
-        glitch10 30s infinite,
-        pulse15 30s infinite,
-        crt20 30s infinite;
-}
-
-/* Floating shapes ----------------------------------------------------- */
-
-.floating-shapes .shape {
-    position: absolute;
-    background: rgba(200, 205, 255, 0.35);
-    border-radius: 22px;
-    animation: floatShape 8s infinite ease-in-out;
-    box-shadow: 0 0 22px rgba(120, 110, 255, 0.35);
-}
-
-.s1 {
-    width: 150px;
-    height: 50px;
-    top: 20%;
-    left: 12%;
-}
-
-.s2 {
-    width: 80px;
-    height: 80px;
-    top: 60%;
-    left: 70%;
-    animation-delay: 1.2s;
-}
-
-.s3 {
-    width: 120px;
-    height: 40px;
-    top: 75%;
-    left: 25%;
-    animation-delay: 2.1s;
-}
-
-.s4 {
-    width: 60px;
-    height: 60px;
-    top: 30%;
-    left: 80%;
-    animation-delay: 3s;
-}
-
-/* RIGHT PANEL ---------------------------------------------------------- */
-
-.right-panel {
-    width: 25%;
-    background: #ffffff;
+  .modal-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid #e6edf5;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 
-    /* LOGIN SUBIU AQUI */
-    justify-content: flex-start;
-    padding: 40px 50px 20px 50px;
+    h5 {
+      margin: 0;
+      color: #112233;
+      font-size: 1rem;
+    }
 
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.10);
+    .btn-close {
+      border: none;
+      background: transparent;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px;
+      color: #6c7a8a;
+      transition: .1s;
+    }
+    .btn-close:hover { color: #1a2a44; }
+  }
+
+  .modal-body {
+    padding: 18px;
+
+    .form-row {
+      margin-bottom: 12px;
+
+      .form-label {
+        font-size: 0.78rem;
+        color: #6b7a8a;
+        margin-bottom: 4px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 8px 10px;
+        border-radius: 6px;
+        border: 1px solid #dce3eb;
+      }
+    }
+  }
+
+  .modal-footer {
+    padding: 14px 18px;
+    border-top: 1px solid #e6edf5;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.86rem;
+    }
+
+    .btn-cancel { background: #e4e9f1; color: #223048; }
+    .btn-save   { background: #0d6efd; color: white; }
+  }
 }
 
-.right-logo {
-    width: 180px;
-    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.2));
-    margin-top: 10px;
-}
-
-/* Inputs --------------------------------------------------------------- */
-
-.login-form {
-    margin-top: 10px;
-    /* estava 20, subi mais */
-}
-
-.form-select,
-.form-control {
-    border: 2px solid #c9c9e5;
-    border-radius: 12px;
-    padding: 12px;
-    font-size: 15px;
-    transition: 0.25s;
-
-    &:focus {
-        border-color: #8e92ff;
-        box-shadow: 0 0 7px rgba(120, 120, 255, 0.35);
-    }
-}
-
-/* Botão */
-.btn-login {
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    background: #8e92ff;
-    font-weight: bold;
-    color: #fff;
-    font-size: 17px;
-    transition: 0.3s;
-
-    &:hover {
-        background: #7b7fff;
-        transform: translateY(-2px);
-    }
-}
-
-.version-text {
-    font-size: 12px;
-    opacity: 0.6;
-    text-align: center;
-}
-
-/* Animations ---------------------------------------------------------- */
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes floatShape {
-    0% {
-        transform: translateY(0) scale(1);
-    }
-
-    50% {
-        transform: translateY(-20px) scale(1.05);
-    }
-
-    100% {
-        transform: translateY(0) scale(1);
-    }
-}
-
-@keyframes flicker5 {
-
-    0%,
-    16.6% {
-        opacity: 1;
-    }
-
-    16.7% {
-        opacity: 0.4;
-        filter: brightness(1.6);
-    }
-
-    17% {
-        opacity: 1;
-    }
-
-    17.6% {
-        opacity: 0.3;
-    }
-
-    17.9% {
-        opacity: 1;
-        filter: none;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes glitch10 {
-
-    0%,
-    33.2% {
-        transform: none;
-        filter: none;
-    }
-
-    33.3% {
-        transform: skewX(6deg) translateX(3px);
-        filter: hue-rotate(20deg) saturate(1.4);
-    }
-
-    33.45% {
-        transform: skewX(-6deg) translateX(-3px);
-        filter: hue-rotate(-10deg);
-    }
-
-    33.6% {
-        transform: skewX(2deg) translateX(2px);
-    }
-
-    33.8% {
-        transform: none;
-        filter: none;
-    }
-
-    100% {
-        transform: none;
-    }
-}
-
-@keyframes pulse15 {
-
-    0%,
-    49.9% {
-        filter: brightness(1);
-        transform: scale(1);
-    }
-
-    50% {
-        filter: brightness(1.4) saturate(1.2);
-        transform: scale(1.03);
-    }
-
-    51% {
-        filter: brightness(0.9);
-        transform: scale(0.98);
-    }
-
-    52% {
-        filter: brightness(1.2);
-        transform: scale(1.02);
-    }
-
-    53% {
-        filter: brightness(1);
-        transform: scale(1);
-    }
-
-    100% {
-        filter: none;
-        transform: none;
-    }
-}
-
-@keyframes crt20 {
-
-    0%,
-    66.6% {
-        transform: none;
-        filter: none;
-    }
-
-    66.7% {
-        transform: scale(1.015) skewX(1deg);
-        filter: contrast(1.1) brightness(1.1);
-    }
-
-    67.6% {
-        transform: scale(0.985) skewX(-1deg);
-        filter: contrast(0.9);
-    }
-
-    69% {
-        transform: scale(1.01);
-        filter: brightness(1.08);
-    }
-
-    100% {
-        transform: none;
-        filter: none;
-    }
-}
-
-@keyframes pixel25 {
-
-    0%,
-    83.2% {
-        filter: none;
-        transform: none;
-    }
-
-    83.3% {
-        filter: contrast(1.5) saturate(1.3) brightness(1.1);
-        image-rendering: pixelated;
-        transform: scale(1.02);
-    }
-
-    83.7% {
-        filter: contrast(0.8) brightness(0.9);
-        transform: scale(0.98);
-    }
-
-    84.2% {
-        image-rendering: auto;
-        filter: none;
-        transform: none;
-    }
+@keyframes fadeIn {
+  from { transform: translateY(10px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
 }

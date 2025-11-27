@@ -1,0 +1,18 @@
+<nav class="admin-navbar">
+
+  <div class="left">
+    <h1 class="page-title">Administração</h1>
+  </div>
+
+  <div class="right">
+    <span class="user-name">
+      {{ user?.nome ?? 'Usuário' }}
+    </span>
+
+    <button class="logout-btn" (click)="logout()">
+      <i class="bi bi-box-arrow-right"></i>
+      <span>Sair</span>
+    </button>
+  </div>
+
+</nav>

@@ -1,0 +1,195 @@
+.admin-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  gap: 20px;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+  }
+}
+
+.filters {
+  display: flex;
+  gap: 15px;
+
+  input,
+  select {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    flex: 1;
+    background: #fff;
+    font-size: 15px;
+  }
+
+  select {
+    max-width: 200px;
+  }
+}
+
+.table-wrapper {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px #0001;
+}
+
+.meta-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead th {
+    text-align: left;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 2px solid #e3e6eb;
+  }
+
+  tbody td {
+    padding: 14px 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #e9ecef;
+  }
+}
+
+.progress {
+  width: 100px;
+  height: 8px;
+  background: #e4e6eb;
+  border-radius: 4px;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 8px;
+
+  .bar {
+    height: 100%;
+    background: #4c8bf5;
+  }
+}
+
+.progress-text {
+  font-size: 13px;
+  color: #555;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  background: #e8eaed;
+  color: #444;
+
+  &.completed {
+    background: #c8f5d0;
+    color: #0f7c1f;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+
+  &.primary {
+    background: #4c8bf5;
+    color: #fff;
+  }
+
+  &.danger {
+    background: #e04e4e;
+    color: #fff;
+  }
+
+  &.small {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  &.full {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+/* FORMULÁRIO DESLIZANTE */
+.side-form {
+  position: fixed;
+  right: -450px;
+  top: 0;
+  width: 450px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -3px 0 12px #0002;
+  padding: 25px;
+  transition: 0.3s ease;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  &.open {
+    right: 0;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 15px;
+  }
+
+  input,
+  textarea,
+  select {
+    margin-top: 6px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #444;
+  }
+}
+
+.side-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  h3 {
+    margin: 0;
+  }
+}

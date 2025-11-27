@@ -1,0 +1,53 @@
+.page {
+  width: 100%;
+  padding: 20px 8px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+table th,
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #e6e9ee;
+  text-align: left;
+}
+
+.q-text {
+  max-width: 680px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.empty {
+  padding: 18px;
+  text-align: center;
+  color: #777;
+}
+
+.btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+
+.btn.danger {
+  background: #c62828;
+}
+
+table tr:hover {
+  background: #f8fbff;
+}
+
+/* Remover TODO CSS conflitante de modal */
