@@ -1,0 +1,88 @@
+<div class="admin-login-wrapper">
+
+  <!-- Painel esquerdo corporativo -->
+  <div class="left-panel">
+    <div class="brand-area">
+      <img src="/assets/max-play-logo2.png" alt="Autoglass Corporativo" class="brand-logo" />
+      <h1 class="system-title">Portal Administrativo</h1>
+      <p class="system-description">
+        Acesso exclusivo para gestores e administradores.
+      </p>
+    </div>
+
+    <div class="info-highlights">
+      <div class="highlight">
+        <div class="icon-circle">
+          <i class="bi bi-lock-fill"></i>
+        </div>
+        <span>Ambiente Seguro</span>
+      </div>
+
+      <div class="highlight">
+        <div class="icon-circle">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <span>Controle de Acessos</span>
+      </div>
+
+      <div class="highlight">
+        <div class="icon-circle">
+          <i class="bi bi-people-fill"></i>
+        </div>
+        <span>Gestão de Usuários</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Painel do formulário -->
+  <div class="right-panel">
+    <div class="login-card">
+
+      <div class="avatar-area">
+        <img src="/assets/avatars/avatar-admin.png" alt="Administrador" class="admin-avatar" />
+      </div>
+
+      <h2 class="title">Login Administrativo</h2>
+      <p class="subtitle">Autentique suas credenciais para continuar</p>
+
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+
+        <!-- Comunidade -->
+        <div class="form-group">
+          <label>Comunidade</label>
+          <select class="form-control" required [(ngModel)]="sector" name="sector" (change)="onSetorChange()">
+            <option value="">Selecione...</option>
+            <option *ngFor="let s of setores" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+
+        <!-- Usuário detectado automaticamente -->
+        <div *ngIf="usuariosSetor" class="form-group">
+          <label>Usuário</label>
+          <select class="form-control" disabled>
+            <option>{{ usuariosSetor.nome }}</option>
+          </select>
+        </div>
+
+        <!-- Tribo (somente Central) -->
+        <div *ngIf="sector === 'Central de Atendimento'" class="form-group">
+          <label>Tribo</label>
+          <select class="form-control" required [(ngModel)]="team" name="team">
+            <option value="">Selecione...</option>
+            <option *ngFor="let e of equipes">{{ e }}</option>
+          </select>
+        </div>
+
+        <!-- Botão -->
+        <button
+          class="btn-submit"
+          [disabled]="!usuariosSetor || (sector === 'Central de Atendimento' && !team)">
+          Entrar
+        </button>
+
+        <p class="corp-footer">Autoglass • Área Administrativa</p>
+      </form>
+    </div>
+  </div>
+
+</div>

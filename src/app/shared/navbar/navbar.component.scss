@@ -128,3 +128,29 @@
     }
   }
 }
+
+/* LINKS AO LADO DA LOGO */
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: 10px;
+
+  .nav-link-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: #e8eef7;
+    transition: 0.2s ease;
+
+    i {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      color: #ffd100;
+      transform: translateY(-1px);
+    }
+  }
+}

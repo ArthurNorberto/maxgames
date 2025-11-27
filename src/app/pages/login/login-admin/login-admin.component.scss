@@ -1,0 +1,205 @@
+/* --- LAYOUT GERAL --- */
+.admin-login-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: #f4f6f9;
+  overflow: hidden;
+}
+
+/* --- PAINEL ESQUERDO --- */
+.left-panel {
+  width: 48%;
+  background: linear-gradient(135deg, #0b1a34, #11284e);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.brand-area {
+  margin-bottom: 50px;
+
+  .brand-logo {
+    width: 180px;
+    margin-bottom: 28px;
+  }
+
+  .system-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .system-description {
+    font-size: 15px;
+    opacity: 0.85;
+  }
+}
+
+/* Destaques */
+.info-highlights {
+  display: flex;
+  gap: 30px;
+
+  .highlight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+
+      i {
+        font-size: 30px;
+        color: #e2ecff;
+      }
+    }
+
+    span {
+      font-size: 13px;
+      opacity: 0.92;
+    }
+  }
+}
+
+/* --- PAINEL DIREITO (FORM) --- */
+.right-panel {
+  width: 52%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* CARD */
+.login-card {
+  width: 420px;
+  background: #fff;
+  padding: 36px;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Avatar */
+.avatar-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  .admin-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #d0d7e5;
+  }
+}
+
+/* Titles */
+.title {
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: 6px;
+  margin-bottom: 22px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* FORM */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #333;
+  }
+}
+
+.form-control {
+  padding: 11px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccd3e0;
+  background: #ffffff;
+  font-size: 14px;
+  transition: border-color .18s, box-shadow .18s;
+
+  &:focus {
+    border-color: #1e4ed9;
+    box-shadow: 0 0 0 3px rgba(30, 78, 217, 0.15);
+    outline: none;
+  }
+}
+
+/* Botão */
+.btn-submit {
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  background: #1e4ed9;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background .18s;
+
+  &:hover:not([disabled]) {
+    background: #1639a5;
+  }
+
+  &[disabled] {
+    background: #9ca8c9;
+    cursor: not-allowed;
+  }
+}
+
+/* Footer */
+.corp-footer {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #6f7a93;
+}
+
+/* Responsivo */
+@media (max-width: 1000px) {
+  .left-panel {
+    display: none;
+  }
+
+  .right-panel {
+    width: 100%;
+  }
+
+  .login-card {
+    width: 88%;
+    max-width: 420px;
+  }
+}

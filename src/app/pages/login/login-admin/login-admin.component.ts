@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { LoginService } from '../services/login.service';
-import { UsuariosService, Usuario } from '../services/usuarios.service';
+import { LoginService } from '../../services/login.service';
+import { Usuario, UsuariosService } from '../../services/usuarios.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-login-admin',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './login-admin.component.html',
+  styleUrls: ['./login-admin.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginAdminComponent implements OnInit {
 
   setores: string[] = [];
   equipes: string[] = [];
@@ -28,7 +28,11 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.usuariosService.getSetores().subscribe(s => this.setores = s);
+    this.usuariosService.getComunidades().subscribe(s =>
+      this.setores = s
+        .map(c => c.nome)
+        .filter(nome => nome === 'Administrador') // 🔥 só admin
+    );
   }
 
   onSetorChange() {
@@ -40,7 +44,7 @@ export class LoginComponent implements OnInit {
 
     // carrega equipes caso seja Central
     if (this.sector === 'Central de Atendimento') {
-      this.usuariosService.getEquipesCentral().subscribe(e => this.equipes = e);
+      this.usuariosService.getTribos().subscribe(e => this.equipes = e.map(t => t.nome));
     } else {
       this.equipes = [];
     }

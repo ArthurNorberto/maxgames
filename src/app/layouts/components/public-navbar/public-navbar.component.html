@@ -1,21 +1,26 @@
 <header class="public-header shadow-sm">
   <div class="container-fluid d-flex align-items-center flex-nowrap px-3">
 
-    <!-- LOGO dentro de caixa branca -->
+    <!-- LOGO -->
     <a routerLink="/" class="brand-logo-box d-flex align-items-center justify-content-center">
       <img src="assets/logo-menor-max-play.png" alt="MaxPlay Logo" class="brand-logo" />
     </a>
 
-    <!-- LINKS -->
+    <!-- MENU -->
     <nav class="ms-auto d-flex align-items-center gap-3">
 
       <a routerLink="/" class="nav-link text-white text-decoration-none">
         Home
       </a>
 
-      <a routerLink="/login" class="btn btn-sm btn-outline-light">
-        Login
-      </a>
+      <!-- SELECT DE LOGIN -->
+      <div class="login-select-wrapper">
+        <select class="login-select" (change)="navigateTo($event)">
+          <option selected disabled>Entrar</option>
+          <option value="/login">Login do Usuário</option>
+          <option value="/login/admin">Login do Administrador</option>
+        </select>
+      </div>
 
     </nav>
   </div>

@@ -34,4 +34,12 @@ export class NavbarComponent implements OnInit {
   toggleNotifications() {
     this.showNotifications = !this.showNotifications;
   }
+
+  onWebEmailClick() {
+    console.log("WebEmail clicado.");
+  }
+
+  onBaseConhecimentoClick() {
+    console.log("Base do Conhecimento clicada.");
+  }
 }

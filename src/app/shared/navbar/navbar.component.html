@@ -6,6 +6,19 @@
       <img src="assets/logo-menor-max-play.png" alt="MaxPlay Logo" class="brand-logo" />
     </a>
 
+    <!-- LINKS NOVOS AO LADO DA LOGO -->
+    <div class="header-links d-flex align-items-center">
+      <div class="nav-link-item" (click)="onWebEmailClick()">
+        <i class="bi bi-envelope-fill me-1"></i>
+        WebEmail
+      </div>
+
+      <div class="nav-link-item" (click)="onBaseConhecimentoClick()">
+        <i class="bi bi-journal-text me-1"></i>
+        Base do Conhecimento
+      </div>
+    </div>
+
     <!-- Usuário / Notificações / Sair -->
     <div *ngIf="user" class="user-info d-flex align-items-center ms-auto position-relative">
 

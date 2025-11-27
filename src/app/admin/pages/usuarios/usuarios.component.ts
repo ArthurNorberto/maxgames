@@ -34,7 +34,7 @@ export class UsuariosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.usuariosService.getSetores().subscribe(s => this.setores = s);
+    this.usuariosService.getComunidades().subscribe(s => this.setores = s.map(c => c.nome));
   }
 
   onSetorChange() {
@@ -49,7 +49,7 @@ export class UsuariosComponent implements OnInit {
 
     // Equipes somente para Central
     if (this.sector === 'Central de Atendimento') {
-      this.usuariosService.getEquipesCentral().subscribe(e => this.equipes = e);
+      this.usuariosService.getTribos().subscribe(e => this.equipes = e.map(t => t.nome));
     } else {
       this.equipes = [];
     }

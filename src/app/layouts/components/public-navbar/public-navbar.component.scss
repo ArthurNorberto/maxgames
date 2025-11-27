@@ -1,16 +1,16 @@
 .public-header {
   background-color: #003366;
   color: #fff;
-  padding: 8px 0; // era 12px — reduzido ~33%
+  padding: 8px 0;
   font-family: 'Segoe UI', sans-serif;
   position: sticky;
   top: 0;
   z-index: 1000;
 
-  /* BOX BRANCO DA LOGO */
+  /* LOGO */
   .brand-logo-box {
     background: #ffffff;
-    padding: 4px 10px; // era 6px 12px
+    padding: 4px 10px;
     border-radius: 10px;
     display: inline-flex;
     align-items: center;
@@ -25,11 +25,12 @@
     }
 
     .brand-logo {
-      height: 30px; // era 42px — redução ~30%
+      height: 30px;
       width: auto;
     }
   }
 
+  /* LINK */
   .nav-link {
     font-weight: 500;
     transition: 0.2s;
@@ -39,15 +40,44 @@
     }
   }
 
-  .btn {
-    font-weight: 500;
-    border-radius: 5px;
-    padding: 3px 10px; // leve redução no botão
-    transition: 0.2s;
+  /* SELECT LOGIN */
+  .login-select-wrapper {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 5px 10px;
+    border-radius: 8px;
 
-    &:hover {
-      background-color: #FFD100;
-      color: #003366;
+    .login-select {
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-weight: 500;
+      font-size: 14px;
+      appearance: none;
+      cursor: pointer;
+      padding-right: 18px;
+
+      option {
+        color: #003366;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    /* ícone da setinha */
+    position: relative;
+
+    &::after {
+      content: "▼";
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      color: #fff;
+      pointer-events: none;
+      opacity: 0.8;
     }
   }
 }

@@ -43,13 +43,13 @@ export class MeuPerfilComponent implements OnInit {
     ngOnInit(): void {
 
         // Carregar setores
-        this.usuariosService.getSetores().subscribe(s => {
-            this.setores = s;
+        this.usuariosService.getComunidades().subscribe(s => {
+            this.setores = s.map(c => c.nome);
         });
 
         // Carregar equipes da Central
-        this.usuariosService.getEquipesCentral().subscribe(e => {
-            this.equipesCentral = e;
+        this.usuariosService.getTribos().subscribe(e => {
+            this.equipesCentral = e.map(t => t.nome);
         });
 
         // Carregar usuário logado

@@ -58,28 +58,28 @@
     color: rgba(255, 255, 255, 0.92);
   }
 
-  .features {
-    margin-top: 10px;
+  .features-left {
+    margin-top: 14px;
     display: flex;
     gap: 16px;
+    justify-content: flex-start; // alinha à esquerda
+    align-items: center;
 
     .feat-item {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start; // ícone + label à esquerda
 
       .feat-icon {
         width: 44px;
         height: 44px;
         border-radius: 50%;
         background: rgba(8, 22, 50, 0.85);
-        /* círculo azul escuro */
         display: flex;
         justify-content: center;
         align-items: center;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       }
-
 
       .feat-label {
         margin-top: 6px;
