@@ -4,6 +4,8 @@ import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Usuario, UsuariosService } from '../../services/usuarios.service';
+import { ComunidadesService } from '../../services/comunidades.service';
+import { TribosService } from '../../services/tribos.service';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +26,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private comunidadesService: ComunidadesService,
+    private tribosService: TribosService
   ) { }
 
   ngOnInit() {
-    this.usuariosService.getComunidades().subscribe(s =>
+    this.comunidadesService.getComunidades().subscribe(s =>
       this.setores = s
         .map(c => c.nome)
         .filter(nome => nome !== 'Administrador') // ⛔ remove admin do login comum
@@ -44,7 +48,7 @@ export class LoginComponent implements OnInit {
 
     // carrega equipes caso seja Central
     if (this.sector === 'Central de Atendimento') {
-      this.usuariosService.getTribos().subscribe(e => this.equipes = e.map(t => t.nome));
+      this.tribosService.getTribos().subscribe(e => this.equipes = e.map(t => t.nome));
     } else {
       this.equipes = [];
     }

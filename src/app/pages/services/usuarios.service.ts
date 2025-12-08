@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { Tribo } from './tribos.service';
 
 export interface Usuario {
     id: string;
@@ -9,6 +10,7 @@ export interface Usuario {
     comunidade: string;
     tribo?: string;
     login: string;
+    senha?: string;
     avatar: string;
     maxCoin: number;
     frase?: string;
@@ -17,41 +19,11 @@ export interface Usuario {
     dataNascimento?: string;
 }
 
-export interface Comunidade {
-    id: string;
-    nome: string;
-}
 
-export interface Tribo {
-    id: string;
-    nome: string;
-}
 
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
 
-    // 🔹 Comunidades reais como objetos
-    comunidades: Comunidade[] = [
-        { id: '1', nome: 'Central de Atendimento' },
-        { id: '2', nome: 'CIM' },
-        { id: '3', nome: 'QA' },
-        { id: '4', nome: 'Desenvolvimento' },
-        { id: '5', nome: 'Administrador' }
-    ];
-
-    // 🔹 Tribos reais como objetos
-    tribos: Tribo[] = [
-        { id: '1', nome: 'Porto' },
-        { id: '2', nome: 'Bradesco' },
-        { id: '3', nome: 'Azul' },
-        { id: '4', nome: 'HDI' },
-        { id: '5', nome: 'Allianz' },
-        { id: '6', nome: 'Tokio' },
-        { id: '7', nome: 'CIM' },
-        { id: '8', nome: 'QA' },
-        { id: '9', nome: 'Desenvolvimento' },
-        { id: '10', nome: 'Administrador' }
-    ];
 
     /** 🔹 Usuários oficiais por setor (com dados completos) */
     usuariosPorSetor: Record<string, Usuario> = {
@@ -267,13 +239,6 @@ export class UsuariosService {
         return of(ranking);
     }
 
-    getComunidades(): Observable<Comunidade[]> {
-        return of(this.comunidades);
-    }
-
-    getTribos(): Observable<Tribo[]> {
-        return of(this.tribos);
-    }
 
     /** 🔹 Busca por setor */
     getUsuarioPorSetor(setor: string): Observable<Usuario | null> {

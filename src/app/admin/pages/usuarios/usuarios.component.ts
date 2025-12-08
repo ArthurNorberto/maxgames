@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { UsuariosService, Usuario } from '../../../pages/services/usuarios.service';
 import { LoginService } from '../../../pages/services/login.service';
+import { ComunidadesService } from '../../../pages/services/comunidades.service';
+import { TribosService } from '../../../pages/services/tribos.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -11,7 +13,7 @@ import { LoginService } from '../../../pages/services/login.service';
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss']
-}) 
+})
 export class UsuariosComponent implements OnInit {
 
   setores: string[] = [];
@@ -30,11 +32,13 @@ export class UsuariosComponent implements OnInit {
   constructor(
     private usuariosService: UsuariosService,
     private loginService: LoginService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private comunidadesService: ComunidadesService,
+    private tribosService: TribosService
+  ) { }
 
   ngOnInit() {
-    this.usuariosService.getComunidades().subscribe(s => this.setores = s.map(c => c.nome));
+    this.comunidadesService.getComunidades().subscribe(s => this.setores = s.map(c => c.nome));
   }
 
   onSetorChange() {
@@ -49,7 +53,7 @@ export class UsuariosComponent implements OnInit {
 
     // Equipes somente para Central
     if (this.sector === 'Central de Atendimento') {
-      this.usuariosService.getTribos().subscribe(e => this.equipes = e.map(t => t.nome));
+      this.tribosService.getTribos().subscribe(e => this.equipes = e.map(t => t.nome));
     } else {
       this.equipes = [];
     }

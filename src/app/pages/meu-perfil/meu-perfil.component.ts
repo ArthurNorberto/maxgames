@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { Usuario, UsuariosService } from '../services/usuarios.service';
 import { FormsModule } from '@angular/forms';
+import { ComunidadesService } from '../services/comunidades.service';
+import { TribosService } from '../services/tribos.service';
 
 @Component({
     selector: 'app-meu-perfil',
@@ -37,18 +39,20 @@ export class MeuPerfilComponent implements OnInit {
     constructor(
         private router: Router,
         private usuariosService: UsuariosService,
-        private loginService: LoginService
+        private loginService: LoginService,
+        private comunidadesService: ComunidadesService,
+        private tribosService: TribosService
     ) { }
 
     ngOnInit(): void {
 
         // Carregar setores
-        this.usuariosService.getComunidades().subscribe(s => {
+        this.comunidadesService.getComunidades().subscribe(s => {
             this.setores = s.map(c => c.nome);
         });
 
         // Carregar equipes da Central
-        this.usuariosService.getTribos().subscribe(e => {
+        this.tribosService.getTribos().subscribe(e => {
             this.equipesCentral = e.map(t => t.nome);
         });
 
