@@ -3,13 +3,11 @@
   position: fixed;
   inset: 0;
   overflow: hidden;
-  /* evita barra de rolagem na tela */
   height: 100vh;
   width: 100vw;
   font-family: "Segoe UI", sans-serif;
-  color: #fff;
+  color: #fff; /* texto branco só para elementos fora da caixa branca */
   background: #000;
-  /* fallback */
 }
 
 /* BACKGROUND */
@@ -28,8 +26,7 @@
   z-index: 2;
 }
 
-/* CENTRO: logo alinhada exatamente ao centro da viewport (vertical + horizontal) */
-
+/* CENTRO: logo alinhada ao centro */
 .center-main {
   position: absolute;
   top: 50%;
@@ -40,7 +37,6 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  /* pointer-events removido aqui */
 
   .main-logo {
     width: 760px;
@@ -62,13 +58,12 @@
     margin-top: 14px;
     display: flex;
     gap: 16px;
-    justify-content: flex-start; // alinha à esquerda
     align-items: center;
 
     .feat-item {
       display: flex;
       flex-direction: column;
-      align-items: flex-start; // ícone + label à esquerda
+      align-items: flex-start;
 
       .feat-icon {
         width: 44px;
@@ -90,24 +85,12 @@
   }
 }
 
-
-
-/* animação leve */
 @keyframes float {
-
-  0%,
-  100% {
-    transform: translate(-50%, -50%) translateY(0);
-  }
-
-  50% {
-    transform: translate(-50%, -50%) translateY(-6px);
-  }
-
-  /* apenas um leve flutuar sem empurrar pra cima */
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-6px); }
 }
 
-/* ÁREA DO FORM À DIREITA (mantém o form no lado direito, sem empurrar a logo) */
+/* Área do form à direita */
 .content {
   position: relative;
   z-index: 5;
@@ -116,60 +99,61 @@
   justify-content: flex-end;
   align-items: center;
   padding-right: 70px;
-  pointer-events: auto;
 }
 
-/* Caixa do login — transparente clara (não forte) */
+/* LOGIN BOX — fundo branco */
 .login-box {
   width: 380px;
   padding: 28px;
   border-radius: 18px;
 
-  background: rgba(255, 255, 255, 0.06);
-  /* menos visível, quase transparente */
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-
+  background: #fff;
+  border: 1px solid #e1e1e1;
   box-shadow: 0 8px 30px rgba(2, 6, 20, 0.55);
+
+  color: #222; /* 🔥 Garantimos texto escuro aqui dentro */
 
   .title {
     font-size: 22px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.96);
+    color: #222;
   }
 
   .subtitle {
     margin-top: 6px;
     font-size: 13px;
-    opacity: 0.85;
-    color: rgba(255, 255, 255, 0.92);
+    color: #444;
+    opacity: 0.9;
     margin-bottom: 14px;
+  }
+
+  .form-label {
+    color: #222; /* 🔥 labels ajustadas */
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
   }
 }
 
-/* SELECT / INPUT: aparência legível — o dropdown (options) fica escuro ao exibir, e as opções em si ficam legíveis
-   Nota: navegadores nativos podem ter estilos próprios nas options; aqui garantimos contraste mínimo */
+/* INPUTS / SELECT */
 .form-control {
   width: 100%;
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #f5f5f5;
+  color: #222;
+  border: 1px solid #ccc;
   padding: 10px 12px;
   border-radius: 10px;
   font-size: 14px;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   transition: box-shadow .18s, border-color .18s;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: rgba(123, 166, 255, 0.95);
-  box-shadow: 0 0 12px rgba(123, 166, 255, 0.18);
+  border-color: #1f61ff;
+  box-shadow: 0 0 10px rgba(31, 97, 255, 0.25);
 }
 
-/* Força cor legível das opções em alguns browsers */
 .form-control option {
   color: #111;
   background: #fff;
@@ -199,45 +183,47 @@
   text-align: center;
   margin-top: 12px;
   font-size: 12px;
-  opacity: 0.75;
-  color: rgba(255, 255, 255, 0.85);
+  opacity: 0.6;
+  color: #333; /* 🔥 corrigido (antes estava branco sobre branco) */
 }
 
-/* RESPONSIVO:
-   - em telas pequenas removemos o bloco central para dar foco ao formulário
-   - limitamos largura da logo para não ultrapassar o espaço do form */
+/* LINKS */
+.links {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+
+  .link {
+    color: #1f61ff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s ease, opacity .2s ease;
+
+    &:hover {
+      color: #4d88ff;
+      text-decoration: underline;
+    }
+  }
+
+  .divider {
+    color: #666;
+    opacity: 0.7;
+  }
+}
+
+/* RESPONSIVO */
 @media (max-width: 1150px) {
-  .center-main .main-logo {
-    width: 540px;
-  }
-
-  .center-main .slogan {
-    font-size: 18px;
-  }
-
-  .content {
-    padding-right: 32px;
-  }
-
-  .login-box {
-    width: 360px;
-    padding: 22px;
-  }
+  .center-main .main-logo { width: 540px; }
+  .center-main .slogan { font-size: 18px; }
+  .content { padding-right: 32px; }
+  .login-box { width: 360px; padding: 22px; }
 }
 
 @media (max-width: 900px) {
-  .center-main {
-    display: none;
-  }
-
-  /* simplifica para mobile */
-  .content {
-    justify-content: center;
-    padding-right: 0;
-  }
-
-  .login-box {
-    width: calc(100% - 40px);
-    margin: 0 20px;
-  }
+  .center-main { display: none; }
+  .content { justify-content: center; padding-right: 0; }
+  .login-box { width: calc(100% - 40px); margin: 0 20px; }
 }

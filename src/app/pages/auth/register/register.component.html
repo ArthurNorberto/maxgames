@@ -1,0 +1,95 @@
+<div class="register-wrapper">
+
+    <!-- BACKGROUND -->
+    <div class="bg-image" aria-hidden="true"></div>
+    <div class="bg-overlay" aria-hidden="true"></div>
+
+    <!-- BLOCO CENTRAL (mesmo da tela de login, reaproveitado visualmente) -->
+    <div class="center-main" role="banner" aria-label="MaxPlay central">
+        <img class="main-logo" src="/assets/max-play-logo2.png" alt="MaxPlay" />
+        <p class="slogan">Crie seu perfil e comece sua jornada</p>
+
+        <div class="features-left">
+            <div class="feat-item">
+                <div class="feat-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#cfe4ff">
+                        <path
+                            d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                    </svg>
+                </div>
+                <span class="feat-label">Perfil único</span>
+            </div>
+
+            <div class="feat-item">
+                <div class="feat-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#cfe4ff">
+                        <path d="M17 3H7V5H5V9H19V5H17V3Z" />
+                    </svg>
+                </div>
+                <span class="feat-label">Comece sua jornada</span>
+            </div>
+
+            <div class="feat-item">
+                <div class="feat-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#cfe4ff">
+                        <path
+                            d="M6 2H18C19.11 2 20 2.89 20 4V16C20 17.11 19.11 18 18 18H6C4.89 18 4 17.11 4 16V4C4 2.89 4.89 2 6 2Z" />
+                    </svg>
+                </div>
+                <span class="feat-label">Acesso rápido</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORM À DIREITA (igual ao login) -->
+    <div class="content">
+        <div class="register-box" aria-labelledby="register-title">
+            <h2 id="register-title" class="title">Criar sua conta</h2>
+
+            <form (ngSubmit)="salvar()" novalidate>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Nome completo</label>
+                    <input class="form-control" [(ngModel)]="model.nome" name="nome" required />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Login</label>
+                    <input class="form-control" [(ngModel)]="model.login" name="login" required />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Comunidade</label>
+                    <select class="form-control" [(ngModel)]="model.comunidade" name="comunidade" required>
+                        <option value="">Selecione...</option>
+                        <option *ngFor="let c of comunidades" [value]="c">{{ c }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Tribo</label>
+                    <select class="form-control" [(ngModel)]="model.tribo" name="tribo">
+                        <option value="">Selecione...</option>
+                        <option *ngFor="let t of tribos" [value]="t">{{ t }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Data de Nascimento</label>
+                    <input type="date" class="form-control" [(ngModel)]="model.dataNascimento" name="dataNascimento" />
+                </div>
+
+                <button class="btn-login" [disabled]="carregando">Finalizar Cadastro</button>
+
+                <p class="msg-sucesso" *ngIf="mensagem">{{ mensagem }}</p>
+
+                <div class="links">
+                    <a routerLink="/login" class="link">← Voltar ao login</a>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>

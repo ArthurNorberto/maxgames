@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FeedComponent } from './feed/feed.component';
+import { FeedComponent } from './components/feed/feed.component';
 
 
 

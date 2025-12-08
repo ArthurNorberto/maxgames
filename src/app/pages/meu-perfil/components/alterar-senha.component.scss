@@ -1,0 +1,55 @@
+/* 🔹 Fundo escuro / blur */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  z-index: 9997;
+}
+
+/* 🔹 Modal centralizado */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  max-width: 420px;
+
+  background: #fff;
+  border-radius: 18px;
+  padding: 20px 22px 24px;
+
+  z-index: 9999;
+  animation: fadeUp .28s ease;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Título */
+.modal h3 {
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* Erro */
+.error {
+  color: #d9534f;
+  font-size: .9rem;
+  margin-top: -6px;
+}
+
+/* Animação */
+@keyframes fadeUp {
+  from {
+    transform: translate(-50%, -46%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}

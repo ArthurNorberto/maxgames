@@ -2,6 +2,9 @@
   display: block;
 }
 
+/* ============================= */
+/* CARD DO POST                  */
+/* ============================= */
 .post-card {
   background: #fff;
   border-radius: 10px;
@@ -9,14 +12,16 @@
   box-shadow: 0 6px 18px rgba(2, 48, 86, 0.05);
   margin-bottom: 12px;
   transition: transform .18s ease, box-shadow .18s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 26px rgba(2, 48, 86, 0.08);
+  }
 }
 
-.post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 26px rgba(2, 48, 86, 0.08);
-}
-
-/* CABEÇALHO */
+/* ============================= */
+/* CABEÇALHO                     */
+/* ============================= */
 
 .post-head {
   display: flex;
@@ -30,8 +35,6 @@
   border-radius: 50%;
   object-fit: cover;
 }
-
-/* META INFO */
 
 .meta {
   flex: 1;
@@ -61,7 +64,9 @@
   color: #16a34a;
 }
 
-/* CORPO */
+/* ============================= */
+/* CORPO DO POST                 */
+/* ============================= */
 
 .post-body {
   margin-top: 10px;
@@ -72,16 +77,12 @@
   margin: 0 0 10px 0;
   font-size: 1rem;
   line-height: 1.4;
-  color: #0b3a57;
   white-space: pre-line;
 }
 
-.action {
-  margin: 8px 0 0;
-  font-size: 1rem;
-}
-
-/* IMAGEM DO POST — ESTILO FEED FACEBOOK */
+/* ============================= */
+/* IMAGEM DO POST                */
+/* ============================= */
 
 .image-wrapper {
   width: 100%;
@@ -99,21 +100,42 @@
   width: 100%;
   height: auto;
   object-fit: contain;
-  display: block;
-  transition: transform 0.25s ease;
+  transition: transform .25s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
-.post-image:hover {
-  transform: scale(1.02);
-}
-
-/* TAG DO GAME */
+/* ============================= */
+/* TAG DO GAME                   */
+/* ============================= */
 
 .game-label {
   background: #eef6fb;
   color: #0b3a57;
   padding: 4px 8px;
   border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ============================= */
+/* CONTADORES (likes/comments)   */
+/* ============================= */
+
+.counts {
+  margin-top: 10px;
+  padding-bottom: 8px;
+
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: #526774;
+
+  i.liked {
+    color: #2e86c7;
+  }
 }
 
 /* ============================= */
@@ -127,26 +149,31 @@
 
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .action-btn {
   flex: 1;
+  min-width: 100px;
+
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 6px;
 
   background: #f7fbff;
   border: 1px solid #d9e7f0;
   color: #0b3a57;
+
   font-weight: 600;
-  padding: 10px 0;
-  border-radius: 12px;
   font-size: 0.95rem;
 
+  padding: 10px 0;
+  border-radius: 12px;
+
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all .18s ease;
 
   i {
     font-size: 1.1rem;
@@ -154,22 +181,50 @@
 
   &:hover {
     background: #eaf5ff;
-    transform: translateY(-2px);
     border-color: #b6d4e8;
+    transform: translateY(-2px);
   }
 
   &:active {
-    transform: scale(0.97);
+    transform: scale(.97);
   }
 }
 
-/* Like com realce sutil */
-.action-btn.like i {
-  color: #2f89c8;
+/* ESTADO CURTIDO */
+.action-btn.like.liked {
+  background: #e3f3ff;
+  border-color: #a9d0ef;
+  color: #0d3c63;
 }
 
-/* Comentário com ícone mais suave */
-.action-btn.comment i {
-  color: #4a6572;
+.action-btn.like.liked i {
+  color: #1c7ed6;
 }
 
+/* Ícones */
+.action-btn.like i { color: #2e86c7; }
+.action-btn.comment i { color: #637d90; }
+.action-btn.share i { color: #6d5dd1; }
+
+/* Responsivo */
+@media (max-width: 450px) {
+  .action-btn {
+    font-size: 0.83rem;
+    padding: 8px 0;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+}
+
+.shared-post-wrapper {
+  margin-top: 12px;
+}
+
+.shared-box {
+  border-radius: 12px;
+  padding: 12px;
+  background: #f4f7fa;
+  border: 1px solid #e4e9ee;
+}

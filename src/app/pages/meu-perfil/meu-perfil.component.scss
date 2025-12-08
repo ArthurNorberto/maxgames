@@ -165,3 +165,27 @@
   .avatar-wrap { width: 92px; height: 92px; }
   .form-section { width: 100%; }
 }
+
+
+.section-block {
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #eef3f7;
+}
+
+.section-block:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 14px;
+}
+
+.textarea-large {
+  min-height: 80px;
+}
+
+

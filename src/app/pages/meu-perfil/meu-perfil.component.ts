@@ -6,11 +6,12 @@ import { Usuario, UsuariosService } from '../services/usuarios.service';
 import { FormsModule } from '@angular/forms';
 import { ComunidadesService } from '../services/comunidades.service';
 import { TribosService } from '../services/tribos.service';
+import { ModalAlterarSenhaComponent } from './components/alterar-senha.component';
 
 @Component({
     selector: 'app-meu-perfil',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, ModalAlterarSenhaComponent],
     templateUrl: './meu-perfil.component.html',
     styleUrls: ['./meu-perfil.component.scss']
 })
@@ -24,8 +25,14 @@ export class MeuPerfilComponent implements OnInit {
         comunidade: '',
         tribo: '',
         login: '',
+        senha: '',
         avatar: '',
-        maxCoin: 0
+        maxCoin: 0,
+        dataNascimento: '',
+        frase: '',
+        hobbies: '',
+        interesses: '',
+        perfil: { id: '', nome: '' }
     };
 
     avatarPreview: string | ArrayBuffer | null = null;
@@ -35,6 +42,7 @@ export class MeuPerfilComponent implements OnInit {
 
     successMessage = '';
     errorMessage = '';
+    abrirSenha = false;
 
     constructor(
         private router: Router,
@@ -101,5 +109,17 @@ export class MeuPerfilComponent implements OnInit {
             this.errorMessage = 'Ocorreu um erro ao salvar. Tente novamente.';
             setTimeout(() => this.errorMessage = '', 5000);
         }
+    }
+
+    abrirAlterarSenha() {
+        this.abrirSenha = true;
+    }
+
+    salvarSenha(novaSenha: string) {
+        this.usuario.senha = novaSenha;
+        this.successMessage = 'Senha atualizada com sucesso!';
+        this.abrirSenha = false;
+
+        setTimeout(() => this.successMessage = '', 3000);
     }
 }

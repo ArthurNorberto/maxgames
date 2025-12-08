@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Usuario } from '../../../pages/services/usuarios.service';
-import { Post } from '../../../pages/services/feed.service';
+import { Post } from '../../../services/feed.service';
+import { Usuario } from '../../../services/usuarios.service';
+
 
 @Component({
   selector: 'app-post-box',

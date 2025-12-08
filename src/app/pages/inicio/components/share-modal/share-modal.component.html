@@ -1,0 +1,46 @@
+<div class="overlay" (click)="close.emit()"></div>
+
+<div class="modal animate-in">
+
+  <div class="modal-content">
+
+    <div class="grip"></div>
+
+    <div class="header">
+      <h2>Compartilhar publicação</h2>
+      <button class="close-btn" (click)="close.emit()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <!-- TEXTO QUE O USUÁRIO VAI ESCREVER -->
+    <textarea
+      [(ngModel)]="message"
+      class="share-text"
+      placeholder="Escreva algo sobre esta publicação..."></textarea>
+
+    <!-- POST ORIGINAL EMBUTIDO -->
+    <div class="original-post">
+      <div class="post-head">
+        <img class="avatar" [src]="post.avatar" />
+        <div>
+          <div class="name">{{ post.userNome }}</div>
+          <div class="time">{{ timeAgo(post.createdAt) }}</div>
+        </div>
+      </div>
+
+      <div class="post-body">
+        <p class="msg">{{ post.message }}</p>
+        <img *ngIf="post.imageUrl" class="image" [src]="post.imageUrl" />
+      </div>
+    </div>
+
+    <!-- BOTÃO DE COMPARTILHAR -->
+    <button class="share-btn" (click)="sendShare()">
+      <i class="bi bi-share-fill"></i>
+      Compartilhar agora
+    </button>
+
+  </div>
+
+</div>

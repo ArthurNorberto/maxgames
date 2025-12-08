@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PostItemComponent } from '../../../inicio/post-item/post-item.component';
+import { PostItemComponent } from '../../../inicio/components/post-item/post-item.component';
 import { Usuario } from '../../../services/usuarios.service';
 import { Post } from '../../../services/feed.service';
 

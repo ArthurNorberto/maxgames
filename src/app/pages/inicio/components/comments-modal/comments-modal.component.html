@@ -1,0 +1,42 @@
+<div class="overlay" (click)="close.emit()"></div>
+
+<div class="modal animate-in">
+
+  <!-- Grip bar estilo Instagram -->
+  <div class="grip"></div>
+
+  <div class="header">
+    <h2>Comentários</h2>
+    <button class="close-btn" (click)="close.emit()" aria-label="Fechar">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <div class="comments-list">
+
+    <div class="comment" *ngFor="let c of comments">
+      <img class="avatar" [src]="c.avatar">
+
+      <div class="bubble">
+        <div class="name">{{ c.userNome }}</div>
+        <div class="msg">{{ c.message }}</div>
+        <div class="time">{{ timeAgo(c.createdAt) }}</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="input-area">
+    <img class="avatar" [src]="user.avatar">
+
+    <input
+      [(ngModel)]="newComment"
+      placeholder="Escreva um comentário..."
+      (keyup.enter)="enviarComentario()">
+
+    <button class="send-btn" (click)="enviarComentario()">
+      <i class="bi bi-send-fill"></i>
+    </button>
+  </div>
+
+</div>

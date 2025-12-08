@@ -1,0 +1,141 @@
+/* overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  z-index: 9997;
+}
+
+/* modal container */
+.modal {
+  position: fixed;
+  bottom: 10px; /* NÃO encosta no rodapé */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 520px;
+
+  background: #fff;
+  border-radius: 18px;
+  padding: 0; /* IMPORTANTE */
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+
+  /* limite real */
+  max-height: 80vh;
+  overflow: visible; /* sem scroll aqui */
+
+  animation: slideUp .32s ease;
+}
+
+/* conteúdo com scroll */
+.modal-content {
+  padding: 14px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  /* o scroll fica AQUI */
+  overflow-y: auto;
+  max-height: calc(80vh - 20px);
+}
+
+/* header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .close-btn {
+    background: #eef3f8;
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* textarea */
+.share-text {
+  width: 100%;
+  min-height: 80px;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid #d7dee5;
+  font-size: 1rem;
+  resize: none;
+}
+
+/* original post preview */
+.original-post {
+  background: #f4f7fa;
+  border-radius: 12px;
+  padding: 12px;
+
+  .post-head {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+    }
+
+    .name {
+      font-weight: 600;
+    }
+
+    .time {
+      font-size: .8rem;
+      color: #677884;
+    }
+  }
+
+  .msg {
+    margin-bottom: 8px;
+  }
+
+  .image {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 6px;
+  }
+}
+
+/* button */
+.share-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+/* animation */
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}

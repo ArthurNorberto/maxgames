@@ -1,0 +1,31 @@
+<div class="overlay" (click)="fecharAoClicarFora($event)"></div>
+
+<div class="modal">
+  <h3>Alterar senha</h3>
+
+  <form (ngSubmit)="confirmar()">
+
+    <div class="mb-3">
+      <label class="form-label">Senha atual</label>
+      <input type="password" class="form-control" [(ngModel)]="oldPwd" name="oldPwd" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Nova senha</label>
+      <input type="password" class="form-control" [(ngModel)]="newPwd" name="newPwd" required>
+    </div>
+
+    <div class="mb-1">
+      <label class="form-label">Confirmar nova senha</label>
+      <input type="password" class="form-control" [(ngModel)]="confirmPwd" name="confirmPwd" required>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <div class="d-flex justify-content-end gap-2 mt-3">
+      <button type="button" class="btn btn-outline-secondary" (click)="close.emit()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+
+  </form>
+</div>

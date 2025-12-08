@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Post, FeedService } from '../../../pages/services/feed.service';
-import { Usuario, UsuariosService } from '../../../pages/services/usuarios.service';
+import { Post, FeedService } from '../../../services/feed.service';
+import { Usuario, UsuariosService } from '../../../services/usuarios.service';
 import { PostBoxComponent } from '../post-box/post-box.component';
 import { PostItemComponent } from '../post-item/post-item.component';
 import { FeedTabsComponent } from '../feed-tabs/feed-tabs.component';
@@ -18,7 +18,7 @@ export class FeedComponent implements OnInit {
     filtered: Post[] = [];
     loading = true;
     user!: Usuario | null;
-    activeTab: 'universo' | 'tribo' | 'comunidade' = 'universo';
+    activeTab: 'universo' | 'comunidade' | 'tribo' = 'universo';
 
     constructor(
         private feedService: FeedService,
@@ -26,9 +26,9 @@ export class FeedComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+
         this.usuarioService.getUsuarioAtual().subscribe(u => {
             this.user = u;
-            // após ter user, podemos aplicar filtro quando posts chegarem
             this.applyFilter();
         });
 
@@ -38,6 +38,7 @@ export class FeedComponent implements OnInit {
             this.loading = false;
         });
     }
+
 
     handlePublicar(p: Post) {
         // adiciona localmente e atualiza visual

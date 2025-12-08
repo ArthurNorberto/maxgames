@@ -1,0 +1,116 @@
+<article class="post-card">
+
+  <div class="post-head">
+    <img class="avatar" [src]="post.avatar" />
+
+    <div class="meta">
+      <div class="user">
+        {{ post.userNome }}
+        <span class="sector">({{ post.userComunidade || '—' }})</span>
+      </div>
+      <div class="time">{{ timeAgo(post.createdAt) }}</div>
+    </div>
+
+    <div class="points" *ngIf="post.points">+{{ post.points }}</div>
+  </div>
+
+  <div class="post-body">
+    <p class="message" *ngIf="post.message">{{ post.message }}</p>
+
+    <div class="image-wrapper" *ngIf="post.imageUrl">
+      <img class="post-image" [src]="post.imageUrl" />
+    </div>
+
+    <p class="action" *ngIf="post.action">{{ post.action }}</p>
+
+    <div class="game" *ngIf="post.game">
+      <small class="game-label">{{ post.game }}</small>
+    </div>
+
+  </div>
+
+  <!-- SE ESTE POST FOR UM COMPARTILHAMENTO -->
+  <div class="shared-post-wrapper" *ngIf="post.sharedPost">
+
+    <div class="shared-box">
+
+      <div class="post-head">
+        <img class="avatar" [src]="post.sharedPost.avatar" />
+
+        <div class="meta">
+          <div class="user">
+            {{ post.sharedPost.userNome }}
+            <span class="sector">({{ post.sharedPost.userComunidade || '—' }})</span>
+          </div>
+          <div class="time">{{ timeAgo(post.sharedPost.createdAt) }}</div>
+        </div>
+      </div>
+
+      <div class="post-body">
+        <p class="message" *ngIf="post.sharedPost.message">{{ post.sharedPost.message }}</p>
+
+        <div class="image-wrapper" *ngIf="post.sharedPost.imageUrl">
+          <img class="post-image" [src]="post.sharedPost.imageUrl" />
+        </div>
+
+        <p class="action" *ngIf="post.sharedPost.action">{{ post.sharedPost.action }}</p>
+
+        <div class="game" *ngIf="post.sharedPost.game">
+          <small class="game-label">{{ post.sharedPost.game }}</small>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- CONTADORES (likes, comentários, compartilhamentos) -->
+  <div class="counts" *ngIf="showActions && hasCounts">
+    <span *ngIf="post.interactions.likes > 0">
+      <i class="bi bi-hand-thumbs-up-fill liked"></i> {{ post.interactions.likes }}
+    </span>
+
+    <span *ngIf="post.interactions.comments > 0">
+      {{ post.interactions.comments }} comentário(s)
+    </span>
+  </div>
+
+  <div class="actions" *ngIf="showActions">
+
+    <!-- CURTIR -->
+    <button class="action-btn like" [class.liked]="post.interactions.likedByUser" (click)="toggleLike()">
+
+      <i class="bi" [ngClass]="post.interactions.likedByUser
+            ? 'bi-hand-thumbs-up-fill'
+            : 'bi-hand-thumbs-up'">
+      </i>
+
+      {{ post.interactions.likedByUser ? 'Curtido' : 'Curtir' }}
+    </button>
+
+    <!-- COMENTAR -->
+    <button class="action-btn comment" (click)="openComments()">
+      <i class="bi bi-chat-dots"></i>
+      Comentar
+    </button>
+
+
+    <!-- COMPARTILHAR -->
+    <button class="action-btn share" (click)="openShare()">
+      <i class="bi bi-share"></i>
+      Compartilhar
+    </button>
+
+  </div>
+
+</article>
+
+<app-comments-modal *ngIf="showCommentsModal" [postId]="post.id" (close)="closeComments()">
+</app-comments-modal>
+
+<app-share-modal
+  *ngIf="showShareModal"
+  [post]="post"
+  (close)="closeShare()">
+</app-share-modal>

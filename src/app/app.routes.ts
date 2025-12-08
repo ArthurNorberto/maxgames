@@ -35,12 +35,12 @@ export const routes: Routes = [
             {
                 path: '',
                 loadComponent: () =>
-                    import('./pages/login/login-usuario/login.component').then(m => m.LoginComponent)
+                    import('./pages/auth/login-usuario/login.component').then(m => m.LoginComponent)
             },
             {
                 path: 'admin',
                 loadComponent: () =>
-                    import('./pages/login/login-admin/login-admin.component').then(m => m.LoginAdminComponent)
+                    import('./pages/auth/login-admin/login-admin.component').then(m => m.LoginAdminComponent)
             },
             {
                 path: '',
@@ -48,6 +48,14 @@ export const routes: Routes = [
                 pathMatch: 'full'
             }
         ]
+    },
+    {
+        path: 'register',
+        loadComponent: () => import('./pages/auth/register/register.component').then(m => m.RegisterComponent)
+    },
+    {
+        path: 'forgot-password',
+        loadComponent: () => import('./pages/auth/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
     },
     {
         path: '',
