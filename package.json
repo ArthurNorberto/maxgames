@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production --base-href /maxgames/",
+    "deploy": "npm run build:prod && npx angular-cli-ghpages --dir=dist/max-play",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:max-play": "node dist/max-play/server/server.mjs"
@@ -44,6 +46,7 @@
     "zone.js": "^0.15.1"
   },
   "devDependencies": {
+    "angular-cli-ghpages": "^1.0.0",
     "@angular/build": "^21.0.2",
     "@angular/cli": "^21.0.2",
     "@angular/compiler-cli": "^21.0.3",
